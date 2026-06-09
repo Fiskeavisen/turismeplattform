@@ -12,19 +12,22 @@ Du trenger **ikke** kjøre `git pull` eller restart manuelt etter hver push.
 
 ## Én-gangs oppsett (ca. 5 min)
 
-### 1. Finn SSH-verten til ProISP
+### 1. SFTP/SSH-verten
 
-I cPanel → **SSH Access** (eller spør ProISP). Typisk én av:
+ProISP oppgir `ftp.frimedia.no` for FTP, men **SFTP bruker port 22** — samme som SSH.
+Vi bruker **`frimedia.no`** (testet og fungerer med deploy-nøkkel).
 
-- `frimedia.no`
-- `ssh.frimedia.no`
-- `cpanel3.proisp.no`
+I GitHub Secrets er satt:
 
-Test fra PC:
+| Secret | Verdi |
+|--------|--------|
+| `DEPLOY_HOST` | `frimedia.no` |
+| `DEPLOY_USER` | `frimeuhl` |
+| `DEPLOY_PATH` | `/home/frimeuhl/demo.frimedia.no` |
+| `DEPLOY_PORT` | `22` |
+| `DEPLOY_SSH_KEY` | Privat nøkkel (allerede satt) |
 
-```powershell
-ssh frimeuhl@DIN-SSH-VERT
-```
+**Ikke** legg cPanel-passord i GitHub — nøkkelbasert innlogging er tryggere.
 
 ### 2. Opprett deploy-nøkkel for GitHub Actions
 
@@ -108,7 +111,7 @@ Sjekk at deploy-steget blir grønt, deretter `https://demo.frimedia.no/`.
 ## Hva skjer ved hver push
 
 ```
-main (kode) → GitHub Actions bygger → deploy-gren → SSH til ProISP → restart
+main (kode) → GitHub Actions bygger → SFTP/SCP til ProISP → pakk ut → restart
 ```
 
-Samme mønster som dine andre sider — bare konfigurer secrets én gang.
+Filer kopieres direkte via SFTP (port 22). Serveren kjører **ikke** `git fetch` — det unngår trådproblemer på delt hosting.

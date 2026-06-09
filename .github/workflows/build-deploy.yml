@@ -35,6 +35,7 @@ jobs:
           cp -r .next/static/. deploy-out/.next/static/
           cp -r public deploy-out/public
           cp .deploy/htaccess deploy-out/.htaccess
+          tar czf release.tar.gz -C deploy-out .
 
       - name: Push ferdig bygg til deploy-grenen
         run: |
@@ -46,24 +47,43 @@ jobs:
           git commit -m "Bygg fra ${GITHUB_SHA}"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" deploy
 
+      - name: Lagre byggpakke for SFTP-deploy
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-bundle
+          path: release.tar.gz
+          retention-days: 3
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy til ProISP via SSH
+      - name: Last ned byggpakke
+        uses: actions/download-artifact@v4
+        with:
+          name: deploy-bundle
+
+      - name: Last opp til ProISP via SFTP/SCP (port 22)
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          source: "release.tar.gz"
+          target: "${{ secrets.DEPLOY_PATH }}/tmp"
+
+      - name: Pakk ut og restart app
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
-          script_stop: true
           script: |
-            export DEPLOY_PATH="${{ secrets.DEPLOY_PATH || '/home/frimeuhl/demo.frimedia.no' }}"
-            export DEPLOY_USER="${{ secrets.DEPLOY_USER || 'frimeuhl' }}"
-            cd "$DEPLOY_PATH"
-            git fetch origin deploy
-            git checkout -f -B deploy origin/deploy
+            cd "${{ secrets.DEPLOY_PATH }}"
+            tar xzf tmp/release.tar.gz
+            rm -f tmp/release.tar.gz
             mkdir -p tmp && touch tmp/restart.txt
-            cloudlinux-selector restart --json --interpreter nodejs --user "$DEPLOY_USER" --app-root demo.frimedia.no || true
-            echo "Live: $(git rev-parse --short HEAD)"
+            cloudlinux-selector restart --json --interpreter nodejs --user frimeuhl --app-root demo.frimedia.no || true
+            echo "Deploy ferdig"
