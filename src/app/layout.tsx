@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Malenes overskriftsfonter: Storhavet bruker Fraunces, Fyrvokteren bruker Cormorant.
+// Malenes overskriftsfonter: Storhavet bruker Fraunces, Fyrvokteren bruker Cormorant, Skogsro bruker Geist.
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],

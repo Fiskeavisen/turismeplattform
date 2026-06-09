@@ -5,7 +5,7 @@ import { themes, type ThemeDefinition } from "@/lib/themes";
 export const metadata = {
   title: "Designmaler | Turismeplattform",
   description:
-    "Tre gjennomarbeidede norske designmaler for turismesider: Storhavet, Fjordlys og Fyrvokteren.",
+    "Tre gjennomarbeidede norske designmaler for turismesider: Storhavet, Skogsro og Fyrvokteren.",
 };
 
 export default function TemplatesPage() {
