@@ -1,0 +1,46 @@
+export const salesPackages = [
+  {
+    id: "start",
+    name: "Start",
+    priceRange: "120 000 - 220 000 kr",
+    description: "For mindre aktører som trenger en moderne nettside med enkel bookingvei.",
+    features: [
+      "Moderne nettside",
+      "Admin for tekst, bilder og logo",
+      "Aktiviteter eller overnatting",
+      "Artikler og enkel SEO",
+      "Manuell bookingforespørsel",
+      "Norsk, engelsk og tysk struktur",
+    ],
+  },
+  {
+    id: "proff",
+    name: "Proff",
+    priceRange: "220 000 - 420 000 kr",
+    description: "For aktører som vil ha bookingdashboard, betaling og bedre synlighet.",
+    features: [
+      "Alt i Start",
+      "Stripe/Vipps-adapter",
+      "Bookingoversikt og kundedialog",
+      "Epostmaler",
+      "SEO/AEO-oppsett",
+      "FAQ og strukturert data",
+      "Statistikkdashboard",
+    ],
+  },
+  {
+    id: "premium",
+    name: "Premium",
+    priceRange: "420 000 - 750 000 kr",
+    description: "For destinasjoner og større reiselivsaktører med flere kanaler.",
+    features: [
+      "Alt i Proff",
+      "Channel manager-adapter",
+      "Google Search Console/Analytics",
+      "Google/Trustpilot-anmeldelser",
+      "Flere landingssider og kampanjer",
+      "Avanserte pakker og opplevelser",
+      "Mer kundetilpasset design",
+    ],
+  },
+];
