@@ -38,7 +38,13 @@ NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=sb_publishable_...
 SUPABASE_SERVICE_ROLE_KEY=...kun på server, aldri i frontend...
 ```
 
-## Første gangs oppsett på ProISP (SSH)
+## Automatisk deploy (anbefalt)
+
+Se **`docs/AUTO_DEPLOY.md`** — etter én-gangs oppsett deployer GitHub Actions
+automatisk til `demo.frimedia.no` hver gang du pusher til `main`. Du trenger ikke
+kjøre SSH-kommandoer manuelt ved hver oppdatering.
+
+## Manuelle steg (kun første gang / feilsøking)
 
 ```bash
 # 1. Gå til web-root eller egen mappe

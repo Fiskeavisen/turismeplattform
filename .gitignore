@@ -23,6 +23,8 @@
 # misc
 .DS_Store
 *.pem
+.deploy/github_actions_deploy
+.deploy/github_actions_deploy.pub
 
 # debug
 npm-debug.log*

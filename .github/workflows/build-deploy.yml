@@ -1,4 +1,4 @@
-name: Bygg og publiser til deploy-gren
+name: Bygg og deploy til demo.frimedia.no
 
 on:
   push:
@@ -34,6 +34,7 @@ jobs:
           mkdir -p deploy-out/.next/static
           cp -r .next/static/. deploy-out/.next/static/
           cp -r public deploy-out/public
+          cp .deploy/htaccess deploy-out/.htaccess
 
       - name: Push ferdig bygg til deploy-grenen
         run: |
@@ -44,3 +45,25 @@ jobs:
           git add -A
           git commit -m "Bygg fra ${GITHUB_SHA}"
           git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" deploy
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy til ProISP via SSH
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          script_stop: true
+          script: |
+            export DEPLOY_PATH="${{ secrets.DEPLOY_PATH || '/home/frimeuhl/demo.frimedia.no' }}"
+            export DEPLOY_USER="${{ secrets.DEPLOY_USER || 'frimeuhl' }}"
+            cd "$DEPLOY_PATH"
+            git fetch origin deploy
+            git checkout -f -B deploy origin/deploy
+            mkdir -p tmp && touch tmp/restart.txt
+            cloudlinux-selector restart --json --interpreter nodejs --user "$DEPLOY_USER" --app-root demo.frimedia.no || true
+            echo "Live: $(git rev-parse --short HEAD)"
