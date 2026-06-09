@@ -1,0 +1,46 @@
+name: Bygg og publiser til deploy-gren
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  NEXT_PUBLIC_SITE_URL: https://demo.frimedia.no
+  NEXT_PUBLIC_SUPABASE_URL: https://ppugutfpfygpimoniqxd.supabase.co
+  NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_suH0x0Nx6mWnDIfIDN85nA_thrWbY-w
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Sett sammen kjøreklar app (standalone + static + public)
+        run: |
+          mkdir -p deploy-out
+          cp -r .next/standalone/. deploy-out/
+          mkdir -p deploy-out/.next/static
+          cp -r .next/static/. deploy-out/.next/static/
+          cp -r public deploy-out/public
+
+      - name: Push ferdig bygg til deploy-grenen
+        run: |
+          cd deploy-out
+          git init -b deploy
+          git config user.name "github-actions"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          git commit -m "Bygg fra ${GITHUB_SHA}"
+          git push -f "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git" deploy
