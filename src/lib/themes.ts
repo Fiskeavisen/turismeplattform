@@ -37,10 +37,10 @@ export type ThemeDefinition = {
 export const themes: ThemeDefinition[] = [
   {
     id: "coastal",
-    name: "Kyst & eventyr",
-    tagline: "Havet først. Store bilder, dyp havblå og varm sand.",
+    name: "Storhavet",
+    tagline: "Havet først. Store bilder, dyp havblå og varm strandsand.",
     description:
-      "Immersive naturbilder med mørk overlay, serif-overskrifter og tydelig booking. Best når kunden har sterke landskapsbilder og selger følelsen av sted.",
+      "Norsk kystfølelse med immersive naturbilder, mørk overlay, serif-overskrifter og tydelig booking. Best når kunden har sterke landskapsbilder og selger følelsen av hav, skjær og horisont.",
     idealFor: ["Feriesentre ved havet", "Hytteutleie med båt", "Fiske- og kystopplevelser"],
     heroStyle: "image-overlay",
     tokens: {
@@ -62,10 +62,10 @@ export const themes: ThemeDefinition[] = [
   },
   {
     id: "fjord",
-    name: "Fjord & ro",
+    name: "Fjordlys",
     tagline: "Lys, luft og ro. Skoggrønn med kobber som varme.",
     description:
-      "Lyst og luftig uttrykk med rene sans-serif-overskrifter, mye whitespace og rolige flater. Best når kunden selger stillhet, natur og restitusjon fremfor action.",
+      "Lyst og luftig norsk fjorduttrykk med rene sans-serif-overskrifter, mye whitespace og rolige flater. Best når kunden selger stillhet, natur og restitusjon fremfor action.",
     idealFor: ["Fjord- og fjellhytter", "Retreat og roligere opphold", "Familiedestinasjoner"],
     heroStyle: "split-light",
     tokens: {
@@ -87,11 +87,11 @@ export const themes: ThemeDefinition[] = [
   },
   {
     id: "premium",
-    name: "Premium resort",
-    tagline: "Mørk eleganse. Kull, gull og presise detaljer.",
+    name: "Fyrvokteren",
+    tagline: "Mørk kysteleganse. Vinternatt, messing og presise detaljer.",
     description:
-      "Eksklusivt hotelluttrykk med mørke flater, gull-aksent, smale serif-overskrifter og skarpe hjørner. Best når kunden tar høyere priser og vil signalisere kvalitet.",
-    idealFor: ["Resort og boutique-hotell", "Premium hytter og pakker", "Firma- og eventkunder"],
+      "Eksklusivt norsk kystuttrykk med mørke flater inspirert av vinterhav og fyrlykt, gull-aksent, smale serif-overskrifter og skarpe hjørner. Best når kunden tar høyere priser og vil signalisere kvalitet.",
+    idealFor: ["Kystresort og boutique-hotell", "Premium hytter og pakker", "Firma- og eventkunder"],
     heroStyle: "editorial-dark",
     tokens: {
       background: "#121317",

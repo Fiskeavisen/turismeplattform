@@ -13,7 +13,7 @@ strukturert profil som resten av plattformen bygger på.
 3. **Profilen styrer skreddersøm.** Mal, farger, tone, produkter, FAQ,
    artikkelideer og integrasjoner leses fra profilen når siden bygges.
 
-Schemaet ligger i `src/lib/customer-profile.ts`. Eksempel: `customers/flo.json`.
+Schemaet ligger i `src/lib/customer-profile.ts`. Eksempel: `customers/nordskjaer.json`.
 
 ## Prompt-mal (kopier og lim inn)
 
@@ -27,7 +27,7 @@ Eventuelle andre kilder: <Google Maps-profil, Facebook, brosjyre osv.>
 Gjør følgende:
 1. Les kundens nettside og kildene over.
 2. Fyll ut en komplett kundeprofil som JSON etter schemaet i
-   src/lib/customer-profile.ts. Bruk customers/flo.json som referanse.
+   src/lib/customer-profile.ts. Bruk customers/nordskjaer.json som referanse.
 3. Hent ut: alle overnattingstyper, alle aktiviteter, priser, kontaktinfo,
    beliggenhet, reisevei, historie/fortelling, bildekreditering og det som
    gjør kunden unik (uniqueSellingPoints).

@@ -101,7 +101,7 @@ SSL kan ofte settes opp via ProISP/cPanel (Let's Encrypt).
 
 | URL | Beskrivelse |
 |-----|-------------|
-| `/` | Flø-demo (offentlig) |
+| `/` | Nordskjær-demo (offentlig) |
 | `/login` | Innlogging |
 | `/portal` | Hub – krever innlogging |
 | `/admin` | Admin-demo – krever innlogging |

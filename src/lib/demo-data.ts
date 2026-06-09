@@ -13,16 +13,16 @@ import type {
 import { themes } from "./themes";
 
 export const touristCenter = {
-  name: "Flø Feriesenter Demo",
+  name: "Nordskjær Feriesenter",
   tagline: {
     nb: "Moderne hytter, båt og naturopplevelser mellom hav og fjell.",
     en: "Modern cabins, boats and nature experiences between ocean and mountains.",
     de: "Moderne Hütten, Boote und Naturerlebnisse zwischen Meer und Bergen.",
   },
-  location: "Flø, Sunnmøre",
+  location: "Nordskjær, Vestlandskysten",
   phone: "+47 70 00 00 00",
-  email: "booking@flo-demo.no",
-  coordinates: "62.3960, 5.8540",
+  email: "booking@nordskjaer-demo.no",
+  coordinates: "62.4000, 5.9000",
 };
 
 export const themeSettings: ThemeSettings = {
@@ -96,9 +96,9 @@ export const activities: Activity[] = [
     },
     slug: "havfiske-med-bat",
     teaser: {
-      nb: "Bo ved havet og dra rett ut til gode fiskeplasser fra Flø.",
-      en: "Stay by the sea and head straight to good fishing spots from Flø.",
-      de: "Wohnen Sie am Meer und fahren Sie direkt zu guten Angelplätzen ab Flø.",
+      nb: "Bo ved havet og dra rett ut til gode fiskeplasser fra Nordskjær.",
+      en: "Stay by the sea and head straight to good fishing spots from Nordskjær.",
+      de: "Wohnen Sie am Meer und fahren Sie direkt zu guten Angelplätzen ab Nordskjær.",
     },
     description: {
       nb: "En trygg, guidet tur med lokalkjent skipper og stopp ved skjulte perler.",
@@ -116,11 +116,11 @@ export const activities: Activity[] = [
   {
     id: "kayak",
     title: {
-      nb: "Båttur til Grasøya",
-      en: "Boat trip to Grasøya",
-      de: "Bootsfahrt nach Grasøya",
+      nb: "Båttur til Måkøy fyr",
+      en: "Boat trip to Måkøy lighthouse",
+      de: "Bootsfahrt zum Leuchtturm Måkøy",
     },
-    slug: "battur-til-grasoya",
+    slug: "battur-til-makoy-fyr",
     teaser: {
       nb: "Opplev fyr, kystlandskap og havutsikt på en kort og minneverdig tur.",
       en: "Experience lighthouse history, coastal scenery and ocean views.",
@@ -142,9 +142,9 @@ export const activities: Activity[] = [
   {
     id: "mountain-hike",
     title: {
-      nb: "Fjellturer fra Flø",
-      en: "Mountain hikes from Flø",
-      de: "Bergtouren ab Flø",
+      nb: "Fjellturer fra Nordskjær",
+      en: "Mountain hikes from Nordskjær",
+      de: "Bergtouren ab Nordskjær",
     },
     slug: "guidet-fjelltur",
     teaser: {
@@ -168,15 +168,15 @@ export const activities: Activity[] = [
   {
     id: "food-night",
     title: {
-      nb: "Dagstur til Ålesund",
-      en: "Day trip to Ålesund",
-      de: "Tagesausflug nach Ålesund",
+      nb: "Dagstur til kystbyen",
+      en: "Day trip to the coastal town",
+      de: "Tagesausflug in die Küstenstadt",
     },
-    slug: "dagstur-til-alesund",
+    slug: "dagstur-til-kystbyen",
     teaser: {
-      nb: "Bruk Flø som rolig base og opplev jugendbyen, fjorder og kystkultur.",
-      en: "Use Flø as a calm base for Ålesund, fjords and coastal culture.",
-      de: "Nutzen Sie Flø als ruhige Basis für Ålesund, Fjorde und Küstenkultur.",
+      nb: "Bruk Nordskjær som rolig base og opplev byliv, fjorder og kystkultur.",
+      en: "Use Nordskjær as a calm base for town life, fjords and coastal culture.",
+      de: "Nutzen Sie Nordskjær als ruhige Basis für Stadtleben, Fjorde und Küstenkultur.",
     },
     description: {
       nb: "Et sosialt kveldsarrangement for grupper, bedrifter og reisefølger.",
@@ -360,9 +360,9 @@ export const emailTemplates: EmailTemplate[] = [
     name: "Før ankomst",
     trigger: "pre_arrival",
     subject: {
-      nb: "Velkommen snart til Nordlys Kystcamp",
-      en: "Welcome soon to Nordlys Kystcamp",
-      de: "Bald willkommen bei Nordlys Kystcamp",
+      nb: "Velkommen snart til Nordskjær Feriesenter",
+      en: "Welcome soon to Nordskjær Feriesenter",
+      de: "Bald willkommen im Nordskjær Feriesenter",
     },
     preview: {
       nb: "Her er pakkeliste, veibeskrivelse, værinfo og innsjekk.",
@@ -404,18 +404,18 @@ export const faqItems: FAQItem[] = [
     },
   },
   {
-    id: "travel-flø",
+    id: "travel-nordskjaer",
     category: "travel",
     order: 3,
     question: {
-      nb: "Hvordan kommer man seg til Flø?",
-      en: "How do guests get to Flø?",
-      de: "Wie kommen Gäste nach Flø?",
+      nb: "Hvordan kommer man seg til Nordskjær?",
+      en: "How do guests get to Nordskjær?",
+      de: "Wie kommen Gäste nach Nordskjær?",
     },
     answer: {
-      nb: "Flø ligger ytterst mot havet på Sunnmøre, med kort vei fra Ulsteinvik og dagsturmuligheter til Ålesund og Geiranger.",
-      en: "Flø is located by the open ocean on Sunnmøre, close to Ulsteinvik and day trips to Ålesund and Geiranger.",
-      de: "Flø liegt am offenen Meer auf Sunnmøre, nahe Ulsteinvik und mit Tagesausflügen nach Ålesund und Geiranger.",
+      nb: "Nordskjær ligger ytterst mot havet på Vestlandskysten, med kort vei til nærmeste tettsted og dagsturmuligheter til byer og fjorder.",
+      en: "Nordskjær is located by the open ocean on the west coast, close to the nearest town and day trips to cities and fjords.",
+      de: "Nordskjær liegt am offenen Meer an der Westküste, nahe dem nächsten Ort und mit Tagesausflügen zu Städten und Fjorden.",
     },
   },
 ];
@@ -457,7 +457,7 @@ export const analyticsSummary: AnalyticsSummary = {
     { source: "Direkte trafikk", visitors: 2100 },
   ],
   topQueries: [
-    { query: "hytte ved havet sunnmøre", clicks: 420 },
+    { query: "hytte ved havet vestlandet", clicks: 420 },
     { query: "rib safari helgeland", clicks: 318 },
     { query: "kajakk og overnatting norge", clicks: 276 },
   ],

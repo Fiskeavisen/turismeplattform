@@ -9,7 +9,7 @@ Region: eu-central-1
 ## Status
 
 - Turisme-migrasjon er kjørt (`platform_foundation`)
-- Flø-demo tenant er opprettet (`flo-feriesenter`)
+- Demo-tenant er opprettet (`nordskjaer-feriesenter`)
 - Tabeller: tenants, theme_settings, page_sections, activities, accommodations,
   articles, bookings, booking_messages, email_templates, faqs, reviews
 

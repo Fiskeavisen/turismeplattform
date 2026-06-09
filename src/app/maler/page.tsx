@@ -5,7 +5,7 @@ import { themes, type ThemeDefinition } from "@/lib/themes";
 export const metadata = {
   title: "Designmaler | Turismeplattform",
   description:
-    "Tre gjennomarbeidede designmaler for turismesider: Kyst & eventyr, Fjord & ro og Premium resort.",
+    "Tre gjennomarbeidede norske designmaler for turismesider: Storhavet, Fjordlys og Fyrvokteren.",
 };
 
 export default function TemplatesPage() {
@@ -62,7 +62,7 @@ function TemplateShowcase({ theme }: { theme: ThemeDefinition }) {
             <h2 className="text-3xl font-semibold tracking-[-0.02em]">{theme.name}</h2>
             {theme.id === "coastal" ? (
               <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
-                Valgt for Flø-demoen
+                Valgt for Nordskjær-demoen
               </span>
             ) : null}
           </div>
@@ -123,7 +123,7 @@ function TemplateShowcase({ theme }: { theme: ThemeDefinition }) {
               className="mt-4 text-4xl leading-tight"
               style={{ fontFamily: tokens.headingFontStack, fontWeight: 600 }}
             >
-              Bo ved havet på vakre Flø
+              Bo ved havet på Nordskjær
             </h3>
             <p className="mt-3 max-w-md leading-7" style={{ color: tokens.mutedText }}>
               Moderne hytter med egen båt, fisketurer og naturopplevelser

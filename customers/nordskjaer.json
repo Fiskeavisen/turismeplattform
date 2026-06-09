@@ -1,0 +1,133 @@
+{
+  "slug": "nordskjaer-feriesenter",
+  "name": "Nordskjær Feriesenter",
+  "businessType": "feriesenter",
+  "socialLinks": [],
+
+  "location": {
+    "place": "Nordskjær",
+    "region": "Vestlandskysten",
+    "country": "NO",
+    "coordinates": "62.4000, 5.9000",
+    "travelInfo": "Nordskjær er et oppdiktet kystsamfunn ytterst mot havet, knyttet til fastlandet med tunnel og ferge. Nærmeste tettsted med butikker og kaféer ligger ti minutter unna med bil.",
+    "nearbyDestinations": ["Kystbyen", "Fjordene", "Måkøy fyr"]
+  },
+
+  "contact": {
+    "phone": "+47 70 00 00 00",
+    "altPhone": "",
+    "email": "booking@nordskjaer-demo.no",
+    "address": "Nordskjær, Norge"
+  },
+
+  "brand": {
+    "tagline": {
+      "nb": "Moderne og koselige hytter i et spektakulært kystlandskap.",
+      "en": "Modern and cozy cabins in a spectacular coastal landscape.",
+      "de": "Moderne und gemütliche Hütten in einer spektakulären Küstenlandschaft."
+    },
+    "story": "Det oppdiktede kystsamfunnet Nordskjær ligger mellom alpelandskap og det åpne havet. Mange gjester kommer for det gode fisket, og hver hytte leveres med egen liten motorbåt. Fjellene rundt har stier for fottur og sykkel, og dykking, surfing og kiting er også populært.",
+    "toneOfVoice": "varm",
+    "template": "coastal",
+    "photoCredits": "Demobilder (Unsplash)"
+  },
+
+  "languages": ["nb", "en", "de"],
+
+  "accommodations": [
+    {
+      "name": "Hytte type 1",
+      "description": "To soverom med fem senger totalt, pluss hems med to senger adskilt av vegg. Egen liten motorbåt følger med.",
+      "beds": 7,
+      "guests": 7,
+      "amenities": ["Egen motorbåt", "Kjøkken", "Hems", "Utsikt mot havet"],
+      "imageHints": ["hytte ved havet", "kveldslys", "båt ved brygge"]
+    },
+    {
+      "name": "Hytte type 2",
+      "description": "To soverom med fem senger totalt, pluss hems med to senger. Godt egnet for familier.",
+      "beds": 7,
+      "guests": 7,
+      "amenities": ["Egen motorbåt", "Kjøkken", "Hems", "Familievennlig"],
+      "imageHints": ["familie på brygge", "hytteinteriør"]
+    }
+  ],
+
+  "activities": [
+    {
+      "name": "Havfiske med båt",
+      "description": "Hver hytte har egen liten motorbåt, og mange gjester kommer for det gode fisket rett utenfor Nordskjær.",
+      "category": "sea",
+      "bookable": true,
+      "imageHints": ["fisking fra båt", "fangst", "hav og fjell"]
+    },
+    {
+      "name": "Båttur til Måkøy fyr",
+      "description": "Besøk det gamle fyret og opplev det spektakulære kystlandskapet.",
+      "category": "sea",
+      "bookable": true,
+      "imageHints": ["fyr", "kystlandskap"]
+    },
+    {
+      "name": "Fjellturer og sykling",
+      "description": "Fjellene rundt Nordskjær har stier for både fottur og sykkel, med utsikt mot havet.",
+      "category": "mountain",
+      "bookable": false,
+      "imageHints": ["fjelltur med havutsikt"]
+    },
+    {
+      "name": "Dagstur til kystbyen",
+      "description": "Byliv, fjorder og kystkultur er bare en kort dagstur unna.",
+      "category": "culture",
+      "bookable": false,
+      "imageHints": ["kystby", "fjordlandskap"]
+    }
+  ],
+
+  "uniqueSellingPoints": [
+    "Egen motorbåt følger med hver hytte",
+    "Godt havfiske rett utenfor",
+    "Mellom alpelandskap og åpent hav",
+    "Kort vei til tettsted, by og fjorder",
+    "Dykking, surfing og kiting i området"
+  ],
+
+  "faq": [
+    {
+      "question": "Er båt inkludert ved hytteopphold?",
+      "answer": "Ja, hver hytte kommer med egen liten motorbåt.",
+      "category": "stay"
+    },
+    {
+      "question": "Hvordan kommer man seg til Nordskjær?",
+      "answer": "Nordskjær er knyttet til fastlandet med tunnel og ferge. Nærmeste tettsted ligger ti minutter unna med bil.",
+      "category": "travel"
+    }
+  ],
+
+  "articleIdeas": [
+    "48 timer på Nordskjær",
+    "Fiskeferie på Vestlandet: alt du trenger å vite",
+    "De beste turene rundt Nordskjær",
+    "Dagstur til kystbyen fra Nordskjær",
+    "Når er fisket best på Vestlandskysten?"
+  ],
+
+  "seoKeywords": [
+    "hytte ved havet vestlandet",
+    "fiskeferie norge",
+    "hytteutleie med båt",
+    "feriesenter norskekysten",
+    "overnatting ved havet"
+  ],
+
+  "integrations": {
+    "bookingMode": "request",
+    "onBookingCom": false,
+    "payments": [],
+    "searchConsoleVerified": false,
+    "reviewSources": ["manual"]
+  },
+
+  "internalNotes": "Fiktiv demokunde. Alle navn, steder og kontaktdetaljer er oppdiktet."
+}

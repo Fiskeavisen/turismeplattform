@@ -24,9 +24,9 @@ import { buildMetadata } from "@/lib/seo/metadata";
 
 export const metadata = buildMetadata({
   title: {
-    nb: "Flø Feriesenter Demo | Turismeplattform",
-    en: "Flø Holiday Centre Demo | Tourism Platform",
-    de: "Flø Ferienzentrum Demo | Tourismusplattform",
+    nb: "Nordskjær Feriesenter Demo | Turismeplattform",
+    en: "Nordskjær Holiday Centre Demo | Tourism Platform",
+    de: "Nordskjær Ferienzentrum Demo | Tourismusplattform",
   },
   description: {
     nb: "Demo av en gjenbrukbar turismeplattform med booking, admin, SEO, AEO og tre språk.",
@@ -104,11 +104,11 @@ export default function Home() {
               ))}
             </div>
             <h1 className="max-w-4xl text-5xl font-semibold tracking-[-0.04em] text-white md:text-7xl">
-              Opplev Flø mellom hav, hytter og fjell.
+              Opplev Nordskjær mellom hav, hytter og fjell.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-white/78">
               Dette er første referanseside for turismeplattformen: en moderne
-              Flø-demo med hytter, båt, aktiviteter, artikler, booking, tre
+              kystdemo med hytter, båt, aktiviteter, artikler, booking, tre
               språk, admin, SEO, AEO og statistikk.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
@@ -152,7 +152,7 @@ export default function Home() {
         <SectionHeading
           eyebrow="Aktiviteter"
           title="Enkelt å legge til produkter, priser og kapasitet."
-          description="Flø-demoen viser hvordan samme system kan håndtere hytter, båt, havfiske, fjellturer, dagsturer og opplevelser."
+          description="Nordskjær-demoen viser hvordan samme system kan håndtere hytter, båt, havfiske, fjellturer, dagsturer og opplevelser."
         />
         <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
           {activities.map((activity) => <ProductCard key={activity.id} activity={activity} />)}

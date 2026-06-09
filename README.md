@@ -1,7 +1,7 @@
 # Turismeplattform
 
 Gjenbrukbar grunnmur for moderne turistsider bygget med Next.js, TypeScript,
-Tailwind og Supabase-struktur. Første demo bruker Flø som pilot, slik at
+Tailwind og Supabase-struktur. Første demo bruker det oppdiktede Nordskjær Feriesenter, slik at
 løsningen kan selges til feriesentre, hytteutleie, aktivitetsselskaper og
 destinasjonsaktører.
 

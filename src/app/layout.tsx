@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Malenes overskriftsfonter: Kyst & eventyr bruker Fraunces, Premium resort bruker Cormorant.
+// Malenes overskriftsfonter: Storhavet bruker Fraunces, Fyrvokteren bruker Cormorant.
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],

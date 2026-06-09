@@ -10,12 +10,12 @@ export type DemoSite = {
 
 export const demoSites: DemoSite[] = [
   {
-    slug: "flo-feriesenter",
-    name: "Flø Feriesenter",
-    description: "Feriesenter med hytter, båt, havfiske og fjellturer på Sunnmøre.",
+    slug: "nordskjaer-feriesenter",
+    name: "Nordskjær Feriesenter",
+    description: "Feriesenter med hytter, båt, havfiske og fjellturer ved norskekysten.",
     publicPath: "/",
     adminPath: "/admin",
-    template: "Kyst & eventyr",
+    template: "Storhavet",
     status: "live",
   },
 ];
