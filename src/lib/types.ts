@@ -71,6 +71,32 @@ export type Accommodation = {
   amenities: string[];
 };
 
+export type RentalUnit = {
+  id: string;
+  accommodationId: string;
+  name: string;
+  active: boolean;
+};
+
+export type AddonPriceType = "per_stay" | "per_night" | "per_person";
+
+export type BookingAddon = {
+  id: string;
+  name: LocalizedString;
+  priceNok: number;
+  priceType: AddonPriceType;
+  active: boolean;
+  sortOrder: number;
+};
+
+export type BookingAddonSelection = {
+  id: string;
+  name: string;
+  priceNok: number;
+  priceType: AddonPriceType;
+  amount: number;
+};
+
 export type Article = {
   id: string;
   title: LocalizedString;
@@ -87,12 +113,15 @@ export type Booking = {
   guestEmail: string;
   guestPhone: string;
   productTitle: string;
+  rentalUnitId?: string;
+  rentalUnitName?: string;
   arrivalDate: string;
   departureDate?: string;
   guests: number;
   status: BookingStatus;
   paymentProvider: PaymentProvider;
   totalAmount: number;
+  addons?: BookingAddonSelection[];
   source: "website" | "booking-com" | "airbnb" | "manual" | "partner";
   language: Locale;
 };

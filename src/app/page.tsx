@@ -16,6 +16,7 @@ import {
   activities,
   analyticsSummary,
   articles,
+  rentalUnits,
   templates,
   touristCenter,
 } from "@/lib/demo-data";
@@ -174,31 +175,46 @@ export default function Home() {
             </p>
           </div>
           <div className="grid gap-5 md:grid-cols-2">
-            {accommodations.map((accommodation) => (
-              <article key={accommodation.id} className="rounded-[1.5rem] bg-[#f7f3eb] p-4">
-                <div
-                  className="h-56 rounded-[1.2rem]"
-                  style={{
-                    backgroundImage: `url('${accommodation.imageUrl}')`,
-                    backgroundPosition: "center",
-                    backgroundSize: "cover",
-                  }}
-                />
-                <div className="p-3">
-                  <h3 className="mt-3 text-2xl font-semibold">{accommodation.title.nb}</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">
-                    {accommodation.description.nb}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {accommodation.amenities.map((amenity) => (
-                      <span key={amenity} className="rounded-full bg-white px-3 py-1 text-xs">
-                        {amenity}
+            {accommodations.map((accommodation) => {
+              const units = rentalUnits.filter(
+                (unit) => unit.accommodationId === accommodation.id && unit.active,
+              );
+
+              return (
+                <article key={accommodation.id} className="rounded-[1.5rem] bg-[#f7f3eb] p-4">
+                  <div
+                    className="h-56 rounded-[1.2rem]"
+                    style={{
+                      backgroundImage: `url('${accommodation.imageUrl}')`,
+                      backgroundPosition: "center",
+                      backgroundSize: "cover",
+                    }}
+                  />
+                  <div className="p-3">
+                    <h3 className="mt-3 text-2xl font-semibold">{accommodation.title.nb}</h3>
+                    <p className="mt-2 text-sm leading-6 text-slate-600">
+                      {accommodation.description.nb}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      <span className="rounded-full bg-sky-950 px-3 py-1 text-xs font-semibold text-white">
+                        {units.length} enheter: {units[0]?.name}–{units[units.length - 1]?.name}
                       </span>
-                    ))}
+                      {accommodation.amenities.map((amenity) => (
+                        <span key={amenity} className="rounded-full bg-white px-3 py-1 text-xs">
+                          {amenity}
+                        </span>
+                      ))}
+                    </div>
+                    <a
+                      href="#booking"
+                      className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-sky-900"
+                    >
+                      Sjekk ledighet <ArrowRight size={15} />
+                    </a>
                   </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>

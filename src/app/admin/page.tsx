@@ -8,11 +8,14 @@ import {
   Paintbrush,
   Plus,
   SearchCheck,
+  ShoppingBag,
 } from "lucide-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { addonPriceTypeLabel } from "@/lib/booking/pricing";
 import {
   analyticsSummary,
+  bookingAddons,
   bookings,
   editableSections,
   emailTemplates,
@@ -99,7 +102,22 @@ export default function AdminDashboard() {
                 >
                   <div>
                     <p className="font-semibold">{booking.guestName}</p>
-                    <p className="text-sm text-slate-500">{booking.productTitle}</p>
+                    <p className="text-sm text-slate-500">
+                      {booking.productTitle}
+                      {booking.rentalUnitName ? ` · ${booking.rentalUnitName}` : ""}
+                    </p>
+                    {booking.addons && booking.addons.length > 0 ? (
+                      <div className="mt-2 flex flex-wrap gap-1.5">
+                        {booking.addons.map((addon) => (
+                          <span
+                            key={addon.id}
+                            className="rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-900"
+                          >
+                            {addon.name} · {formatCurrency(addon.amount)}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
                   </div>
                   <div>
                     <p className="text-sm font-semibold">{booking.arrivalDate}</p>
@@ -163,6 +181,37 @@ export default function AdminDashboard() {
                 <div key={source.source} className="flex justify-between rounded-2xl bg-slate-50 p-3 text-sm">
                   <span>{source.source}</span>
                   <strong>{source.visitors.toLocaleString("nb-NO")}</strong>
+                </div>
+              ))}
+            </div>
+          </Panel>
+
+          <Panel icon={<ShoppingBag size={20} />} title="Tilvalg og mersalg">
+            <div className="overflow-hidden rounded-2xl border border-slate-200">
+              {bookingAddons.map((addon) => (
+                <div
+                  key={addon.id}
+                  className="flex items-center justify-between gap-4 border-b border-slate-200 bg-white p-4 last:border-b-0"
+                >
+                  <div>
+                    <p className="font-semibold">{addon.name.nb}</p>
+                    <p className="text-sm text-slate-500">
+                      {addonPriceTypeLabel(addon.priceType)}
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span
+                      className={cn(
+                        "rounded-full px-3 py-1 text-xs font-semibold",
+                        addon.active
+                          ? "bg-emerald-100 text-emerald-800"
+                          : "bg-slate-200 text-slate-600",
+                      )}
+                    >
+                      {addon.active ? "Aktiv" : "Skjult"}
+                    </span>
+                    <strong>{formatCurrency(addon.priceNok)}</strong>
+                  </div>
                 </div>
               ))}
             </div>
