@@ -1,0 +1,15 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/booking-systemer/layout,_N_T_/booking-systemer/page,_N_T_/booking-systemer"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/booking-systemer/__PAGE__",
+    "/booking-systemer",
+    "/_index",
+    "/_head"
+  ]
+}
