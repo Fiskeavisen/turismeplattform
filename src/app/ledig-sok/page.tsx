@@ -127,7 +127,7 @@ export default async function AvailableSearchPage({ searchParams }: PageProps) {
       <section className="mx-auto max-w-7xl px-6 py-8">
         <form
           action="/ledig-sok"
-          className="-mt-16 grid gap-3 rounded-[2rem] bg-white p-5 shadow-2xl shadow-slate-950/15 ring-1 ring-slate-200 md:grid-cols-[1.2fr_0.9fr_0.9fr_0.8fr_0.9fr_auto] md:items-end"
+          className="-mt-8 grid gap-3 rounded-[2rem] bg-white p-5 shadow-2xl shadow-slate-950/15 ring-1 ring-slate-200 md:grid-cols-[1.2fr_0.9fr_0.9fr_0.8fr_0.9fr_auto] md:items-end"
         >
           <div>
             <label htmlFor="q" className="text-xs font-semibold uppercase tracking-wide text-slate-600">
