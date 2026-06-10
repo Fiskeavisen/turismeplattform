@@ -98,12 +98,15 @@ export default function Home() {
             {[
               ["#maler", "Maler"],
               ["#funksjoner", "Funksjoner"],
+              ["/booking-systemer", "Booking systemer"],
+              ["/ledig-sok", "Søk ledig dato"],
+              ["/markedsplass", "Markedsplass"],
               ["#pakker", "Pakker"],
               ["#kontakt", "Kontakt"],
             ].map(([href, label]) => (
-              <a key={href} href={href} className="rounded-full px-3.5 py-2.5 hover:bg-slate-100">
+              <Link key={href} href={href} className="rounded-full px-3.5 py-2.5 hover:bg-slate-100">
                 {label}
-              </a>
+              </Link>
             ))}
           </nav>
           <Link
@@ -145,6 +148,24 @@ export default function Home() {
             >
               Pakker og priser
             </a>
+            <Link
+              href="/booking-systemer"
+              className="inline-flex min-h-13 items-center gap-2 rounded-full border border-slate-300 px-7 text-base font-semibold hover:bg-slate-50"
+            >
+              Booking systemer
+            </Link>
+            <Link
+              href="/ledig-sok"
+              className="inline-flex min-h-13 items-center gap-2 rounded-full border border-slate-300 px-7 text-base font-semibold hover:bg-slate-50"
+            >
+              Søk ledig dato
+            </Link>
+            <Link
+              href="/markedsplass"
+              className="inline-flex min-h-13 items-center gap-2 rounded-full border border-slate-300 px-7 text-base font-semibold hover:bg-slate-50"
+            >
+              Test markedsplass
+            </Link>
           </div>
         </div>
 
@@ -346,6 +367,15 @@ export default function Home() {
             </Link>
             <Link href="/login" className="hover:text-slate-950">
               Kundeportal
+            </Link>
+            <Link href="/booking-systemer" className="hover:text-slate-950">
+              Booking systemer
+            </Link>
+            <Link href="/ledig-sok" className="hover:text-slate-950">
+              Søk ledig dato
+            </Link>
+            <Link href="/markedsplass" className="hover:text-slate-950">
+              Markedsplass
             </Link>
           </div>
         </div>

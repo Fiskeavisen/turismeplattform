@@ -119,7 +119,7 @@ export function FyrvokterenLayout() {
       <section id="opplevelser" className="mx-auto max-w-6xl px-6 py-24">
         <SectionMarker tokens={tokens} number="01" title="Opplevelser" />
         <div className="mt-12 grid gap-16">
-          {activities.map((activity, index) => {
+          {activities.filter((activity) => activity.visible).map((activity, index) => {
             const reversed = index % 2 === 1;
 
             return (
@@ -257,7 +257,7 @@ export function FyrvokterenLayout() {
       <section id="artikler" className="mx-auto max-w-6xl px-6 py-24">
         <SectionMarker tokens={tokens} number="04" title="Journal" />
         <div className="mt-12 grid gap-10 md:grid-cols-3">
-          {articles.map((article) => (
+          {articles.filter((article) => article.published).map((article) => (
             <article key={article.id}>
               <div
                 className="h-44 bg-cover bg-center"

@@ -8,9 +8,11 @@ import type {
   EditableSection,
   EmailTemplate,
   FAQItem,
+  InstagramImageSource,
   RentalUnit,
   Review,
   ReviewIntegration,
+  SocialMediaLink,
   ThemeSettings,
 } from "./types";
 import { themes } from "./themes";
@@ -27,6 +29,53 @@ export const touristCenter = {
   phone: "+47 70 00 00 00",
   email: "booking@nordskjaer-demo.no",
   coordinates: "62.4000, 5.9000",
+};
+
+export const socialMediaLinks: SocialMediaLink[] = [
+  {
+    id: "instagram",
+    label: "Instagram",
+    username: "@nordskjaer_demo",
+    url: "https://instagram.com/nordskjaer_demo",
+    visible: true,
+  },
+  {
+    id: "facebook",
+    label: "Facebook",
+    username: "Nordskjær Feriesenter",
+    url: "https://facebook.com/nordskjaer-demo",
+    visible: true,
+  },
+  {
+    id: "tiktok",
+    label: "TikTok",
+    username: "@nordskjaer",
+    url: "",
+    visible: false,
+  },
+  {
+    id: "youtube",
+    label: "YouTube",
+    username: "Nordskjær Feriesenter",
+    url: "",
+    visible: false,
+  },
+  {
+    id: "tripadvisor",
+    label: "Tripadvisor",
+    username: "Nordskjær Feriesenter",
+    url: "",
+    visible: false,
+  },
+];
+
+export const instagramImageSource: InstagramImageSource = {
+  mode: "account",
+  accountHandle: "@nordskjaer_demo",
+  hashtag: "nordskjaer",
+  connected: false,
+  lastSync: undefined,
+  libraryRecommendation: "instagram-graph-api",
 };
 
 export const themeSettings: ThemeSettings = {
@@ -114,6 +163,9 @@ export const activities: Activity[] = [
     priceFrom: 1290,
     imageUrl: norskeBilder.trebaat.url,
     capacity: 12,
+    difficulty: "lett",
+    minAge: 2,
+    visible: true,
     bookable: true,
     sellStandalone: true,
   },
@@ -140,6 +192,9 @@ export const activities: Activity[] = [
     priceFrom: 890,
     imageUrl: norskeBilder.seilbaatNatt.url,
     capacity: 8,
+    difficulty: "lett",
+    minAge: 2,
+    visible: true,
     bookable: true,
     sellStandalone: true,
   },
@@ -166,6 +221,9 @@ export const activities: Activity[] = [
     priceFrom: 690,
     imageUrl: norskeBilder.fjelldal.url,
     capacity: 16,
+    difficulty: "middels",
+    minAge: 8,
+    visible: true,
     bookable: true,
     sellStandalone: false,
   },
@@ -192,6 +250,9 @@ export const activities: Activity[] = [
     priceFrom: 1190,
     imageUrl: norskeBilder.rorbuerKyst.url,
     capacity: 24,
+    difficulty: "lett",
+    minAge: 0,
+    visible: true,
     bookable: true,
     sellStandalone: true,
   },
@@ -310,6 +371,9 @@ export const articles: Article[] = [
     category: "guide",
     readingMinutes: 5,
     imageUrl: norskeBilder.fjellDis.url,
+    published: true,
+    featured: true,
+    relatedActivityId: "rib-safari",
   },
   {
     id: "best-season",
@@ -327,6 +391,8 @@ export const articles: Article[] = [
     category: "season",
     readingMinutes: 4,
     imageUrl: norskeBilder.vintervann.url,
+    published: true,
+    featured: false,
   },
   {
     id: "local-guide",
@@ -344,6 +410,9 @@ export const articles: Article[] = [
     category: "local",
     readingMinutes: 6,
     imageUrl: norskeBilder.nordlysSkog.url,
+    published: false,
+    featured: false,
+    relatedActivityId: "kayak",
   },
 ];
 

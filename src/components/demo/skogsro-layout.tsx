@@ -178,7 +178,7 @@ export function SkogsroLayout() {
           Rolige dager ute, med utgangspunkt i feriesenteret.
         </p>
         <div className="mt-8 grid">
-          {activities.map((activity, index) => (
+          {activities.filter((activity) => activity.visible).map((activity, index) => (
             <article
               key={activity.id}
               className="grid items-center gap-5 py-6 sm:grid-cols-[8rem_1fr_auto]"
@@ -323,7 +323,7 @@ export function SkogsroLayout() {
           </span>
         </div>
         <div className="grid gap-5 md:grid-cols-3">
-          {articles.map((article) => (
+          {articles.filter((article) => article.published).map((article) => (
             <article key={article.id}>
               <div
                 className="h-44 rounded-3xl bg-cover bg-center"

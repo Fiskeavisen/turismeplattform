@@ -1,4 +1,4 @@
-import { ArrowRight, MapPin, Star } from "lucide-react";
+import { ArrowRight, Baby, Clock, Gauge, MapPin, Star, Tag } from "lucide-react";
 import { BookingSearchCard } from "@/components/platform/booking-search-card";
 import {
   accommodations,
@@ -12,6 +12,12 @@ import { norskeBilder } from "@/lib/images";
 import { getTheme } from "@/lib/themes";
 import { formatCurrency } from "@/lib/utils";
 import { activityIcons, fallbackActivityIcon, uspItems } from "./shared";
+
+const difficultyLabels = {
+  lett: "Lett",
+  middels: "Middels",
+  krevende: "Krevende",
+} as const;
 
 /**
  * Storhavet: bygget etter den godkjente skissen.
@@ -117,7 +123,7 @@ export function StorhavetLayout() {
       {/* Fire opplevelseskort med ikon-badge */}
       <section id="opplevelser" className="mx-auto max-w-7xl px-6 pb-8 pt-14">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {activities.map((activity) => {
+          {activities.filter((activity) => activity.visible).map((activity) => {
             const Icon = activityIcons[activity.id] ?? fallbackActivityIcon;
 
             return (
@@ -146,6 +152,30 @@ export function StorhavetLayout() {
                   <p className="mt-2 text-sm leading-6" style={{ color: tokens.mutedText }}>
                     {activity.teaser.nb}
                   </p>
+                  <div className="mt-4 grid grid-cols-4 gap-2 text-center text-xs">
+                    {[
+                      [Clock, activity.duration, "Tid"],
+                      [Gauge, difficultyLabels[activity.difficulty], "Nivå"],
+                      [Baby, `${activity.minAge}+`, "Alder"],
+                      [Tag, formatCurrency(activity.priceFrom), "Pris"],
+                    ].map(([FactIcon, value, label]) => {
+                      const TypedIcon = FactIcon as typeof Clock;
+
+                      return (
+                        <div
+                          key={`${value}-${label}`}
+                          className="rounded-2xl p-2"
+                          style={{ background: tokens.surfaceMuted }}
+                        >
+                          <TypedIcon className="mx-auto" size={17} style={{ color: tokens.primary }} />
+                          <p className="mt-1 font-semibold">{value as string}</p>
+                          <p className="text-[10px] uppercase tracking-wide" style={{ color: tokens.mutedText }}>
+                            {label as string}
+                          </p>
+                        </div>
+                      );
+                    })}
+                  </div>
                   {activity.sellStandalone ? (
                     <span
                       className="mt-3 inline-flex rounded-full px-3 py-1 text-xs font-semibold"
@@ -263,7 +293,7 @@ export function StorhavetLayout() {
               </span>
             </div>
             <div className="grid gap-4 sm:grid-cols-3">
-              {articles.map((article) => (
+              {articles.filter((article) => article.published).map((article) => (
                 <article key={article.id}>
                   <div
                     className="h-28 bg-cover bg-center"

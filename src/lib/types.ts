@@ -43,6 +43,23 @@ export type ThemeSettings = {
   borderRadius: "soft" | "rounded" | "sharp";
 };
 
+export type SocialMediaLink = {
+  id: "instagram" | "facebook" | "tiktok" | "youtube" | "tripadvisor";
+  label: string;
+  url: string;
+  username: string;
+  visible: boolean;
+};
+
+export type InstagramImageSource = {
+  mode: "account" | "hashtag" | "manual";
+  accountHandle: string;
+  hashtag: string;
+  connected: boolean;
+  lastSync?: string;
+  libraryRecommendation: string;
+};
+
 export type LocalizedString = Record<Locale, string>;
 
 export type Activity = {
@@ -56,6 +73,9 @@ export type Activity = {
   priceFrom: number;
   imageUrl: string;
   capacity: number;
+  difficulty: "lett" | "middels" | "krevende";
+  minAge: number;
+  visible: boolean;
   bookable: boolean;
   sellStandalone: boolean;
 };
@@ -109,6 +129,9 @@ export type Article = {
   category: "guide" | "season" | "activity" | "local";
   readingMinutes: number;
   imageUrl: string;
+  published: boolean;
+  featured: boolean;
+  relatedActivityId?: string;
 };
 
 export type Booking = {
