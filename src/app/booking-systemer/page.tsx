@@ -191,7 +191,7 @@ export default function BookingSystemsPage() {
             <div className="flex items-center justify-between gap-4">
               <div>
                 <p className="text-xs font-semibold uppercase tracking-[0.25em] text-slate-500">
-                  Helgeland Connect
+                  Connect
                 </p>
                 <h2 className="mt-2 text-2xl font-semibold">Partnernettverk</h2>
               </div>

@@ -6,7 +6,7 @@ export type MarketplaceBookingMode = "internal" | "channel-manager" | "external-
 
 export type MarketplaceChannel =
   | "Direkte"
-  | "Helgeland Connect"
+  | "Connect"
   | "Airbnb"
   | "Booking.com"
   | "Hotels.com"
@@ -92,7 +92,7 @@ export const marketplacePartners: MarketplacePartner[] = [
     description: "Hytter, båt, havfiske og fjellturer ved kysten.",
     websitePath: "/demo/storhavet",
     contactEmail: "booking@nordskjaer-demo.no",
-    channels: ["Direkte", "Helgeland Connect", "Booking.com"],
+    channels: ["Direkte", "Connect", "Booking.com"],
   },
   {
     id: "helgeland-kajakk",
@@ -101,7 +101,7 @@ export const marketplacePartners: MarketplacePartner[] = [
     description: "Guidede padleturer, familieturer og kurs langs Helgelandskysten.",
     websitePath: "/booking-systemer",
     contactEmail: "hei@helgeland-kajakk.demo",
-    channels: ["Direkte", "Helgeland Connect", "Visit Norway"],
+    channels: ["Direkte", "Connect", "Visit Norway"],
   },
   {
     id: "fjordro",
@@ -110,7 +110,7 @@ export const marketplacePartners: MarketplacePartner[] = [
     description: "Små hytter og leiligheter for par, familier og arbeidsreisende.",
     websitePath: "/booking-systemer",
     contactEmail: "booking@fjordro.demo",
-    channels: ["Direkte", "Helgeland Connect", "Airbnb", "Hotels.com"],
+    channels: ["Direkte", "Connect", "Airbnb", "Hotels.com"],
   },
   {
     id: "oyeventyr",
@@ -119,7 +119,7 @@ export const marketplacePartners: MarketplacePartner[] = [
     description: "Båtturer, øyhopping og lokale matopplevelser.",
     websitePath: "/booking-systemer",
     contactEmail: "post@oyeventyr.demo",
-    channels: ["Direkte", "Helgeland Connect", "Booking.com"],
+    channels: ["Direkte", "Connect", "Booking.com"],
   },
 ];
 
@@ -136,7 +136,7 @@ export const marketplaceProducts: MarketplaceProduct[] = [
     priceFrom: 1890,
     guestsMax: 7,
     bookingMode: "internal",
-    channels: ["Direkte", "Helgeland Connect", "Booking.com"],
+    channels: ["Direkte", "Connect", "Booking.com"],
     minNights: 2,
     units: [
       { id: "hytte-1", name: "Hytte 1", blockedPeriods: [] },
@@ -157,7 +157,7 @@ export const marketplaceProducts: MarketplaceProduct[] = [
     priceFrom: 1490,
     guestsMax: 5,
     bookingMode: "channel-manager",
-    channels: ["Direkte", "Helgeland Connect", "Airbnb", "Hotels.com"],
+    channels: ["Direkte", "Connect", "Airbnb", "Hotels.com"],
     minNights: 1,
     units: [
       { id: "fjordro-1", name: "Skogshytte 1", blockedPeriods: [{ from: "2026-06-28", to: "2026-06-30" }] },
@@ -177,7 +177,7 @@ export const marketplaceProducts: MarketplaceProduct[] = [
     priceFrom: 990,
     guestsMax: 2,
     bookingMode: "channel-manager",
-    channels: ["Direkte", "Helgeland Connect", "Airbnb"],
+    channels: ["Direkte", "Connect", "Airbnb"],
     minNights: 1,
     units: [
       { id: "fjordro-leil-1", name: "Leilighet A", blockedPeriods: [] },
@@ -196,7 +196,7 @@ export const marketplaceProducts: MarketplaceProduct[] = [
     priceFrom: 890,
     guestsMax: 12,
     bookingMode: "internal",
-    channels: ["Direkte", "Helgeland Connect", "Visit Norway"],
+    channels: ["Direkte", "Connect", "Visit Norway"],
     duration: "3 timer",
     capacityPerDay: 12,
     blockedDates: ["2026-07-22"],
@@ -217,7 +217,7 @@ export const marketplaceProducts: MarketplaceProduct[] = [
     priceFrom: 1290,
     guestsMax: 18,
     bookingMode: "external-link",
-    channels: ["Direkte", "Helgeland Connect", "Booking.com"],
+    channels: ["Direkte", "Connect", "Booking.com"],
     duration: "4 timer",
     capacityPerDay: 18,
     blockedDates: ["2026-08-01"],
@@ -238,7 +238,7 @@ export const marketplaceProducts: MarketplaceProduct[] = [
     priceFrom: 1290,
     guestsMax: 12,
     bookingMode: "internal",
-    channels: ["Direkte", "Helgeland Connect"],
+    channels: ["Direkte", "Connect"],
     duration: "2 timer",
     capacityPerDay: 12,
     blockedDates: [],
