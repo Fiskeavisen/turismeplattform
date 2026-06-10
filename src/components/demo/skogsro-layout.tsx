@@ -204,6 +204,7 @@ export function SkogsroLayout() {
                   <span className="flex items-center gap-1.5">
                     <Users size={13} /> Maks {activity.capacity}
                   </span>
+                  {activity.sellStandalone ? <span>Kan kjøpes uten opphold</span> : null}
                 </div>
               </div>
               <p className="text-sm font-bold sm:text-right">

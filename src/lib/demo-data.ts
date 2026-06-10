@@ -114,6 +114,7 @@ export const activities: Activity[] = [
     imageUrl: norskeBilder.trebaat.url,
     capacity: 12,
     bookable: true,
+    sellStandalone: true,
   },
   {
     id: "kayak",
@@ -139,6 +140,7 @@ export const activities: Activity[] = [
     imageUrl: norskeBilder.seilbaatNatt.url,
     capacity: 8,
     bookable: true,
+    sellStandalone: true,
   },
   {
     id: "mountain-hike",
@@ -164,6 +166,7 @@ export const activities: Activity[] = [
     imageUrl: norskeBilder.fjelldal.url,
     capacity: 16,
     bookable: true,
+    sellStandalone: false,
   },
   {
     id: "food-night",
@@ -189,12 +192,14 @@ export const activities: Activity[] = [
     imageUrl: norskeBilder.rorbuerKyst.url,
     capacity: 24,
     bookable: true,
+    sellStandalone: true,
   },
 ];
 
 export const accommodations: Accommodation[] = [
   {
     id: "sea-cabin",
+    type: "hytte",
     title: {
       nb: "Hytte type 1 med båt",
       en: "Cabin type 1 with boat",
@@ -214,6 +219,7 @@ export const accommodations: Accommodation[] = [
   },
   {
     id: "basecamp-room",
+    type: "leilighet",
     title: {
       nb: "Hytte type 2 for familier",
       en: "Cabin type 2 for families",

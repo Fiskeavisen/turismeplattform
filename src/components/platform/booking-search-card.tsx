@@ -21,6 +21,12 @@ const fieldClass =
 
 const labelClass = "text-xs font-semibold uppercase tracking-wide text-slate-600";
 
+const accommodationTypeLabel = {
+  hytte: "Hytte",
+  leilighet: "Leilighet",
+  hus: "Hus",
+} as const;
+
 /*
  * Fargene styres av CSS-variabler slik at kortet automatisk følger
  * designmalen på /demo/[tema]. Fallback-verdiene gir Storhavet-paletten.
@@ -262,7 +268,8 @@ export function BookingSearchCard({ variant = "panel" }: BookingSearchCardProps)
               >
                 {accommodations.map((item) => (
                   <option key={item.id} value={item.id}>
-                    {item.title.nb} · fra {formatCurrency(item.priceFrom)}/natt
+                    {accommodationTypeLabel[item.type]} · {item.title.nb} · fra{" "}
+                    {formatCurrency(item.priceFrom)}/natt
                   </option>
                 ))}
               </select>

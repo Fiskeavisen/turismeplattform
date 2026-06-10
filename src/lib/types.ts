@@ -57,10 +57,14 @@ export type Activity = {
   imageUrl: string;
   capacity: number;
   bookable: boolean;
+  sellStandalone: boolean;
 };
+
+export type AccommodationType = "hytte" | "leilighet" | "hus";
 
 export type Accommodation = {
   id: string;
+  type: AccommodationType;
   title: LocalizedString;
   slug: string;
   description: LocalizedString;

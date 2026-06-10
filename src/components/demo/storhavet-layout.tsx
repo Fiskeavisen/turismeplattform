@@ -145,6 +145,14 @@ export function StorhavetLayout() {
                   <p className="mt-2 text-sm leading-6" style={{ color: tokens.mutedText }}>
                     {activity.teaser.nb}
                   </p>
+                  {activity.sellStandalone ? (
+                    <span
+                      className="mt-3 inline-flex rounded-full px-3 py-1 text-xs font-semibold"
+                      style={{ background: tokens.surfaceMuted, color: tokens.primary }}
+                    >
+                      Kan kjøpes uten opphold
+                    </span>
+                  ) : null}
                   <div className="mt-4 flex items-center justify-between text-sm">
                     <span className="font-semibold">Fra {formatCurrency(activity.priceFrom)}</span>
                     <ArrowRight size={16} style={{ color: tokens.primary }} />

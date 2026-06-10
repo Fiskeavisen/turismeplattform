@@ -139,6 +139,7 @@ export function FyrvokterenLayout() {
                     style={{ color: tokens.primary }}
                   >
                     {activity.duration} · maks {activity.capacity} gjester
+                    {activity.sellStandalone ? " · kan kjøpes uten opphold" : ""}
                   </p>
                   <h3
                     className="mt-4 text-3xl md:text-4xl"
