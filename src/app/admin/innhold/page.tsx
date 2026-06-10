@@ -1,16 +1,37 @@
-import { Star } from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { PageHeader, Panel } from "@/components/admin/ui";
 import { articles, faqItems, reviews } from "@/lib/demo-data";
 
 export const metadata = { title: "Innhold | Admin" };
 
 export default function AdminContentPage() {
+  const publishedReviews = reviews.filter((review) => review.published).length;
+
   return (
     <>
       <PageHeader
         title="Innhold"
-        description="Artikler, FAQ og anmeldelser som bygger synlighet i Google og AI-svartjenester."
+        description="Artikler og FAQ som bygger synlighet i Google og AI-svartjenester. Omtaler administreres i egen seksjon."
       />
+
+      <Panel className="mb-6">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <div>
+            <p className="font-semibold">Omtaler og reviews</p>
+            <p className="mt-1 text-sm leading-6 text-slate-600">
+              {publishedReviews} omtaler er publisert på nettsiden. Svar, godkjenn og koble til
+              Google og Trustpilot under Omtaler.
+            </p>
+          </div>
+          <Link
+            href="/admin/omtaler"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-slate-950 px-5 text-sm font-semibold text-white hover:bg-slate-800"
+          >
+            Gå til omtaler <ArrowRight size={15} />
+          </Link>
+        </div>
+      </Panel>
 
       <div className="grid gap-6 xl:grid-cols-2">
         <Panel title="Artikler" action="Ny artikkel">
@@ -46,24 +67,6 @@ export default function AdminContentPage() {
                   <p className="mt-1.5 text-sm leading-6 text-slate-600">{item.answer.nb}</p>
                 </div>
               ))}
-          </div>
-        </Panel>
-
-        <Panel title="Anmeldelser" className="xl:col-span-2">
-          <div className="grid gap-4 md:grid-cols-2">
-            {reviews.map((review) => (
-              <figure key={review.id} className="rounded-2xl border border-slate-200 p-5">
-                <div className="flex gap-1 text-amber-500">
-                  {Array.from({ length: review.rating }).map((_, index) => (
-                    <Star key={index} size={15} fill="currentColor" />
-                  ))}
-                </div>
-                <blockquote className="mt-3 text-sm leading-6">“{review.quote.nb}”</blockquote>
-                <figcaption className="mt-3 text-xs font-semibold uppercase tracking-wide text-slate-500">
-                  {review.guestName} · {review.source} · {review.date}
-                </figcaption>
-              </figure>
-            ))}
           </div>
         </Panel>
       </div>

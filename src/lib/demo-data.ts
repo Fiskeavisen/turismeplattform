@@ -10,6 +10,7 @@ import type {
   FAQItem,
   RentalUnit,
   Review,
+  ReviewIntegration,
   ThemeSettings,
 } from "./types";
 import { themes } from "./themes";
@@ -493,10 +494,21 @@ export const reviews: Review[] = [
     rating: 5,
     source: "manual",
     date: "2026-05-12",
+    published: true,
+    productLabel: "Hytte type 1 med båt",
     quote: {
       nb: "Fantastisk plass. Hytta var moderne, utsikten var rå og båten gjorde ferien komplett.",
       en: "Fantastic place. The cabin was modern, the view was stunning and the boat completed the holiday.",
       de: "Fantastischer Ort. Die Hütte war modern, die Aussicht stark und das Boot machte den Urlaub komplett.",
+    },
+    reply: {
+      text: {
+        nb: "Tusen takk, Kari! Vi er glade for at båten og utsikten gjorde oppholdet minneverdig.",
+        en: "Thank you, Kari! We are glad the boat and the view made your stay memorable.",
+        de: "Danke, Kari! Schön, dass Boot und Aussicht den Aufenthalt unvergesslich gemacht haben.",
+      },
+      date: "2026-05-13",
+      author: "Nordskjær Feriesenter",
     },
   },
   {
@@ -505,11 +517,56 @@ export const reviews: Review[] = [
     rating: 5,
     source: "google",
     date: "2026-06-03",
+    published: true,
+    productLabel: "Havfiske med båt",
     quote: {
       nb: "Perfekt base for fiske, fjellturer og rolige kvelder ved havet.",
       en: "Perfect base for fishing, hikes and quiet evenings by the sea.",
       de: "Perfekte Basis für Angeln, Wanderungen und ruhige Abende am Meer.",
     },
+  },
+  {
+    id: "review-anna",
+    guestName: "Anna",
+    rating: 4,
+    source: "trustpilot",
+    date: "2026-06-08",
+    published: false,
+    productLabel: "Hytte type 2 for familier",
+    quote: {
+      nb: "Hyggelig opphold og god kommunikasjon. Litt kort vei til brygga, men ellers veldig fornøyd.",
+      en: "Nice stay and good communication. A short walk to the pier, but otherwise very happy.",
+      de: "Schöner Aufenthalt und gute Kommunikation. Kurzer Weg zum Steg, aber insgesamt sehr zufrieden.",
+    },
+  },
+];
+
+export const reviewIntegrations: ReviewIntegration[] = [
+  {
+    id: "google",
+    name: "Google",
+    connected: true,
+    lastSync: "2026-06-09 08:15",
+    reviewCount: 1,
+    averageRating: 5,
+    description: "Henter nye anmeldelser fra Google Business Profile og lar deg svare fra admin.",
+  },
+  {
+    id: "trustpilot",
+    name: "Trustpilot",
+    connected: true,
+    lastSync: "2026-06-09 07:40",
+    reviewCount: 1,
+    averageRating: 4,
+    description: "Synkroniserer omtaler og invitasjoner til Trustpilot for bedre tillit og SEO.",
+  },
+  {
+    id: "manual",
+    name: "Manuelle omtaler",
+    connected: true,
+    reviewCount: 1,
+    averageRating: 5,
+    description: "Legg inn omtaler fra e-post, telefon eller skjema og publiser dem på nettsiden.",
   },
 ];
 

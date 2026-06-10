@@ -21,6 +21,7 @@ import { uspItems } from "./shared";
 export function FyrvokterenLayout() {
   const theme = getTheme("premium");
   const { tokens } = theme;
+  const featuredReview = reviews.find((review) => review.published) ?? reviews[0];
 
   const cssVars = {
     "--demo-primary": tokens.primary,
@@ -212,7 +213,7 @@ export function FyrvokterenLayout() {
       {/* Stort sitat */}
       <section className="mx-auto max-w-3xl px-6 py-24 text-center">
         <div className="flex justify-center gap-1.5" style={{ color: tokens.primary }}>
-          {Array.from({ length: reviews[0]?.rating ?? 5 }).map((_, index) => (
+          {Array.from({ length: featuredReview?.rating ?? 5 }).map((_, index) => (
             <Star key={index} size={16} fill="currentColor" />
           ))}
         </div>
@@ -220,13 +221,13 @@ export function FyrvokterenLayout() {
           className="mt-8 text-3xl leading-[1.4] md:text-4xl"
           style={{ fontFamily: tokens.headingFontStack, fontWeight: 500 }}
         >
-          “{reviews[0]?.quote.nb}”
+          “{featuredReview?.quote.nb}”
         </blockquote>
         <p
           className="mt-8 text-xs font-semibold uppercase tracking-[0.35em]"
           style={{ color: tokens.mutedText }}
         >
-          {reviews[0]?.guestName} · gjest {reviews[0]?.date}
+          {featuredReview?.guestName} · gjest {featuredReview?.date}
         </p>
       </section>
 

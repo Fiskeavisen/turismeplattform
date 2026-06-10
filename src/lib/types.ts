@@ -146,6 +146,12 @@ export type FAQItem = {
   order: number;
 };
 
+export type ReviewReply = {
+  text: LocalizedString;
+  date: string;
+  author: string;
+};
+
 export type Review = {
   id: string;
   guestName: string;
@@ -153,7 +159,29 @@ export type Review = {
   source: "manual" | "google" | "trustpilot";
   quote: LocalizedString;
   date: string;
+  published: boolean;
+  reply?: ReviewReply;
+  productLabel?: string;
 };
+
+export type ReviewIntegration = {
+  id: "google" | "trustpilot" | "manual";
+  name: string;
+  connected: boolean;
+  lastSync?: string;
+  reviewCount: number;
+  averageRating: number;
+  description: string;
+};
+
+export type ReportPeriod = "30d" | "90d" | "year";
+
+export type ReportType =
+  | "belegg"
+  | "omsetning"
+  | "aktiviteter"
+  | "mersalg"
+  | "kilder";
 
 export type AnalyticsSummary = {
   visitors: number;

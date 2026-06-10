@@ -21,6 +21,7 @@ import { uspItems } from "./shared";
 export function SkogsroLayout() {
   const theme = getTheme("fjord");
   const { tokens } = theme;
+  const publishedReviews = reviews.filter((review) => review.published);
 
   const cssVars = {
     "--demo-primary": tokens.primary,
@@ -288,7 +289,7 @@ export function SkogsroLayout() {
       {/* Gjester som sitatband */}
       <section className="mx-auto max-w-6xl px-6 py-16">
         <div className="grid gap-6 md:grid-cols-2">
-          {reviews.map((review) => (
+          {publishedReviews.map((review) => (
             <figure
               key={review.id}
               className="rounded-3xl border p-7"

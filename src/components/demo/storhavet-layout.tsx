@@ -22,6 +22,7 @@ import { activityIcons, fallbackActivityIcon, uspItems } from "./shared";
 export function StorhavetLayout() {
   const theme = getTheme("coastal");
   const { tokens } = theme;
+  const publishedReviews = reviews.filter((review) => review.published);
 
   const cssVars = {
     "--demo-primary": tokens.primary,
@@ -299,7 +300,7 @@ export function StorhavetLayout() {
               </span>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
-              {reviews.map((review) => (
+              {publishedReviews.map((review) => (
                 <figure
                   key={review.id}
                   className="bg-white p-5 shadow-sm ring-1 ring-slate-950/5"
