@@ -17,9 +17,18 @@ const trustPoints = [
 ];
 
 const fieldClass =
-  "mt-1.5 block h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm font-medium text-slate-900 focus:border-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-800/20";
+  "mt-1.5 block h-11 w-full rounded-xl border border-slate-300 bg-white px-3 text-sm font-medium text-slate-900 focus:border-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400/30";
 
 const labelClass = "text-xs font-semibold uppercase tracking-wide text-slate-600";
+
+/*
+ * Fargene styres av CSS-variabler slik at kortet automatisk følger
+ * designmalen på /demo/[tema]. Fallback-verdiene gir Storhavet-paletten.
+ */
+const primaryStyle = {
+  background: "var(--demo-primary, #0c3550)",
+  color: "var(--demo-primary-fg, #ffffff)",
+} as const;
 
 type UnitAvailability = {
   id: string;
@@ -175,10 +184,13 @@ export function BookingSearchCard() {
   }
 
   return (
-    <div id="booking" className="rounded-[2rem] bg-white p-5 text-slate-950 shadow-2xl">
-      <div className="rounded-[1.5rem] bg-slate-950 p-5 text-white">
-        <p className="text-sm text-amber-100">Bookingmodul</p>
-        <h2 className="mt-2 text-2xl font-semibold">Velg hytte, se ledighet og book</h2>
+    <div
+      id="booking"
+      className="rounded-[2rem] bg-white p-5 text-slate-950 shadow-2xl shadow-slate-950/15 ring-1 ring-slate-950/5"
+    >
+      <div className="rounded-[1.5rem] p-5" style={primaryStyle}>
+        <p className="text-sm opacity-75">Booking</p>
+        <h2 className="mt-1 text-2xl font-semibold">Søk ledige hytter</h2>
       </div>
 
       {step === "done" ? (
@@ -277,7 +289,8 @@ export function BookingSearchCard() {
             type="button"
             onClick={checkAvailability}
             disabled={loading}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-sky-950 px-5 font-semibold text-white hover:bg-sky-900 disabled:opacity-60"
+            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl px-5 font-semibold transition hover:opacity-90 disabled:opacity-60"
+            style={primaryStyle}
           >
             {loading ? <Loader2 size={18} className="animate-spin" /> : null}
             Sjekk ledighet
@@ -301,19 +314,21 @@ export function BookingSearchCard() {
                       !unit.available &&
                         "cursor-not-allowed border-slate-200 bg-slate-50 text-slate-400",
                       unit.available &&
-                        selectedUnitId === unit.id &&
-                        "border-sky-900 bg-sky-950 text-white",
-                      unit.available &&
                         selectedUnitId !== unit.id &&
-                        "border-slate-300 hover:border-sky-900/40",
+                        "border-slate-300 hover:border-slate-500",
                     )}
+                    style={
+                      unit.available && selectedUnitId === unit.id
+                        ? { ...primaryStyle, borderColor: "transparent" }
+                        : undefined
+                    }
                   >
                     {unit.name}
                     <span
                       className={cn(
                         "block text-xs font-medium",
                         !unit.available && "text-slate-400",
-                        unit.available && selectedUnitId === unit.id && "text-amber-100",
+                        unit.available && selectedUnitId === unit.id && "opacity-80",
                         unit.available && selectedUnitId !== unit.id && "text-emerald-700",
                       )}
                     >
@@ -345,17 +360,25 @@ export function BookingSearchCard() {
                           key={addon.id}
                           className={cn(
                             "flex cursor-pointer items-center justify-between gap-3 rounded-xl border px-3 py-2.5 text-sm",
-                            checked
-                              ? "border-sky-900 bg-sky-50"
-                              : "border-slate-300 hover:border-sky-900/40",
+                            !checked && "border-slate-300 hover:border-slate-500",
                           )}
+                          style={
+                            checked
+                              ? {
+                                  borderColor: "var(--demo-primary, #0c3550)",
+                                  background:
+                                    "color-mix(in srgb, var(--demo-primary, #0c3550) 7%, white)",
+                                }
+                              : undefined
+                          }
                         >
                           <span className="flex items-center gap-2.5">
                             <input
                               type="checkbox"
                               checked={checked}
                               onChange={() => toggleAddon(addon.id)}
-                              className="size-4 accent-sky-950"
+                              className="size-4"
+                              style={{ accentColor: "var(--demo-primary, #0c3550)" }}
                             />
                             <span className="font-semibold">{addon.name.nb}</span>
                           </span>
@@ -438,7 +461,8 @@ export function BookingSearchCard() {
                 type="button"
                 onClick={submitBooking}
                 disabled={submitting}
-                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-sky-950 px-5 font-semibold text-white hover:bg-sky-900 disabled:opacity-60"
+                className="inline-flex h-12 items-center justify-center gap-2 rounded-xl px-5 font-semibold transition hover:opacity-90 disabled:opacity-60"
+                style={primaryStyle}
               >
                 {submitting ? <Loader2 size={18} className="animate-spin" /> : null}
                 Send bookingforespørsel · {formatCurrency(totalAmount)}

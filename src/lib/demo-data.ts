@@ -13,6 +13,7 @@ import type {
   ThemeSettings,
 } from "./types";
 import { themes } from "./themes";
+import { norskeBilder } from "./images";
 
 export const touristCenter = {
   name: "Nordskjær Feriesenter",
@@ -110,8 +111,7 @@ export const activities: Activity[] = [
     category: "sea",
     duration: "2 timer",
     priceFrom: 1290,
-    imageUrl:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: norskeBilder.trebaat.url,
     capacity: 12,
     bookable: true,
   },
@@ -136,8 +136,7 @@ export const activities: Activity[] = [
     category: "sea",
     duration: "3 timer",
     priceFrom: 890,
-    imageUrl:
-      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: norskeBilder.seilbaatNatt.url,
     capacity: 8,
     bookable: true,
   },
@@ -162,8 +161,7 @@ export const activities: Activity[] = [
     category: "mountain",
     duration: "4 timer",
     priceFrom: 690,
-    imageUrl:
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: norskeBilder.fjelldal.url,
     capacity: 16,
     bookable: true,
   },
@@ -188,8 +186,7 @@ export const activities: Activity[] = [
     category: "food",
     duration: "3 timer",
     priceFrom: 1190,
-    imageUrl:
-      "https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: norskeBilder.rorbuerKyst.url,
     capacity: 24,
     bookable: true,
   },
@@ -212,8 +209,7 @@ export const accommodations: Accommodation[] = [
     beds: 6,
     guests: 7,
     priceFrom: 1890,
-    imageUrl:
-      "https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: norskeBilder.brygge.url,
     amenities: ["Båt kan legges til", "Kjøkken", "Wifi", "Terrasse"],
   },
   {
@@ -232,8 +228,7 @@ export const accommodations: Accommodation[] = [
     beds: 2,
     guests: 2,
     priceFrom: 990,
-    imageUrl:
-      "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: norskeBilder.skogshytte.url,
     amenities: ["Frokostvalg", "Wifi", "Felles tørkerom"],
   },
 ];
@@ -307,8 +302,7 @@ export const articles: Article[] = [
     },
     category: "guide",
     readingMinutes: 5,
-    imageUrl:
-      "https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: norskeBilder.fjellDis.url,
   },
   {
     id: "best-season",
@@ -325,8 +319,7 @@ export const articles: Article[] = [
     },
     category: "season",
     readingMinutes: 4,
-    imageUrl:
-      "https://images.unsplash.com/photo-1473773508845-188df298d2d1?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: norskeBilder.vintervann.url,
   },
   {
     id: "local-guide",
@@ -343,8 +336,7 @@ export const articles: Article[] = [
     },
     category: "local",
     readingMinutes: 6,
-    imageUrl:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: norskeBilder.nordlysSkog.url,
   },
 ];
 

@@ -105,13 +105,15 @@ export default async function PortalPage() {
 
         <div className="mt-10 grid gap-4 md:grid-cols-2">
           <Link
-            href="/maler"
+            href="/#maler"
             className="flex items-center gap-4 rounded-[1.5rem] bg-white p-5 shadow-sm ring-1 ring-slate-200 hover:ring-sky-900/20"
           >
             <Palette className="text-sky-900" />
             <div>
               <p className="font-semibold">Designmaler</p>
-              <p className="text-sm text-slate-600">Sammenlign Kyst, Fjord og Premium.</p>
+              <p className="text-sm text-slate-600">
+                Sammenlign Storhavet, Skogsro og Fyrvokteren.
+              </p>
             </div>
           </Link>
           <Link

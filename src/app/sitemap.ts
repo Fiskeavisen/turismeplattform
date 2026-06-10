@@ -11,6 +11,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       priority: 1,
     },
+    ...["storhavet", "skogsro", "fyrvokteren"].map((slug) => ({
+      url: `${siteUrl}/demo/${slug}`,
+      lastModified: now,
+      priority: 0.9,
+    })),
     ...activities.map((activity) => ({
       url: `${siteUrl}/opplevelser/${activity.slug}`,
       lastModified: now,

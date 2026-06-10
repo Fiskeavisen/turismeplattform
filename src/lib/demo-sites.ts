@@ -13,7 +13,7 @@ export const demoSites: DemoSite[] = [
     slug: "nordskjaer-feriesenter",
     name: "Nordskjær Feriesenter",
     description: "Feriesenter med hytter, båt, havfiske og fjellturer ved norskekysten.",
-    publicPath: "/",
+    publicPath: "/demo/storhavet",
     adminPath: "/admin",
     template: "Storhavet",
     status: "live",
