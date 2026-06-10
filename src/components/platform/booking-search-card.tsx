@@ -38,7 +38,15 @@ type UnitAvailability = {
 
 type Step = "search" | "details" | "done";
 
-export function BookingSearchCard() {
+type BookingSearchCardProps = {
+  /**
+   * "panel": stående kort med farget topp (standard).
+   * "bar": liggende søkefelt-rad som flyter over hero-bildet (skisse-designet).
+   */
+  variant?: "panel" | "bar";
+};
+
+export function BookingSearchCard({ variant = "panel" }: BookingSearchCardProps) {
   const [accommodationId, setAccommodationId] = useState(accommodations[0]?.id ?? "");
   const [arrivalDate, setArrivalDate] = useState("");
   const [departureDate, setDepartureDate] = useState("");
@@ -186,12 +194,17 @@ export function BookingSearchCard() {
   return (
     <div
       id="booking"
-      className="rounded-[2rem] bg-white p-5 text-slate-950 shadow-2xl shadow-slate-950/15 ring-1 ring-slate-950/5"
+      className={cn(
+        "bg-white text-slate-950 shadow-2xl shadow-slate-950/15 ring-1 ring-slate-950/5",
+        variant === "panel" ? "rounded-[2rem] p-5" : "rounded-3xl p-3",
+      )}
     >
-      <div className="rounded-[1.5rem] p-5" style={primaryStyle}>
-        <p className="text-sm opacity-75">Booking</p>
-        <h2 className="mt-1 text-2xl font-semibold">Søk ledige hytter</h2>
-      </div>
+      {variant === "panel" ? (
+        <div className="rounded-[1.5rem] p-5" style={primaryStyle}>
+          <p className="text-sm opacity-75">Booking</p>
+          <h2 className="mt-1 text-2xl font-semibold">Søk ledige hytter</h2>
+        </div>
+      ) : null}
 
       {step === "done" ? (
         <div className="grid gap-4 p-4">
@@ -216,31 +229,38 @@ export function BookingSearchCard() {
           </button>
         </div>
       ) : (
-        <div className="grid gap-4 p-4">
-          <div>
-            <label htmlFor="booking-accommodation" className={labelClass}>
-              Hyttetype
-            </label>
-            <select
-              id="booking-accommodation"
-              value={accommodationId}
-              onChange={(event) => {
-                setAccommodationId(event.target.value);
-                setUnits(null);
-                setSelectedUnitId("");
-                setStep("search");
-              }}
-              className={fieldClass}
-            >
-              {accommodations.map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.title.nb} · fra {formatCurrency(item.priceFrom)}/natt
-                </option>
-              ))}
-            </select>
-          </div>
+        <div className={cn("grid gap-4", variant === "panel" ? "p-4" : "p-2")}>
+          <div
+            className={cn(
+              "grid gap-3",
+              variant === "panel"
+                ? "sm:grid-cols-2"
+                : "lg:grid-cols-[1.25fr_1fr_1fr_0.9fr_auto] lg:items-end",
+            )}
+          >
+            <div className={variant === "panel" ? "sm:col-span-2" : undefined}>
+              <label htmlFor="booking-accommodation" className={labelClass}>
+                Hyttetype
+              </label>
+              <select
+                id="booking-accommodation"
+                value={accommodationId}
+                onChange={(event) => {
+                  setAccommodationId(event.target.value);
+                  setUnits(null);
+                  setSelectedUnitId("");
+                  setStep("search");
+                }}
+                className={fieldClass}
+              >
+                {accommodations.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.title.nb} · fra {formatCurrency(item.priceFrom)}/natt
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="booking-arrival" className={labelClass}>
                 Ankomst
@@ -265,36 +285,39 @@ export function BookingSearchCard() {
                 className={fieldClass}
               />
             </div>
-          </div>
 
-          <div>
-            <label htmlFor="booking-guests" className={labelClass}>
-              Gjester
-            </label>
-            <select
-              id="booking-guests"
-              value={guests}
-              onChange={(event) => setGuests(Number(event.target.value))}
-              className={fieldClass}
+            <div className={variant === "panel" ? "sm:col-span-2" : undefined}>
+              <label htmlFor="booking-guests" className={labelClass}>
+                Gjester
+              </label>
+              <select
+                id="booking-guests"
+                value={guests}
+                onChange={(event) => setGuests(Number(event.target.value))}
+                className={fieldClass}
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((count) => (
+                  <option key={count} value={count}>
+                    {count} {count === 1 ? "gjest" : "gjester"}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <button
+              type="button"
+              onClick={checkAvailability}
+              disabled={loading}
+              className={cn(
+                "inline-flex items-center justify-center gap-2 rounded-xl px-5 font-semibold transition hover:opacity-90 disabled:opacity-60",
+                variant === "panel" ? "h-12 sm:col-span-2" : "h-11 whitespace-nowrap",
+              )}
+              style={primaryStyle}
             >
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((count) => (
-                <option key={count} value={count}>
-                  {count} {count === 1 ? "gjest" : "gjester"}
-                </option>
-              ))}
-            </select>
+              {loading ? <Loader2 size={18} className="animate-spin" /> : null}
+              Søk ledige hytter
+            </button>
           </div>
-
-          <button
-            type="button"
-            onClick={checkAvailability}
-            disabled={loading}
-            className="inline-flex h-12 items-center justify-center gap-2 rounded-xl px-5 font-semibold transition hover:opacity-90 disabled:opacity-60"
-            style={primaryStyle}
-          >
-            {loading ? <Loader2 size={18} className="animate-spin" /> : null}
-            Sjekk ledighet
-          </button>
 
           {units ? (
             <div>
@@ -474,13 +497,20 @@ export function BookingSearchCard() {
             <p className="rounded-xl bg-rose-50 p-3 text-sm text-rose-800">{error}</p>
           ) : null}
 
-          <div className="grid gap-2 text-sm text-slate-600">
-            {trustPoints.map((item) => (
-              <p key={item} className="flex items-center gap-2">
-                <Check className="text-emerald-600" size={16} /> {item}
-              </p>
-            ))}
-          </div>
+          {variant === "panel" || units ? (
+            <div
+              className={cn(
+                "gap-2 text-sm text-slate-600",
+                variant === "panel" ? "grid" : "flex flex-wrap gap-x-5",
+              )}
+            >
+              {trustPoints.map((item) => (
+                <p key={item} className="flex items-center gap-2">
+                  <Check className="text-emerald-600" size={16} /> {item}
+                </p>
+              ))}
+            </div>
+          ) : null}
         </div>
       )}
     </div>
