@@ -3,8 +3,8 @@ import {
   ArrowRight,
   CalendarCheck,
   CreditCard,
-  Globe2,
-  SearchCheck,
+  TrendingUp,
+  Users,
 } from "lucide-react";
 import { PageHeader, Panel } from "@/components/admin/ui";
 import {
@@ -36,8 +36,8 @@ export default function AdminOverviewPage() {
         {[
           ["Bookinger", bookings.length.toString(), CalendarCheck],
           ["Omsetning", formatCurrency(revenue), CreditCard],
-          ["AEO-score", `${analyticsSummary.aeoScore}/100`, SearchCheck],
-          ["Språk", "NO / EN / DE", Globe2],
+          ["Besøkende", analyticsSummary.visitors.toLocaleString("nb-NO"), Users],
+          ["Konvertering", `${analyticsSummary.conversionRate.toLocaleString("nb-NO")} %`, TrendingUp],
         ].map(([label, value, Icon]) => (
           <article
             key={label as string}
@@ -114,6 +114,33 @@ export default function AdminOverviewPage() {
                 >
                   <span>{source.source}</span>
                   <strong>{source.visitors.toLocaleString("nb-NO")}</strong>
+                </div>
+              ))}
+            </div>
+          </Panel>
+
+          <Panel title="Søkesynlighet">
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-slate-600">AEO-score</p>
+              <p className="text-2xl font-semibold">{analyticsSummary.aeoScore}/100</p>
+            </div>
+            <div className="mt-2 h-2 overflow-hidden rounded-full bg-slate-100">
+              <div
+                className="h-full rounded-full bg-emerald-500"
+                style={{ width: `${analyticsSummary.aeoScore}%` }}
+              />
+            </div>
+            <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-slate-400">
+              Toppsøk som gir klikk
+            </p>
+            <div className="mt-2 grid gap-2">
+              {analyticsSummary.topQueries.map((query) => (
+                <div
+                  key={query.query}
+                  className="flex justify-between gap-3 rounded-xl bg-slate-50 p-3 text-sm"
+                >
+                  <span className="truncate">«{query.query}»</span>
+                  <strong className="shrink-0">{query.clicks}</strong>
                 </div>
               ))}
             </div>

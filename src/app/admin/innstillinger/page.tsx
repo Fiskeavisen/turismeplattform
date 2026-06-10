@@ -1,5 +1,5 @@
-import { Globe2, Mail, MapPin, Phone } from "lucide-react";
-import { PageHeader, Panel } from "@/components/admin/ui";
+import { CreditCard, Globe2, Mail, MapPin, Phone } from "lucide-react";
+import { PageHeader, Panel, StatusPill } from "@/components/admin/ui";
 import { emailTemplates, touristCenter } from "@/lib/demo-data";
 
 export const metadata = { title: "Innstillinger | Admin" };
@@ -52,6 +52,50 @@ export default function AdminSettingsPage() {
                   {status}
                 </span>
               </span>
+            ))}
+          </div>
+        </Panel>
+
+        <Panel title="Betaling" className="xl:col-span-2">
+          <p className="text-sm leading-6 text-slate-600">
+            Gjesten velger betalingsmåte i bookingflyten. Leverandørene aktiveres
+            med kundens egne avtaler og nøkler.
+          </p>
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
+            {[
+              {
+                name: "Stripe",
+                detail: "Kortbetaling med automatisk bekreftelse",
+                configured: Boolean(process.env.STRIPE_SECRET_KEY),
+              },
+              {
+                name: "Vipps / MobilePay",
+                detail: "Norges mest brukte mobilbetaling",
+                configured: Boolean(
+                  process.env.VIPPS_CLIENT_ID && process.env.VIPPS_CLIENT_SECRET,
+                ),
+              },
+              {
+                name: "Manuell forespørsel",
+                detail: "Booking bekreftes og faktureres av vertskapet",
+                configured: true,
+              },
+            ].map((provider) => (
+              <div
+                key={provider.name}
+                className="rounded-2xl border border-slate-200 p-4"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <p className="flex items-center gap-2 font-semibold">
+                    <CreditCard size={16} className="text-slate-400" /> {provider.name}
+                  </p>
+                  <StatusPill
+                    active={provider.configured}
+                    labels={["Aktiv", "Ikke konfigurert"]}
+                  />
+                </div>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{provider.detail}</p>
+              </div>
             ))}
           </div>
         </Panel>

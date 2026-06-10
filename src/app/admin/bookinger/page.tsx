@@ -5,6 +5,12 @@ import { bookingStatusClass, bookingStatusLabel, cn, formatCurrency } from "@/li
 export const metadata = { title: "Bookinger | Admin" };
 
 export default function AdminBookingsPage() {
+  const totalRevenue = bookings.reduce((sum, booking) => sum + booking.totalAmount, 0);
+  const statusCounts = bookings.reduce<Record<string, number>>((acc, booking) => {
+    acc[booking.status] = (acc[booking.status] ?? 0) + 1;
+    return acc;
+  }, {});
+
   return (
     <>
       <PageHeader
@@ -12,6 +18,23 @@ export default function AdminBookingsPage() {
         description="Alle bookinger med enhet, tilvalg, betaling og kilde. Klikk en booking for å følge opp gjesten."
         action="Ny booking"
       />
+
+      <div className="mb-6 flex flex-wrap items-center gap-2.5">
+        <span className="rounded-full bg-slate-950 px-4 py-2 text-sm font-semibold text-white">
+          {bookings.length} bookinger · {formatCurrency(totalRevenue)}
+        </span>
+        {Object.entries(statusCounts).map(([status, count]) => (
+          <span
+            key={status}
+            className={cn(
+              "rounded-full px-4 py-2 text-sm font-semibold",
+              bookingStatusClass(status as Parameters<typeof bookingStatusClass>[0]),
+            )}
+          >
+            {count} {bookingStatusLabel(status as Parameters<typeof bookingStatusLabel>[0]).toLowerCase()}
+          </span>
+        ))}
+      </div>
 
       <Panel>
         <div className="overflow-hidden rounded-2xl border border-slate-200">

@@ -6,6 +6,7 @@ import {
   BarChart3,
   BedDouble,
   CalendarCheck,
+  CalendarDays,
   Compass,
   FileText,
   Paintbrush,
@@ -24,6 +25,7 @@ type NavItem = {
 const navItems: NavItem[] = [
   { href: "/admin", label: "Oversikt", icon: BarChart3 },
   { href: "/admin/bookinger", label: "Bookinger", icon: CalendarCheck },
+  { href: "/admin/kalender", label: "Kalender", icon: CalendarDays },
   { href: "/admin/overnatting", label: "Overnatting", icon: BedDouble },
   { href: "/admin/aktiviteter", label: "Aktiviteter", icon: Compass },
   { href: "/admin/tilvalg", label: "Tilvalg", icon: ShoppingBag },

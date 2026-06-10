@@ -66,6 +66,13 @@ export function BookingSearchCard({ variant = "panel" }: BookingSearchCardProps)
   const [error, setError] = useState("");
   const [confirmation, setConfirmation] = useState("");
 
+  const todayIso = new Date().toISOString().slice(0, 10);
+  const minDeparture = arrivalDate
+    ? new Date(new Date(`${arrivalDate}T00:00:00Z`).getTime() + 24 * 60 * 60 * 1000)
+        .toISOString()
+        .slice(0, 10)
+    : todayIso;
+
   const accommodation = accommodations.find((item) => item.id === accommodationId);
   const nights = calculateNights(arrivalDate, departureDate);
   const selectedUnit = units?.find((unit) => unit.id === selectedUnitId);
@@ -268,8 +275,15 @@ export function BookingSearchCard({ variant = "panel" }: BookingSearchCardProps)
               <input
                 id="booking-arrival"
                 type="date"
+                min={todayIso}
                 value={arrivalDate}
-                onChange={(event) => setArrivalDate(event.target.value)}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setArrivalDate(value);
+                  if (departureDate && value && departureDate <= value) {
+                    setDepartureDate("");
+                  }
+                }}
                 className={fieldClass}
               />
             </div>
@@ -280,6 +294,7 @@ export function BookingSearchCard({ variant = "panel" }: BookingSearchCardProps)
               <input
                 id="booking-departure"
                 type="date"
+                min={minDeparture}
                 value={departureDate}
                 onChange={(event) => setDepartureDate(event.target.value)}
                 className={fieldClass}
