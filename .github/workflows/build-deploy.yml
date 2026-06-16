@@ -1,8 +1,6 @@
 name: Bygg og deploy til frimedia.no
 
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 
 env:
