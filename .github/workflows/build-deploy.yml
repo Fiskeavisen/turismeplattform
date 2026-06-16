@@ -93,6 +93,7 @@ jobs:
             write_passenger_htaccess() {
               local app_path="$1"
               local target="$2"
+              local port="$3"
               cat > "$target" <<EOF
             # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
             PassengerAppRoot "$app_path"
@@ -100,6 +101,8 @@ jobs:
             PassengerNodejs "$NODEJS"
             PassengerAppType node
             PassengerStartupFile server.js
+            PassengerEnvVar NODE_ENV production
+            PassengerEnvVar PORT "$port"
             # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
             EOF
             }
@@ -115,6 +118,8 @@ jobs:
               local app_path="$1"
               local app_root="$2"
               local label="$3"
+              local site_url="$4"
+              local port="$5"
               local ts
               ts=$(date +%Y%m%d-%H%M%S)
 
@@ -127,11 +132,11 @@ jobs:
               find "$app_path" -mindepth 1 -maxdepth 1 ! -name tmp ! -name .env.local -exec rm -rf {} +
               tar xzf "$BUNDLE" -C "$app_path"
               cat > "$app_path/.env.local" <<ENVEOF
-            NEXT_PUBLIC_SITE_URL=https://frimedia.no
+            NEXT_PUBLIC_SITE_URL=$site_url
             NEXT_PUBLIC_SUPABASE_URL=${{ env.NEXT_PUBLIC_SUPABASE_URL }}
             NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=${{ env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
             ENVEOF
-              write_passenger_htaccess "$app_path" "$app_path/.htaccess"
+              write_passenger_htaccess "$app_path" "$app_path/.htaccess" "$port"
               restart_app "$app_path" "$app_root"
             }
 
@@ -146,12 +151,12 @@ jobs:
               [ "$home_code" = "200" ] && [ "$chunk_code" = "200" ]
             }
 
-            deploy_app "$FRIMEDIA_APP" "frimedia.no" "frimedia"
-            deploy_app "$DEMO_APP" "demo.frimedia.no" "demo"
+            deploy_app "$FRIMEDIA_APP" "frimedia.no" "frimedia" "https://frimedia.no" "3001"
+            deploy_app "$DEMO_APP" "demo.frimedia.no" "demo" "https://demo.frimedia.no" "3000"
 
             echo "==> Pek public_html (frimedia.no) mot egen frimedia-app"
             cp "$DOCROOT/.htaccess" "$HOME/backups/public_html-htaccess-$(date +%Y%m%d-%H%M%S).bak" 2>/dev/null || true
-            write_passenger_htaccess "$FRIMEDIA_APP" "$DOCROOT/.htaccess"
+            write_passenger_htaccess "$FRIMEDIA_APP" "$DOCROOT/.htaccess" "3001"
             restart_app "$FRIMEDIA_APP" "frimedia.no"
 
             rm -f "$BUNDLE"
@@ -160,7 +165,7 @@ jobs:
             sleep 8
             if ! check_url "https://frimedia.no" "frimedia.no"; then
               echo "!! frimedia.no feilet - peker midlertidig tilbake til demo-app for å unngå nedetid"
-              write_passenger_htaccess "$DEMO_APP" "$DOCROOT/.htaccess"
+              write_passenger_htaccess "$DEMO_APP" "$DOCROOT/.htaccess" "3000"
               restart_app "$DEMO_APP" "demo.frimedia.no"
               exit 1
             fi
