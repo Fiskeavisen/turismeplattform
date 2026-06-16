@@ -1,4 +1,4 @@
-name: Bygg og deploy til demo.frimedia.no
+name: Bygg og deploy til frimedia.no
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  NEXT_PUBLIC_SITE_URL: https://demo.frimedia.no
+  NEXT_PUBLIC_SITE_URL: https://frimedia.no
   NEXT_PUBLIC_SUPABASE_URL: https://ppugutfpfygpimoniqxd.supabase.co
   NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: sb_publishable_suH0x0Nx6mWnDIfIDN85nA_thrWbY-w
 
@@ -73,17 +73,55 @@ jobs:
           source: "release.tar.gz"
           target: "${{ secrets.DEPLOY_PATH }}/tmp"
 
-      - name: Pakk ut og restart app
+      - name: Pakk ut, restart og verifiser (med auto-rollback)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
+          command_timeout: 6m
           script: |
-            cd "${{ secrets.DEPLOY_PATH }}"
-            tar xzf tmp/release.tar.gz
+            APP="${{ secrets.DEPLOY_PATH }}"
+            APPROOT="demo.frimedia.no"
+            URL="https://frimedia.no"
+            cd "$APP" || exit 1
+
+            restart_app() {
+              mkdir -p "$APP/tmp" && touch "$APP/tmp/restart.txt"
+              cloudlinux-selector restart --json --interpreter nodejs --user frimeuhl --app-root "$APPROOT" || true
+            }
+
+            TS=$(date +%Y%m%d-%H%M%S)
+            mkdir -p "$HOME/backups"
+            echo "==> Tar backup av nåværende versjon"
+            tar czf "$HOME/backups/frimedia-$TS.tar.gz" .next public server.js .htaccess 2>/dev/null || true
+            ls -1t "$HOME"/backups/frimedia-*.tar.gz 2>/dev/null | tail -n +6 | xargs -r rm -f
+
+            echo "==> Rydder gammelt bygg og pakker ut nytt (ren utskifting)"
+            rm -rf "$APP/.next"
+            if ! tar xzf tmp/release.tar.gz -C "$APP"; then
+              echo "!! Utpakking feilet – ruller tilbake"
+              rm -rf "$APP/.next"
+              tar xzf "$HOME/backups/frimedia-$TS.tar.gz" -C "$APP"
+              restart_app
+              exit 1
+            fi
             rm -f tmp/release.tar.gz
-            mkdir -p tmp && touch tmp/restart.txt
-            cloudlinux-selector restart --json --interpreter nodejs --user frimeuhl --app-root demo.frimedia.no || true
-            echo "Deploy ferdig"
+            restart_app
+
+            echo "==> Helsesjekk"
+            sleep 8
+            HOME_CODE=$(curl -s -o /dev/null -w "%{http_code}" -L "$URL/")
+            CHUNK=$(curl -s -L "$URL/" | grep -o '/_next/static/chunks/[^"]*\.js' | head -1 || true)
+            CHUNK_CODE=$(curl -s -o /dev/null -w "%{http_code}" -L "$URL$CHUNK")
+            echo "Forside: $HOME_CODE | chunk ($CHUNK): $CHUNK_CODE"
+
+            if [ "$HOME_CODE" != "200" ] || [ "$CHUNK_CODE" != "200" ]; then
+              echo "!! Helsesjekk feilet – ruller tilbake til forrige versjon"
+              rm -rf "$APP/.next"
+              tar xzf "$HOME/backups/frimedia-$TS.tar.gz" -C "$APP"
+              restart_app
+              exit 1
+            fi
+            echo "==> Deploy OK og verifisert"
