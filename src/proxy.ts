@@ -11,6 +11,16 @@ export async function proxy(request: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
+  if (
+    host === "synlighet.frimedia.no" &&
+    !request.nextUrl.pathname.startsWith("/synlighet") &&
+    !request.nextUrl.pathname.startsWith("/api")
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname = request.nextUrl.pathname === "/" ? "/synlighet" : `/synlighet${request.nextUrl.pathname}`;
+    return NextResponse.rewrite(url);
+  }
+
   return updateSession(request);
 }
 

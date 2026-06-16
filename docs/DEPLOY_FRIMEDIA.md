@@ -3,6 +3,14 @@
 Anbefalt adresse: **`https://turisme.frimedia.no`** (subdomene) eller
 **`https://demo.frimedia.no`**.
 
+Synlighetsassistenten kan testes før eget domene på:
+
+- **`https://demo.frimedia.no/synlighet`**
+- eventuelt **`https://synlighet.frimedia.no`** når DNS/subdomene peker til samme app
+
+`src/proxy.ts` har host-regel som mapper `synlighet.frimedia.no` til de interne
+rutene under `/synlighet`.
+
 ## Oversikt
 
 1. Push kode til GitHub.
