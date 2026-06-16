@@ -1,0 +1,41 @@
+name: Inspiser frimedia-app (engangs)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hent serverdiagnose
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          command_timeout: 3m
+          script: |
+            set +e
+            echo "===== frimedia app root ====="
+            ls -la "$HOME/frimedia.no" | head -40
+            echo "===== frimedia .htaccess ====="
+            cat "$HOME/frimedia.no/.htaccess"
+            echo "===== public_html .htaccess ====="
+            cat "$HOME/public_html/.htaccess"
+            echo "===== env ====="
+            sed 's/=.*/=***MASKED***/' "$HOME/frimedia.no/.env.local" 2>/dev/null || true
+            echo "===== package/server ====="
+            ls -la "$HOME/frimedia.no/server.js" "$HOME/frimedia.no/package.json" 2>/dev/null || true
+            echo "===== tmp/logs ====="
+            find "$HOME/frimedia.no" -maxdepth 3 -type f \( -name "*.log" -o -name "stderr*" -o -name "stdout*" \) -print -exec tail -80 {} \; 2>/dev/null
+            echo "===== passenger/apache-ish logs ====="
+            find "$HOME" -maxdepth 4 -type f \( -name "*passenger*" -o -name "error_log" -o -name "error.log" \) -print -exec tail -80 {} \; 2>/dev/null
+            echo "===== direkte node smoke ====="
+            cd "$HOME/frimedia.no" || exit 0
+            "$HOME/nodevenv/demo.frimedia.no/20/bin/node" server.js >/tmp/frimedia-node-smoke.log 2>&1 &
+            PID=$!
+            sleep 6
+            curl -s -o /dev/null -w "local:%{http_code}\n" http://127.0.0.1:3000/ || true
+            kill "$PID" 2>/dev/null || true
+            tail -80 /tmp/frimedia-node-smoke.log || true
