@@ -1,0 +1,54 @@
+name: Restore live til fungerende demo-app (engangs)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Gjenopprett kjent fungerende Passenger-konfig
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          command_timeout: 3m
+          script: |
+            set -e
+            DEMO="$HOME/demo.frimedia.no"
+            DOCROOT="$HOME/public_html"
+            NODEJS="$HOME/nodevenv/demo.frimedia.no/20/bin/node"
+
+            write_demo_htaccess() {
+              local target="$1"
+              cat > "$target" <<EOF
+            # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+            PassengerAppRoot "$DEMO"
+            PassengerBaseURI "/"
+            PassengerNodejs "$NODEJS"
+            PassengerAppType node
+            PassengerStartupFile server.js
+            # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+            EOF
+            }
+
+            mkdir -p "$HOME/backups"
+            cp "$DOCROOT/.htaccess" "$HOME/backups/public_html-htaccess-restore-$(date +%Y%m%d-%H%M%S).bak" 2>/dev/null || true
+            cp "$DEMO/.htaccess" "$HOME/backups/demo-htaccess-restore-$(date +%Y%m%d-%H%M%S).bak" 2>/dev/null || true
+
+            write_demo_htaccess "$DOCROOT/.htaccess"
+            write_demo_htaccess "$DEMO/.htaccess"
+
+            mkdir -p "$DEMO/tmp"
+            touch "$DEMO/tmp/restart.txt"
+            cloudlinux-selector restart --json --interpreter nodejs --user frimeuhl --app-root demo.frimedia.no || true
+
+            sleep 8
+            for URL in "https://frimedia.no" "https://demo.frimedia.no"; do
+              CODE=$(curl -s -o /dev/null -w "%{http_code}" -L "$URL/")
+              CHUNK=$(curl -s -L "$URL/" | grep -o '/_next/static/chunks/[^"]*\.js' | head -1 || true)
+              CHUNK_CODE=$(curl -s -o /dev/null -w "%{http_code}" -L "$URL$CHUNK")
+              echo "$URL forside=$CODE chunk=$CHUNK_CODE"
+            done
