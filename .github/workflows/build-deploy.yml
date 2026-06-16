@@ -84,7 +84,7 @@ jobs:
           script: |
             APP="${{ secrets.DEPLOY_PATH }}"
             APPROOT="demo.frimedia.no"
-            URL="https://frimedia.no"
+            URL="https://demo.frimedia.no"
             cd "$APP" || exit 1
 
             restart_app() {

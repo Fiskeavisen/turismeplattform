@@ -1,44 +1,49 @@
-name: Diagnose server (engangs)
+name: Fiks frimedia.no .htaccess (engangs)
 
 on:
   workflow_dispatch:
 
 jobs:
-  diagnose:
+  fix:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspiser ProISP-oppsett
+      - name: Pek public_html mot Next-appen (ren Passenger-konfig)
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
-          command_timeout: 3m
+          command_timeout: 4m
           script: |
-            echo "===== HOME-mappe ====="
-            ls -la ~ | grep -iE "frimedia|public_html|nodevenv|domains" || true
-            echo ""
-            echo "===== Node-apper (cloudlinux-selector) ====="
-            cloudlinux-selector list --json --interpreter nodejs --user frimeuhl 2>&1 || true
-            echo ""
-            echo "===== nodevenv ====="
-            ls -la ~/nodevenv 2>/dev/null || true
-            echo ""
-            echo "===== public_html (.htaccess + _next) ====="
-            ls -la ~/public_html 2>/dev/null | head -20 || true
-            echo "--- public_html/.htaccess ---"
-            cat ~/public_html/.htaccess 2>/dev/null | head -40 || true
-            echo "--- public_html/_next/static/chunks ---"
-            ls -la ~/public_html/_next/static/chunks 2>/dev/null | head -5 || true
-            echo ""
-            echo "===== ~/frimedia.no (hvis finnes) ====="
-            ls -la ~/frimedia.no 2>/dev/null | head -20 || true
-            echo "--- frimedia.no/.htaccess ---"
-            cat ~/frimedia.no/.htaccess 2>/dev/null | head -40 || true
-            echo ""
-            echo "===== demo.frimedia.no/.htaccess ====="
-            cat ~/demo.frimedia.no/.htaccess 2>/dev/null | head -40 || true
-            echo ""
-            echo "===== demo app static finnes? ====="
-            ls -la ~/demo.frimedia.no/.next/static/chunks 2>/dev/null | head -5 || true
+            DOCROOT="$HOME/public_html"
+            APPROOT="demo.frimedia.no"
+            URL="https://frimedia.no"
+            TS=$(date +%Y%m%d-%H%M%S)
+            mkdir -p "$HOME/backups"
+
+            echo "==> Backup av nåværende public_html/.htaccess"
+            cp "$DOCROOT/.htaccess" "$HOME/backups/public_html-htaccess-$TS.bak" 2>/dev/null || true
+
+            echo "==> Kopierer demo-appens rene Passenger-.htaccess til public_html"
+            cp "$HOME/$APPROOT/.htaccess" "$DOCROOT/.htaccess"
+
+            echo "==> Restart app"
+            mkdir -p "$HOME/$APPROOT/tmp" && touch "$HOME/$APPROOT/tmp/restart.txt"
+            cloudlinux-selector restart --json --interpreter nodejs --user frimeuhl --app-root "$APPROOT" || true
+
+            echo "==> Helsesjekk frimedia.no"
+            sleep 8
+            HOME_CODE=$(curl -s -o /dev/null -w "%{http_code}" -L "$URL/")
+            CHUNK=$(curl -s -L "$URL/" | grep -o '/_next/static/chunks/[^"]*\.js' | head -1 || true)
+            CHUNK_CODE=$(curl -s -o /dev/null -w "%{http_code}" -L "$URL$CHUNK")
+            echo "Forside: $HOME_CODE | chunk ($CHUNK): $CHUNK_CODE"
+
+            if [ "$HOME_CODE" != "200" ] || [ "$CHUNK_CODE" != "200" ]; then
+              echo "!! Helsesjekk feilet – gjenoppretter forrige .htaccess"
+              cp "$HOME/backups/public_html-htaccess-$TS.bak" "$DOCROOT/.htaccess" 2>/dev/null || true
+              touch "$HOME/$APPROOT/tmp/restart.txt"
+              cloudlinux-selector restart --json --interpreter nodejs --user frimeuhl --app-root "$APPROOT" || true
+              exit 1
+            fi
+            echo "==> frimedia.no fungerer nå med Next-appen"
