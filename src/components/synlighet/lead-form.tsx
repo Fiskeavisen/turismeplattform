@@ -8,7 +8,11 @@ import type { BrregUnit } from "@/lib/synlighet/types";
 type Step = "input" | "scanning" | "result";
 type Preview = { score: number; foundOpportunities: number; highlights: string[] };
 
-export function LeadForm() {
+export function LeadForm({
+  accentClassName = "bg-slate-950 hover:bg-slate-800",
+}: {
+  accentClassName?: string;
+}) {
   const [step, setStep] = useState<Step>("input");
   const [website, setWebsite] = useState("");
   const [preview, setPreview] = useState<Preview | null>(null);
@@ -171,7 +175,7 @@ export function LeadForm() {
               <button
                 type="submit"
                 disabled={step === "scanning"}
-                className="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl bg-slate-950 px-6 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
+                className={`inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-xl px-6 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-70 ${accentClassName}`}
               >
                 {step === "scanning" ? (
                   <>
@@ -300,7 +304,7 @@ export function LeadForm() {
             <button
               type="submit"
               disabled={submitting}
-              className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-slate-950 px-6 text-sm font-semibold text-white hover:bg-slate-800 disabled:cursor-not-allowed disabled:opacity-70"
+              className={`inline-flex min-h-12 items-center justify-center gap-2 rounded-xl px-6 text-sm font-semibold text-white disabled:cursor-not-allowed disabled:opacity-70 ${accentClassName}`}
             >
               {submitting ? (
                 <>

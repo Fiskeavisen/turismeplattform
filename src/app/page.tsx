@@ -5,6 +5,7 @@ import {
   FieldLabel,
   SectionHeading,
 } from "@/components/feltbok/feltbok-shell";
+import { LeadForm } from "@/components/synlighet/lead-form";
 import {
   feltbokArticles,
   feltbokPrinciples,
@@ -257,6 +258,38 @@ export default function Home() {
                 <p className="mt-2 text-sm leading-6 text-[#20201c]/65">{service.text}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="gratis-rapport" className="border-t border-[#20201c]/12 bg-[#20201c] text-[#f3eee4]">
+        <div className="mx-auto max-w-6xl px-5 py-16 lg:py-20">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#c0caa0]">
+                Gratis for bedrifter
+              </p>
+              <h2
+                className="mt-4 text-4xl font-black leading-[1.02] tracking-[-0.03em] md:text-5xl"
+                style={{ fontFamily: "var(--font-fraunces), Georgia, serif" }}
+              >
+                Få en gratis synlighetsrapport for nettsiden din.
+              </h2>
+              <p className="mt-5 max-w-xl leading-7 text-[#f3eee4]/70">
+                Vi skanner siden din og viser hvor du kan bli lettere å finne på Google og
+                i AI-svar. Legg igjen firmanavn, telefon og e-post, så sender vi hele
+                rapporten – helt uforpliktende.
+              </p>
+              <p className="mt-6 text-sm text-[#f3eee4]/55">
+                Vil du se mer først?{" "}
+                <Link href="/synlighet" className="font-semibold text-[#c0caa0] underline-offset-4 hover:underline">
+                  Les om Synlighetsassistenten
+                </Link>
+              </p>
+            </div>
+            <div>
+              <LeadForm accentClassName="bg-[#2f4034] hover:bg-[#243228]" />
+            </div>
           </div>
         </div>
       </section>
