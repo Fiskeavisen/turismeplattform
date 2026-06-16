@@ -408,3 +408,26 @@ export type AiUsageLog = {
   costEstimate: number;
   createdAt: string;
 };
+
+export type LeadStatus = "scanning" | "report_sent" | "contacted" | "won" | "lost";
+
+export type Lead = {
+  id: string;
+  website: string;
+  companyName: string;
+  orgNumber?: string;
+  phone: string;
+  email: string;
+  brregVerified: boolean;
+  scanScore?: number;
+  status: LeadStatus;
+  createdAt: string;
+};
+
+export type BrregUnit = {
+  organisasjonsnummer: string;
+  navn: string;
+  organisasjonsform?: string;
+  forretningsadresse?: string;
+  hjemmeside?: string;
+};

@@ -471,6 +471,24 @@ Typer: `google_search_console`, `google_analytics`, `wordpress`, `shopify`, `goo
 - `metadataJson`
 - `createdAt`
 
+### visibility_leads
+
+Innkommende leads fra den offentlige leadgeneratoren («Få første rapport gratis»).
+
+- `id`
+- `website`
+- `companyName`
+- `orgNumber` (slått opp i Brønnøysundregistrene)
+- `phone`
+- `email`
+- `brregVerified` (bekreftet mot Enhetsregisteret)
+- `scanScore` (foreløpig synlighetsscore fra hurtig-scan)
+- `status` (`scanning`, `report_sent`, `contacted`, `won`, `lost`)
+- `createdAt`
+- `updatedAt`
+
+Det offentlige skjemaet kan kun `insert`. Lesing skjer via `service_role` i admin-panelet.
+
 ## Sikkerhetsnotater for Supabase
 
 - Aktiver RLS på alle tabeller i `public`.

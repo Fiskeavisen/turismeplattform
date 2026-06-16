@@ -1,5 +1,6 @@
 import { BarChart3, Bot, ClipboardCheck, Gauge, Search, ShieldCheck, Sparkles } from "lucide-react";
 import { CompareBars, TrendChart } from "@/components/synlighet/graphics";
+import { LeadForm } from "@/components/synlighet/lead-form";
 import {
   ButtonLink,
   Card,
@@ -64,7 +65,7 @@ export default function SynlighetLandingPage() {
               liste med konkrete oppgaver hver uke. Etterpå måler vi om det virket.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <ButtonLink href="/synlighet/app/onboarding">Kom i gang gratis</ButtonLink>
+              <ButtonLink href="#gratis-rapport">Få gratis rapport</ButtonLink>
               <ButtonLink href="/synlighet/eksempelrapport" variant="secondary">
                 Se et eksempel
               </ButtonLink>
@@ -124,6 +125,24 @@ export default function SynlighetLandingPage() {
               </ButtonLink>
             </div>
           </Card>
+        </div>
+      </section>
+
+      <section id="gratis-rapport" className="border-b border-slate-200 bg-slate-50">
+        <div className="mx-auto max-w-5xl px-5 py-16 lg:py-20">
+          <div className="text-center">
+            <SectionEyebrow>Gratis å prøve</SectionEyebrow>
+            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] md:text-4xl">
+              Få din første synlighetsrapport gratis
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600">
+              Skriv inn nettadressen din, så skanner vi siden og viser deg hvor du kan bli lettere å finne.
+              Vil du ha hele rapporten? Legg igjen firmanavn, telefon og e-post, så sender vi den til deg.
+            </p>
+          </div>
+          <div className="mt-10">
+            <LeadForm />
+          </div>
         </div>
       </section>
 

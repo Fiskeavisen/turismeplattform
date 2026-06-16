@@ -27,8 +27,24 @@ export const shopifyConnectionSchema = z.object({
   accessToken: z.string().min(8),
 });
 
+export const leadSchema = z.object({
+  website: z.string().trim().min(3).max(200),
+  companyName: z.string().trim().min(2).max(160),
+  orgNumber: z
+    .string()
+    .trim()
+    .regex(/^\d{9}$/u, "Organisasjonsnummer må ha 9 siffer.")
+    .optional()
+    .or(z.literal("")),
+  phone: z.string().trim().min(6).max(40),
+  email: z.string().trim().email(),
+  brregVerified: z.boolean().optional(),
+  scanScore: z.number().int().min(0).max(100).optional(),
+});
+
 export type DateRangeRequest = z.infer<typeof dateRangeSchema>;
 export type CrawlRunRequest = z.infer<typeof crawlRunSchema>;
 export type WordPressConnectionRequest = z.infer<typeof wordpressConnectionSchema>;
 export type WordPressDraftRequest = z.infer<typeof wordpressDraftSchema>;
 export type ShopifyConnectionRequest = z.infer<typeof shopifyConnectionSchema>;
+export type LeadRequest = z.infer<typeof leadSchema>;

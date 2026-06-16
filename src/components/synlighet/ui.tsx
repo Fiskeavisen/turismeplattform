@@ -1,7 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowDownRight, ArrowRight, ArrowUpRight, CheckCircle2, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { PublicNavLinks } from "@/components/synlighet/public-nav";
 import type { ActionStatus, Difficulty, IntegrationStatus, QaStatus } from "@/lib/synlighet/types";
 
 export function SynlighetShell({ children }: { children: ReactNode }) {
@@ -18,17 +19,7 @@ export function SynlighetTopNav() {
           </span>
           <span>Synlighetsassistenten</span>
         </Link>
-        <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex">
-          <Link href="/synlighet/priser" className="hover:text-slate-950">
-            Priser
-          </Link>
-          <Link href="/synlighet/eksempelrapport" className="hover:text-slate-950">
-            Eksempelrapport
-          </Link>
-          <Link href="/synlighet/app/dashboard" className="hover:text-slate-950">
-            Demo
-          </Link>
-        </nav>
+        <PublicNavLinks />
         <Link
           href="/synlighet/app/onboarding"
           className="inline-flex min-h-11 items-center justify-center rounded-full bg-slate-950 px-5 text-sm font-semibold text-white hover:bg-slate-800"
@@ -124,24 +115,50 @@ export function MetricCard({
   value,
   hint,
   tone = "neutral",
+  icon: Icon,
+  delta,
 }: {
   label: string;
   value: string;
   hint?: string;
   tone?: "neutral" | "positive" | "warning";
+  icon?: LucideIcon;
+  delta?: { value: string; direction: "up" | "down" };
 }) {
+  const DeltaIcon = delta?.direction === "down" ? ArrowDownRight : ArrowUpRight;
+
   return (
     <Card className="p-5">
-      <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</p>
-      <p
-        className={cn(
-          "mt-3 text-3xl font-semibold tracking-[-0.03em]",
-          tone === "positive" && "text-emerald-700",
-          tone === "warning" && "text-amber-700",
-        )}
-      >
-        {value}
-      </p>
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</p>
+        {Icon ? (
+          <span className="grid size-8 place-items-center rounded-lg bg-slate-100 text-slate-500">
+            <Icon size={16} />
+          </span>
+        ) : null}
+      </div>
+      <div className="mt-3 flex items-baseline gap-2">
+        <p
+          className={cn(
+            "text-3xl font-semibold tracking-[-0.03em] tabular-nums",
+            tone === "positive" && "text-emerald-700",
+            tone === "warning" && "text-amber-700",
+          )}
+        >
+          {value}
+        </p>
+        {delta ? (
+          <span
+            className={cn(
+              "inline-flex items-center gap-0.5 text-xs font-semibold",
+              delta.direction === "up" ? "text-emerald-700" : "text-rose-700",
+            )}
+          >
+            <DeltaIcon size={13} />
+            {delta.value}
+          </span>
+        ) : null}
+      </div>
       {hint ? <p className="mt-1 text-sm text-slate-500">{hint}</p> : null}
     </Card>
   );

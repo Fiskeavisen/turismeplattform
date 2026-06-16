@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Flame, ListChecks, Wrench, Zap } from "lucide-react";
 import { ActionControls } from "@/components/synlighet/action-controls";
 import { VisibilityAppShell } from "@/components/synlighet/app-shell";
 import { DonutScore, TrendChart } from "@/components/synlighet/graphics";
@@ -60,10 +60,15 @@ export default function VisibilityDashboardPage() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <MetricCard label="Nye tiltak" value={String(newActions)} />
-          <MetricCard label="Høy prioritet" value={String(highPriority)} tone="warning" />
-          <MetricCard label="Raske gevinster" value={String(quickWins)} tone="positive" />
-          <MetricCard label="Tekniske feil" value={String(dashboardMetrics.technicalIssues)} tone="warning" />
+          <MetricCard label="Nye tiltak" value={String(newActions)} icon={ListChecks} />
+          <MetricCard label="Høy prioritet" value={String(highPriority)} tone="warning" icon={Flame} />
+          <MetricCard label="Raske gevinster" value={String(quickWins)} tone="positive" icon={Zap} />
+          <MetricCard
+            label="Tekniske feil"
+            value={String(dashboardMetrics.technicalIssues)}
+            tone="warning"
+            icon={Wrench}
+          />
         </div>
 
         <Card>
