@@ -119,7 +119,7 @@ export default function Home() {
             >
               <div
                 className="aspect-[16/10] bg-cover bg-center"
-                style={{ backgroundImage: `url('${norskeBilder[site.image].url}')` }}
+                style={{ backgroundImage: `url('${site.brandImage}')` }}
               />
               <div className="flex flex-1 flex-col p-5">
                 <div className="flex items-center justify-between">

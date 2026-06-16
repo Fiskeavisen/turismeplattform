@@ -69,9 +69,9 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
           source: "release.tar.gz"
-          target: "/home/${{ secrets.DEPLOY_USER }}/tmp"
+          target: "${{ secrets.DEPLOY_PATH }}/tmp"
 
-      - name: Pakk ut til adskilte apper, restart og verifiser
+      - name: Pakk ut, restart og verifiser live
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -82,60 +82,28 @@ jobs:
           script: |
             set -e
 
-            BUNDLE="$HOME/tmp/release.tar.gz"
-            NODEJS="$HOME/nodevenv/demo.frimedia.no/20/bin/node"
-            FRIMEDIA_APP="$HOME/frimedia.no"
-            DEMO_APP="$HOME/demo.frimedia.no"
+            APP="${{ secrets.DEPLOY_PATH }}"
+            APPROOT="demo.frimedia.no"
             DOCROOT="$HOME/public_html"
+            NODEJS="$HOME/nodevenv/demo.frimedia.no/20/bin/node"
+            BUNDLE="$APP/tmp/release.tar.gz"
 
             write_passenger_htaccess() {
-              local app_path="$1"
-              local target="$2"
-              local port="$3"
+              local target="$1"
               cat > "$target" <<EOF
             # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
-            PassengerAppRoot "$app_path"
+            PassengerAppRoot "$APP"
             PassengerBaseURI "/"
             PassengerNodejs "$NODEJS"
             PassengerAppType node
             PassengerStartupFile server.js
-            PassengerEnvVar NODE_ENV production
-            PassengerEnvVar PORT "$port"
             # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
             EOF
             }
 
             restart_app() {
-              local app_path="$1"
-              local app_root="$2"
-              mkdir -p "$app_path/tmp" && touch "$app_path/tmp/restart.txt"
-              cloudlinux-selector restart --json --interpreter nodejs --user frimeuhl --app-root "$app_root" || true
-            }
-
-            deploy_app() {
-              local app_path="$1"
-              local app_root="$2"
-              local label="$3"
-              local site_url="$4"
-              local port="$5"
-              local ts
-              ts=$(date +%Y%m%d-%H%M%S)
-
-              mkdir -p "$app_path" "$app_path/tmp" "$HOME/backups"
-              echo "==> Backup av $label"
-              tar czf "$HOME/backups/$label-$ts.tar.gz" -C "$app_path" . 2>/dev/null || true
-              ls -1t "$HOME"/backups/"$label"-*.tar.gz 2>/dev/null | tail -n +6 | xargs -r rm -f
-
-              echo "==> Ren utskifting av $label"
-              find "$app_path" -mindepth 1 -maxdepth 1 ! -name tmp ! -name .env.local -exec rm -rf {} +
-              tar xzf "$BUNDLE" -C "$app_path"
-              cat > "$app_path/.env.local" <<ENVEOF
-            NEXT_PUBLIC_SITE_URL=$site_url
-            NEXT_PUBLIC_SUPABASE_URL=${{ env.NEXT_PUBLIC_SUPABASE_URL }}
-            NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=${{ env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
-            ENVEOF
-              write_passenger_htaccess "$app_path" "$app_path/.htaccess" "$port"
-              restart_app "$app_path" "$app_root"
+              mkdir -p "$APP/tmp" && touch "$APP/tmp/restart.txt"
+              cloudlinux-selector restart --json --interpreter nodejs --user frimeuhl --app-root "$APPROOT" || true
             }
 
             check_url() {
@@ -149,27 +117,40 @@ jobs:
               [ "$home_code" = "200" ] && [ "$chunk_code" = "200" ]
             }
 
-            deploy_app "$FRIMEDIA_APP" "frimedia.no" "frimedia" "https://frimedia.no" "3001"
-            deploy_app "$DEMO_APP" "demo.frimedia.no" "demo" "https://demo.frimedia.no" "3000"
+            TS=$(date +%Y%m%d-%H%M%S)
+            mkdir -p "$APP" "$APP/tmp" "$HOME/backups"
+            echo "==> Backup av nåværende live-app"
+            tar czf "$HOME/backups/live-$TS.tar.gz" -C "$APP" . 2>/dev/null || true
+            ls -1t "$HOME"/backups/live-*.tar.gz 2>/dev/null | tail -n +6 | xargs -r rm -f
 
-            echo "==> Pek public_html (frimedia.no) mot egen frimedia-app"
-            cp "$DOCROOT/.htaccess" "$HOME/backups/public_html-htaccess-$(date +%Y%m%d-%H%M%S).bak" 2>/dev/null || true
-            write_passenger_htaccess "$FRIMEDIA_APP" "$DOCROOT/.htaccess" "3001"
-            restart_app "$FRIMEDIA_APP" "frimedia.no"
+            echo "==> Ren utskifting av live-app"
+            find "$APP" -mindepth 1 -maxdepth 1 ! -name tmp ! -name .env.local -exec rm -rf {} +
+            tar xzf "$BUNDLE" -C "$APP"
+            write_passenger_htaccess "$APP/.htaccess"
+            write_passenger_htaccess "$DOCROOT/.htaccess"
+            restart_app
 
             rm -f "$BUNDLE"
 
             echo "==> Helsesjekk"
             sleep 8
             if ! check_url "https://frimedia.no" "frimedia.no"; then
-              echo "!! frimedia.no feilet - peker midlertidig tilbake til demo-app for å unngå nedetid"
-              write_passenger_htaccess "$DEMO_APP" "$DOCROOT/.htaccess" "3000"
-              restart_app "$DEMO_APP" "demo.frimedia.no"
+              echo "!! frimedia.no feilet - ruller tilbake"
+              find "$APP" -mindepth 1 -maxdepth 1 ! -name tmp ! -name .env.local -exec rm -rf {} +
+              tar xzf "$HOME/backups/live-$TS.tar.gz" -C "$APP"
+              write_passenger_htaccess "$APP/.htaccess"
+              write_passenger_htaccess "$DOCROOT/.htaccess"
+              restart_app
               exit 1
             fi
 
             if ! check_url "https://demo.frimedia.no" "demo.frimedia.no"; then
-              echo "!! demo.frimedia.no feilet"
+              echo "!! demo.frimedia.no feilet - ruller tilbake"
+              find "$APP" -mindepth 1 -maxdepth 1 ! -name tmp ! -name .env.local -exec rm -rf {} +
+              tar xzf "$HOME/backups/live-$TS.tar.gz" -C "$APP"
+              write_passenger_htaccess "$APP/.htaccess"
+              write_passenger_htaccess "$DOCROOT/.htaccess"
+              restart_app
               exit 1
             fi
-            echo "==> Deploy OK: domenene kjører adskilte app-røtter"
+            echo "==> Deploy OK og verifisert"

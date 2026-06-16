@@ -23,6 +23,7 @@ export type FriMediaSite = {
   text: string;
   status: string;
   image: NorskBildeNoekkel;
+  brandImage: string;
 };
 
 export const friMediaSites: FriMediaSite[] = [
@@ -34,6 +35,7 @@ export const friMediaSites: FriMediaSite[] = [
     text: "Tester, tips og reportasjer fra elv, sjø og isfiske.",
     status: "Avis",
     image: "trebaat",
+    brandImage: "/frimedia-sites/fiskeavisen-brand-hero.png",
   },
   {
     id: "02",
@@ -43,6 +45,7 @@ export const friMediaSites: FriMediaSite[] = [
     text: "Småvilt, storvilt, fuglejakt, utstyr og forvaltning.",
     status: "Avis",
     image: "fjelldal",
+    brandImage: "/frimedia-sites/jegeravisen-brand-hero.png",
   },
   {
     id: "03",
@@ -52,6 +55,7 @@ export const friMediaSites: FriMediaSite[] = [
     text: "Turforslag, padling, ski, vandring, foto og praktiske tips.",
     status: "Avis",
     image: "kanoVann",
+    brandImage: "/frimedia-sites/ifri-brand-hero.png",
   },
   {
     id: "04",
@@ -61,6 +65,7 @@ export const friMediaSites: FriMediaSite[] = [
     text: "Tester av friluftsutstyr, fra hodelykt til hengekøye til tursko.",
     status: "Tester",
     image: "skikjoerer",
+    brandImage: "/frimedia-sites/testteam-brand-hero.png",
   },
   {
     id: "05",
@@ -70,6 +75,7 @@ export const friMediaSites: FriMediaSite[] = [
     text: "Forsvar, etterretning, beredskap og cybertrusler.",
     status: "Avis",
     image: "moerkBoelge",
+    brandImage: "/frimedia-sites/sikkerhetsavisen-brand-hero.png",
   },
   {
     id: "06",
@@ -79,6 +85,7 @@ export const friMediaSites: FriMediaSite[] = [
     text: "Sendere møter verifiserte transportører for møbler, paller, kjøretøy og flytting.",
     status: "Markedsplass",
     image: "rorbuerKyst",
+    brandImage: "/frimedia-sites/lastet-brand-hero.png",
   },
   {
     id: "07",
@@ -88,6 +95,7 @@ export const friMediaSites: FriMediaSite[] = [
     text: "Kjøpere legger ut anbud, lokale selgere konkurrerer.",
     status: "Markedsplass",
     image: "skogshytte",
+    brandImage: "/frimedia-sites/vedbod-brand-hero.png",
   },
   {
     id: "08",
@@ -97,6 +105,7 @@ export const friMediaSites: FriMediaSite[] = [
     text: "Samme idé som Vedbod, tilpasset svenske kunder og selgere.",
     status: "Markedsplass",
     image: "granskog",
+    brandImage: "/frimedia-sites/vedmatch-brand-hero.png",
   },
 ];
 
