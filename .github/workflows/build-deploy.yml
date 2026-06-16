@@ -126,6 +126,11 @@ jobs:
               echo "==> Ren utskifting av $label"
               find "$app_path" -mindepth 1 -maxdepth 1 ! -name tmp ! -name .env.local -exec rm -rf {} +
               tar xzf "$BUNDLE" -C "$app_path"
+              cat > "$app_path/.env.local" <<ENVEOF
+            NEXT_PUBLIC_SITE_URL=https://frimedia.no
+            NEXT_PUBLIC_SUPABASE_URL=${{ env.NEXT_PUBLIC_SUPABASE_URL }}
+            NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=${{ env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY }}
+            ENVEOF
               write_passenger_htaccess "$app_path" "$app_path/.htaccess"
               restart_app "$app_path" "$app_root"
             }
@@ -153,6 +158,15 @@ jobs:
 
             echo "==> Helsesjekk"
             sleep 8
-            check_url "https://frimedia.no" "frimedia.no"
-            check_url "https://demo.frimedia.no" "demo.frimedia.no"
+            if ! check_url "https://frimedia.no" "frimedia.no"; then
+              echo "!! frimedia.no feilet - peker midlertidig tilbake til demo-app for å unngå nedetid"
+              write_passenger_htaccess "$DEMO_APP" "$DOCROOT/.htaccess"
+              restart_app "$DEMO_APP" "demo.frimedia.no"
+              exit 1
+            fi
+
+            if ! check_url "https://demo.frimedia.no" "demo.frimedia.no"; then
+              echo "!! demo.frimedia.no feilet"
+              exit 1
+            fi
             echo "==> Deploy OK: domenene kjører adskilte app-røtter"
