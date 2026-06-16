@@ -1,4 +1,5 @@
 import { VisibilityAppShell } from "@/components/synlighet/app-shell";
+import { TermLabel } from "@/components/synlighet/term-info";
 import { Card, MetricCard, StatusBadge } from "@/components/synlighet/ui";
 import { paidAdsAlerts, paidAdsCampaigns, paidLandingPageObservations } from "@/lib/synlighet/demo-data";
 
@@ -85,10 +86,10 @@ export default function PaidAdsPage() {
                   <th className="px-4 py-3">Kampanje</th>
                   <th className="px-4 py-3">Status</th>
                   <th className="px-4 py-3">Spend</th>
-                  <th className="px-4 py-3">CTR</th>
-                  <th className="px-4 py-3">CPC</th>
+                  <th className="px-4 py-3"><TermLabel term="ctr">CTR</TermLabel></th>
+                  <th className="px-4 py-3"><TermLabel term="cpc">CPC</TermLabel></th>
                   <th className="px-4 py-3">Konv.</th>
-                  <th className="px-4 py-3">CPA</th>
+                  <th className="px-4 py-3"><TermLabel term="cpa">CPA</TermLabel></th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200 bg-white">

@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import type { LucideIcon } from "lucide-react";
 import {
   BarChart3,
+  BookOpen,
   Bot,
   CircleDollarSign,
   CreditCard,
@@ -30,7 +31,10 @@ type NavGroup = { label: string; items: NavItem[] };
 const appGroups: NavGroup[] = [
   {
     label: "Oversikt",
-    items: [{ href: "/synlighet/app/dashboard", label: "Dashboard", icon: Home }],
+    items: [
+      { href: "/synlighet/app/dashboard", label: "Dashboard", icon: Home },
+      { href: "/synlighet/app/ordliste", label: "Ordliste", icon: BookOpen },
+    ],
   },
   {
     label: "Analyse",

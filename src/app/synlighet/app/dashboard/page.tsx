@@ -3,6 +3,7 @@ import { ArrowRight, Flame, ListChecks, Wrench, Zap } from "lucide-react";
 import { ActionControls } from "@/components/synlighet/action-controls";
 import { VisibilityAppShell } from "@/components/synlighet/app-shell";
 import { DonutScore, TrendChart } from "@/components/synlighet/graphics";
+import { ScoreMeaning, TermLabel } from "@/components/synlighet/term-info";
 import {
   AppNotice,
   Card,
@@ -36,10 +37,13 @@ export default function VisibilityDashboardPage() {
         <div className="grid gap-6 lg:grid-cols-[1fr_1.6fr]">
           <Card className="flex items-center justify-between gap-4">
             <div>
-              <h2 className="text-lg font-semibold">Synlighetsscore</h2>
+              <h2 className="text-lg font-semibold">
+                <TermLabel term="synlighetsscore">Synlighetsscore</TermLabel>
+              </h2>
               <p className="mt-1 text-sm text-slate-500">
                 +{dashboardMetrics.weeklyChange} siden forrige uke
               </p>
+              <ScoreMeaning score={dashboardMetrics.visibilityScore} className="mt-3" />
             </div>
             <DonutScore score={dashboardMetrics.visibilityScore} label="av 100" />
           </Card>
@@ -105,8 +109,10 @@ export default function VisibilityDashboardPage() {
                   <StatusBadge status={action.status} />
                 </div>
                 <div className="mt-4 rounded-xl bg-white p-4 text-sm leading-6 text-slate-600">
-                  Datagrunnlag: {action.sourceData.impressions.toLocaleString("nb-NO")} visninger,{" "}
-                  {action.sourceData.clicks} klikk, CTR {formatPercent(action.sourceData.ctr)}, posisjon{" "}
+                  Datagrunnlag: {action.sourceData.impressions.toLocaleString("nb-NO")}{" "}
+                  <TermLabel term="visninger">visninger</TermLabel>, {action.sourceData.clicks} klikk,{" "}
+                  <TermLabel term="ctr">CTR</TermLabel> {formatPercent(action.sourceData.ctr)},{" "}
+                  <TermLabel term="posisjon">posisjon</TermLabel>{" "}
                   {action.sourceData.position.toLocaleString("nb-NO")}
                 </div>
                 <div className="mt-4 flex flex-wrap gap-2">
