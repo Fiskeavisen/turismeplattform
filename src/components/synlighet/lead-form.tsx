@@ -8,6 +8,13 @@ import type { BrregUnit } from "@/lib/synlighet/types";
 type Step = "input" | "scanning" | "result";
 type Preview = { score: number; foundOpportunities: number; highlights: string[] };
 
+const scanStages = [
+  "Henter forsiden …",
+  "Leser innholdet …",
+  "Sjekker synlighet i Google …",
+  "Finner konkrete muligheter …",
+];
+
 export function LeadForm({
   accentClassName = "bg-slate-950 hover:bg-slate-800",
 }: {
@@ -16,6 +23,8 @@ export function LeadForm({
   const [step, setStep] = useState<Step>("input");
   const [website, setWebsite] = useState("");
   const [preview, setPreview] = useState<Preview | null>(null);
+  const [scanStage, setScanStage] = useState(0);
+  const scanInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const [companyName, setCompanyName] = useState("");
   const [orgNumber, setOrgNumber] = useState("");
@@ -68,7 +77,15 @@ export function LeadForm({
     }
 
     setError(null);
+    setScanStage(0);
     setStep("scanning");
+
+    if (scanInterval.current) {
+      clearInterval(scanInterval.current);
+    }
+    scanInterval.current = setInterval(() => {
+      setScanStage((stage) => Math.min(stage + 1, scanStages.length - 1));
+    }, 550);
 
     try {
       const response = await fetch("/api/scan/preview", {
@@ -78,12 +95,17 @@ export function LeadForm({
       });
       const data = (await response.json()) as Preview;
       // Liten kunstig forsinkelse så det føles som en reell scan.
-      await new Promise((resolve) => setTimeout(resolve, 1100));
+      await new Promise((resolve) => setTimeout(resolve, 1700));
       setPreview(data);
       setStep("result");
     } catch {
       setError("Kunne ikke kjøre scan akkurat nå. Prøv igjen.");
       setStep("input");
+    } finally {
+      if (scanInterval.current) {
+        clearInterval(scanInterval.current);
+        scanInterval.current = null;
+      }
     }
   }
 
@@ -189,16 +211,23 @@ export function LeadForm({
               </button>
             </div>
           </div>
-          <p className="text-sm text-slate-500">
-            Vi sjekker siden for synlighetsmuligheter. Du får et lite sammendrag med en gang – og hele
-            rapporten på e-post.
-          </p>
+          {step === "scanning" ? (
+            <p className="flex items-center gap-2 text-sm font-medium text-slate-600">
+              <Loader2 className="size-4 animate-spin text-slate-400" />
+              {scanStages[scanStage]}
+            </p>
+          ) : (
+            <p className="text-sm text-slate-500">
+              Vi sjekker siden for synlighetsmuligheter. Du får et lite sammendrag med en gang – og hele
+              rapporten på e-post.
+            </p>
+          )}
           {error ? <p className="text-sm font-medium text-rose-700">{error}</p> : null}
         </form>
       ) : null}
 
       {step === "result" && preview ? (
-        <div className="grid gap-6 lg:grid-cols-[0.8fr_1fr]">
+        <div className="animate-fade-up grid gap-6 lg:grid-cols-[0.8fr_1fr]">
           <div className="rounded-2xl bg-slate-50 p-5 text-center">
             <p className="text-sm font-semibold text-slate-500">Foreløpig synlighet</p>
             <div className="mt-3 grid place-items-center">
@@ -216,6 +245,11 @@ export function LeadForm({
                 </li>
               ))}
             </ul>
+            {preview.foundOpportunities > preview.highlights.length ? (
+              <p className="mt-3 text-xs font-semibold text-slate-400">
+                + {preview.foundOpportunities - preview.highlights.length} flere i rapporten
+              </p>
+            ) : null}
           </div>
 
           <form onSubmit={submitLead} className="grid gap-4">
@@ -300,6 +334,14 @@ export function LeadForm({
             </div>
 
             {error ? <p className="text-sm font-medium text-rose-700">{error}</p> : null}
+
+            <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-medium text-slate-500">
+              <span className="inline-flex items-center gap-1">
+                <BadgeCheck className="size-3.5 text-emerald-600" /> Gratis og uforpliktende
+              </span>
+              <span aria-hidden className="text-slate-300">·</span>
+              <span>Vi ringer deg ikke uoppfordret</span>
+            </p>
 
             <button
               type="submit"
