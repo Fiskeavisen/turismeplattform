@@ -26,6 +26,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       priority: 0.8,
     },
+    ...[
+      "om-oss",
+      "tjenester",
+      "annonser",
+      "tester",
+    ].map((slug) => ({
+      url: `${siteUrl}/${slug}`,
+      lastModified: now,
+      priority: 0.8,
+    })),
     ...["storhavet", "skogsro", "fyrvokteren"].map((slug) => ({
       url: `${siteUrl}/demo/${slug}`,
       lastModified: now,
