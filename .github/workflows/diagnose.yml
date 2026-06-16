@@ -1,0 +1,44 @@
+name: Diagnose server (engangs)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspiser ProISP-oppsett
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          command_timeout: 3m
+          script: |
+            echo "===== HOME-mappe ====="
+            ls -la ~ | grep -iE "frimedia|public_html|nodevenv|domains" || true
+            echo ""
+            echo "===== Node-apper (cloudlinux-selector) ====="
+            cloudlinux-selector list --json --interpreter nodejs --user frimeuhl 2>&1 || true
+            echo ""
+            echo "===== nodevenv ====="
+            ls -la ~/nodevenv 2>/dev/null || true
+            echo ""
+            echo "===== public_html (.htaccess + _next) ====="
+            ls -la ~/public_html 2>/dev/null | head -20 || true
+            echo "--- public_html/.htaccess ---"
+            cat ~/public_html/.htaccess 2>/dev/null | head -40 || true
+            echo "--- public_html/_next/static/chunks ---"
+            ls -la ~/public_html/_next/static/chunks 2>/dev/null | head -5 || true
+            echo ""
+            echo "===== ~/frimedia.no (hvis finnes) ====="
+            ls -la ~/frimedia.no 2>/dev/null | head -20 || true
+            echo "--- frimedia.no/.htaccess ---"
+            cat ~/frimedia.no/.htaccess 2>/dev/null | head -40 || true
+            echo ""
+            echo "===== demo.frimedia.no/.htaccess ====="
+            cat ~/demo.frimedia.no/.htaccess 2>/dev/null | head -40 || true
+            echo ""
+            echo "===== demo app static finnes? ====="
+            ls -la ~/demo.frimedia.no/.next/static/chunks 2>/dev/null | head -5 || true
