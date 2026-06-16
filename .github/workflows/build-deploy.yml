@@ -71,9 +71,9 @@ jobs:
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           port: ${{ secrets.DEPLOY_PORT }}
           source: "release.tar.gz"
-          target: "${{ secrets.DEPLOY_PATH }}/tmp"
+          target: "/home/${{ secrets.DEPLOY_USER }}/tmp"
 
-      - name: Pakk ut, restart og verifiser (med auto-rollback)
+      - name: Pakk ut til adskilte apper, restart og verifiser
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.DEPLOY_HOST }}
@@ -82,46 +82,77 @@ jobs:
           port: ${{ secrets.DEPLOY_PORT }}
           command_timeout: 6m
           script: |
-            APP="${{ secrets.DEPLOY_PATH }}"
-            APPROOT="demo.frimedia.no"
-            URL="https://demo.frimedia.no"
-            cd "$APP" || exit 1
+            set -e
 
-            restart_app() {
-              mkdir -p "$APP/tmp" && touch "$APP/tmp/restart.txt"
-              cloudlinux-selector restart --json --interpreter nodejs --user frimeuhl --app-root "$APPROOT" || true
+            BUNDLE="$HOME/tmp/release.tar.gz"
+            NODEJS="$HOME/nodevenv/demo.frimedia.no/20/bin/node"
+            FRIMEDIA_APP="$HOME/frimedia.no"
+            DEMO_APP="$HOME/demo.frimedia.no"
+            DOCROOT="$HOME/public_html"
+
+            write_passenger_htaccess() {
+              local app_path="$1"
+              local target="$2"
+              cat > "$target" <<EOF
+            # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+            PassengerAppRoot "$app_path"
+            PassengerBaseURI "/"
+            PassengerNodejs "$NODEJS"
+            PassengerAppType node
+            PassengerStartupFile server.js
+            # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+            EOF
             }
 
-            TS=$(date +%Y%m%d-%H%M%S)
-            mkdir -p "$HOME/backups"
-            echo "==> Tar backup av nåværende versjon"
-            tar czf "$HOME/backups/frimedia-$TS.tar.gz" .next public server.js .htaccess 2>/dev/null || true
-            ls -1t "$HOME"/backups/frimedia-*.tar.gz 2>/dev/null | tail -n +6 | xargs -r rm -f
+            restart_app() {
+              local app_path="$1"
+              local app_root="$2"
+              mkdir -p "$app_path/tmp" && touch "$app_path/tmp/restart.txt"
+              cloudlinux-selector restart --json --interpreter nodejs --user frimeuhl --app-root "$app_root" || true
+            }
 
-            echo "==> Rydder gammelt bygg og pakker ut nytt (ren utskifting)"
-            rm -rf "$APP/.next"
-            if ! tar xzf tmp/release.tar.gz -C "$APP"; then
-              echo "!! Utpakking feilet – ruller tilbake"
-              rm -rf "$APP/.next"
-              tar xzf "$HOME/backups/frimedia-$TS.tar.gz" -C "$APP"
-              restart_app
-              exit 1
-            fi
-            rm -f tmp/release.tar.gz
-            restart_app
+            deploy_app() {
+              local app_path="$1"
+              local app_root="$2"
+              local label="$3"
+              local ts
+              ts=$(date +%Y%m%d-%H%M%S)
+
+              mkdir -p "$app_path" "$app_path/tmp" "$HOME/backups"
+              echo "==> Backup av $label"
+              tar czf "$HOME/backups/$label-$ts.tar.gz" -C "$app_path" . 2>/dev/null || true
+              ls -1t "$HOME"/backups/"$label"-*.tar.gz 2>/dev/null | tail -n +6 | xargs -r rm -f
+
+              echo "==> Ren utskifting av $label"
+              find "$app_path" -mindepth 1 -maxdepth 1 ! -name tmp ! -name .env.local -exec rm -rf {} +
+              tar xzf "$BUNDLE" -C "$app_path"
+              write_passenger_htaccess "$app_path" "$app_path/.htaccess"
+              restart_app "$app_path" "$app_root"
+            }
+
+            check_url() {
+              local url="$1"
+              local label="$2"
+              local home_code chunk chunk_code
+              home_code=$(curl -s -o /dev/null -w "%{http_code}" -L "$url/")
+              chunk=$(curl -s -L "$url/" | grep -o '/_next/static/chunks/[^"]*\.js' | head -1 || true)
+              chunk_code=$(curl -s -o /dev/null -w "%{http_code}" -L "$url$chunk")
+              echo "$label: forside=$home_code chunk=$chunk_code ($chunk)"
+              [ "$home_code" = "200" ] && [ "$chunk_code" = "200" ]
+            }
+
+            deploy_app "$FRIMEDIA_APP" "frimedia.no" "frimedia"
+            deploy_app "$DEMO_APP" "demo.frimedia.no" "demo"
+
+            echo "==> Pek public_html (frimedia.no) mot egen frimedia-app"
+            cp "$DOCROOT/.htaccess" "$HOME/backups/public_html-htaccess-$(date +%Y%m%d-%H%M%S).bak" 2>/dev/null || true
+            write_passenger_htaccess "$FRIMEDIA_APP" "$DOCROOT/.htaccess"
+            restart_app "$FRIMEDIA_APP" "frimedia.no"
+
+            rm -f "$BUNDLE"
 
             echo "==> Helsesjekk"
             sleep 8
-            HOME_CODE=$(curl -s -o /dev/null -w "%{http_code}" -L "$URL/")
-            CHUNK=$(curl -s -L "$URL/" | grep -o '/_next/static/chunks/[^"]*\.js' | head -1 || true)
-            CHUNK_CODE=$(curl -s -o /dev/null -w "%{http_code}" -L "$URL$CHUNK")
-            echo "Forside: $HOME_CODE | chunk ($CHUNK): $CHUNK_CODE"
-
-            if [ "$HOME_CODE" != "200" ] || [ "$CHUNK_CODE" != "200" ]; then
-              echo "!! Helsesjekk feilet – ruller tilbake til forrige versjon"
-              rm -rf "$APP/.next"
-              tar xzf "$HOME/backups/frimedia-$TS.tar.gz" -C "$APP"
-              restart_app
-              exit 1
-            fi
-            echo "==> Deploy OK og verifisert"
+            check_url "https://frimedia.no" "frimedia.no"
+            check_url "https://demo.frimedia.no" "demo.frimedia.no"
+            echo "==> Deploy OK: domenene kjører adskilte app-røtter"
