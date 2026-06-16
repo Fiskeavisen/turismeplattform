@@ -1,4 +1,12 @@
-import { pageSnapshots, queryRows, visibilityActions } from "./demo-data";
+import {
+  descriptionAudits,
+  externalAuthorityRecommendations,
+  keywordAlerts,
+  monitoredKeywords,
+  pageSnapshots,
+  queryRows,
+  visibilityActions,
+} from "./demo-data";
 import type { ActionCategory, OpportunityType, VisibilityAction } from "./types";
 
 export type Opportunity = {
@@ -203,6 +211,81 @@ export function findSchemaOpportunities(): Opportunity[] {
     }));
 }
 
+export function findKeywordMonitoringOpportunities(): Opportunity[] {
+  return keywordAlerts.map((alert) => {
+    const keyword = monitoredKeywords.find((item) => item.id === alert.keywordId);
+    const score = alert.severity === "high" ? 86 : alert.severity === "medium" ? 74 : 58;
+
+    return {
+      id: `opp-keyword-${alert.id}`,
+      category:
+        alert.type === "low_ctr"
+          ? "ctr_optimization"
+          : alert.type === "wrong_url"
+            ? "internal_linking"
+            : alert.type === "serp_feature_opportunity"
+              ? "answer_readiness"
+              : "content_gap",
+      opportunityType:
+        alert.type === "low_ctr"
+          ? "low_ctr"
+          : alert.type === "position_drop"
+            ? "content_decay"
+            : alert.type === "wrong_url"
+              ? "internal_linking"
+              : "content_gap",
+      url: keyword?.targetUrl ?? keyword?.currentUrl ?? "/",
+      query: keyword?.keyword,
+      score,
+      reason: alert.description,
+      evidence: {
+        alertType: alert.type,
+        severity: alert.severity,
+        position: keyword?.position,
+        previousPosition: keyword?.previousPosition,
+        currentUrl: keyword?.currentUrl,
+        targetUrl: keyword?.targetUrl,
+      },
+    } satisfies Opportunity;
+  });
+}
+
+export function findExternalAuthorityOpportunities(): Opportunity[] {
+  return externalAuthorityRecommendations.map((recommendation) => ({
+    id: `opp-authority-${recommendation.id}`,
+    category: recommendation.type === "outbound_citations" ? "entity_authority" : "reputation_signal",
+    opportunityType: recommendation.type === "outbound_citations" ? "outbound_citation" : "external_authority",
+    url: recommendation.relatedUrl,
+    score: recommendation.priority,
+    reason: recommendation.issue,
+    evidence: {
+      type: recommendation.type,
+      suggestedTargets: recommendation.suggestedTargets.join(", "),
+      measurement: recommendation.measurement,
+    },
+  }));
+}
+
+export function findWeakDescriptionOpportunities(): Opportunity[] {
+  return descriptionAudits
+    .filter((audit) => audit.descriptionScore < 65)
+    .map((audit) => ({
+      id: `opp-description-${audit.id}`,
+      category: "content_gap",
+      opportunityType: "weak_description",
+      url: audit.url,
+      score: audit.priority,
+      reason: audit.issue,
+      evidence: {
+        pageType: audit.pageType,
+        descriptionScore: audit.descriptionScore,
+        wordCount: audit.wordCount,
+        missingElements: audit.missingElements.join(", "),
+        source: audit.source,
+      },
+    }));
+}
+
 export function runMockAnalysis() {
   const opportunities = [
     ...findLowCtrOpportunities(),
@@ -212,6 +295,9 @@ export function runMockAnalysis() {
     ...findLocalVisibilityOpportunities(),
     ...findConversionOpportunities(),
     ...findSchemaOpportunities(),
+    ...findKeywordMonitoringOpportunities(),
+    ...findExternalAuthorityOpportunities(),
+    ...findWeakDescriptionOpportunities(),
   ].sort((a, b) => b.score - a.score);
 
   return {

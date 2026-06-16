@@ -72,6 +72,60 @@ Standard pipeline:
 10. Lag 3-5 tiltak.
 11. Generer ukesrapport.
 
+## Google-oppsett
+
+Onboarding og integrasjonssiden skal ha en tydelig bruksguide for Google Search Console og Google Analytics 4.
+
+Guiden skal forklare:
+
+- hvorfor begge kildene trengs
+- hvilken Google-konto kunden bør bruke
+- hvilke properties som skal velges
+- hva systemet henter fra Search Console
+- hva systemet henter fra GA4
+- vanlige feil når properties eller data ikke vises
+- at systemet kun ber om lesetilgang
+
+Search Console brukes til synlighet før klikket. GA4 brukes til verdi etter klikket. Tiltak skal prioriteres bedre når begge kilder er koblet.
+
+## Søkeordovervåkning
+
+Søkeordovervåkning skal støtte tiltak, ikke bli et separat rank tracking-dashboard.
+
+MVP-en skal vise:
+
+- monitorerte søkeord med posisjon, CTR, klikk, visninger og vinnerside
+- alerts for nær topp 3, lav CTR, posisjonsfall, nye søk og feil URL
+- keyword clusters etter intensjon og anbefalt sidetype
+- konkurrent-/SERP-notater som peker på konkrete innholdshull
+- neste handling per søkeord eller cluster
+
+Inspirasjon kan hentes fra SEMrush-funksjoner som position tracking, keyword gap, SERP features og competitor overview, men produktets språk og prioritering skal fortsatt være handlingsorientert.
+
+## Autoritet og eksterne signaler
+
+Rapportene skal også kunne gi råd som ikke bare handler om å endre egen nettside:
+
+- bli nevnt på relevante eksterne sider
+- få ekte omtaler fra samarbeidspartnere, kunder, bransje- og lokalmiljø
+- bruke ekspertprofiler som kilder i egne og eksterne saker
+- lenke ut til troverdige kilder når siden omtaler regler, frister, definisjoner eller dokumentasjon
+
+Dette skal ikke bli linkspam. Produktet skal advare mot kjøpte lenker, irrelevante kataloger og tilfeldig utgående lenking. Rådene skal være knyttet til tillit, etterprøvbarhet og reelle relasjoner.
+
+## Beskrivelseskvalitet
+
+Systemet skal finne sider som har for svake beskrivelser, spesielt:
+
+- produktsider i Shopify/WooCommerce
+- kategorisider og samlinger
+- tjenestesider med generisk intro eller meta description
+- artikler som mangler kort svar, målgruppe eller neste steg
+
+Et funn skal vise hva som mangler, for eksempel målgruppe, bruksområde, spesifikasjoner, inkludert/ikke inkludert, FAQ, trust eller CTA. Tiltaket skal gi en konkret brief for hva teksten bør dekke, ikke bare si “skriv mer tekst”.
+
+Dette er særlig viktig for nettbutikker, der mange produkter ofte har tynne, like eller leverandørkopierte beskrivelser.
+
 ## Pakker
 
 Starter er for små bedrifter med ett nettsted og få ukentlige tiltak.

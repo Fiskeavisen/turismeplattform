@@ -42,6 +42,20 @@ export default async function ReportDetailPage({ params }: { params: Promise<{ i
               ))}
             </ol>
           </section>
+          <section>
+            <h2 className="text-xl font-semibold">Autoritet utenfor egen nettside</h2>
+            <p className="mt-2 max-w-3xl leading-7 text-slate-600">
+              Noen synlighetstiltak handler om hva andre troverdige kilder sier om bedriften,
+              og om egne sider dokumenterer påstander godt nok.
+            </p>
+            <div className="mt-4 grid gap-3">
+              {report.authorityAdvice.map((advice) => (
+                <div key={advice} className="rounded-xl bg-slate-50 p-4 text-sm leading-6 text-slate-700">
+                  {advice}
+                </div>
+              ))}
+            </div>
+          </section>
           <section className="grid gap-4 md:grid-cols-2">
             <Card className="bg-emerald-50">
               <h3 className="font-semibold text-emerald-950">Raskeste gevinst</h3>

@@ -21,15 +21,23 @@ export default function PagesOverviewPage() {
                 <div>
                   <h2 className="text-lg font-semibold">{page.url}</h2>
                   <p className="mt-1 text-sm text-slate-500">{page.title}</p>
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-slate-400">
+                    {page.pageType}
+                  </p>
                 </div>
                 <span className="rounded-full bg-slate-200 px-3 py-1 text-xs font-semibold text-slate-700">
                   {page.statusCode}
                 </span>
               </div>
-              <div className="mt-4 grid gap-4 md:grid-cols-3">
+              <div className="mt-4 grid gap-4 md:grid-cols-4">
                 <MetricCard label="SEO-score" value={`${page.seoScore} / 100`} />
                 <MetricCard label="AEO-score" value={`${page.aeoScore} / 100`} />
                 <MetricCard label="Lokal score" value={`${page.localScore} / 100`} />
+                <MetricCard
+                  label="Beskrivelse"
+                  value={`${page.descriptionScore} / 100`}
+                  tone={page.descriptionScore < 55 ? "warning" : "neutral"}
+                />
               </div>
             </Link>
           ))}

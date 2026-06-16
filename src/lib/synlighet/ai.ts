@@ -62,11 +62,13 @@ function actionText(opportunity: Opportunity) {
   const byCategory: Record<string, string> = {
     ctr_optimization: `Skriv om title og meta for ${opportunity.url}.`,
     answer_readiness: `Legg til en kort svarblokk og relevante spørsmål på ${opportunity.url}.`,
+    content_gap: `Forbedre beskrivelse og innholdsdekning på ${opportunity.url}.`,
     internal_linking: `Legg inn en kontekstuell internlenke fra ${opportunity.url}.`,
     entity_authority: `Legg til trust-signaler og konkret bevis på ${opportunity.url}.`,
     local_visibility: `Gjør lokale signaler tydeligere på ${opportunity.url}.`,
     conversion_opportunity: `Gjør neste steg tydeligere på ${opportunity.url}.`,
     structured_data: `Legg til relevant schema på ${opportunity.url}.`,
+    reputation_signal: `Bygg relevante eksterne omtaler og omdømmesignaler for ${opportunity.url}.`,
   };
 
   return byCategory[opportunity.category] ?? `Forbedre ${opportunity.url} basert på datagrunnlaget.`;

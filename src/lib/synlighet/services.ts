@@ -1,4 +1,15 @@
-import { integrations, pageSnapshots, queryRows, weeklyReport } from "./demo-data";
+import {
+  competitorObservations,
+  descriptionAudits,
+  externalAuthorityRecommendations,
+  integrations,
+  keywordAlerts,
+  keywordClusters,
+  monitoredKeywords,
+  pageSnapshots,
+  queryRows,
+  weeklyReport,
+} from "./demo-data";
 import { runMockAnalysis } from "./analysis";
 
 export function isMockMode() {
@@ -54,6 +65,37 @@ export async function generateRecommendations() {
 export async function generateWeeklyReport() {
   // TODO: Lag HTML/PDF-variant og lagre rapportstatus i database.
   return weeklyReport;
+}
+
+export async function fetchKeywordMonitoring() {
+  return {
+    mode: isMockMode() ? "mock" : "live",
+    monitoredKeywords,
+    alerts: keywordAlerts,
+    clusters: keywordClusters,
+    competitors: competitorObservations,
+  };
+}
+
+export async function fetchKeywordAlerts() {
+  return {
+    mode: isMockMode() ? "mock" : "live",
+    alerts: keywordAlerts,
+  };
+}
+
+export async function fetchExternalAuthorityRecommendations() {
+  return {
+    mode: isMockMode() ? "mock" : "live",
+    recommendations: externalAuthorityRecommendations,
+  };
+}
+
+export async function fetchDescriptionAudits() {
+  return {
+    mode: isMockMode() ? "mock" : "live",
+    audits: descriptionAudits,
+  };
 }
 
 export async function testCmsConnection(type: "wordpress" | "shopify") {

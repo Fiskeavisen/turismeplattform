@@ -123,6 +123,109 @@ Anbefalte indekser:
 - `revenue`
 - `createdAt`
 
+## Søkeordovervåkning
+
+### monitored_keywords
+
+- `id`
+- `siteId`
+- `keyword`
+- `targetUrl`
+- `currentUrl`
+- `intent`
+- `priority`
+- `conversionValue`
+- `status`
+- `nextAction`
+- `createdAt`
+- `updatedAt`
+
+Status: `watching`, `action_needed`, `measuring`, `ignored`.
+
+### keyword_position_snapshots
+
+- `id`
+- `keywordId`
+- `measuredAt`
+- `position`
+- `bestPosition`
+- `clicks`
+- `impressions`
+- `ctr`
+- `currentUrl`
+- `serpFeaturesJson`
+- `competitorsJson`
+- `createdAt`
+
+Brukes til trend, posisjonsfall, nær topp 3 og før/etter-måling på søkeordnivå.
+
+### keyword_alerts
+
+- `id`
+- `siteId`
+- `keywordId`
+- `type`
+- `severity`
+- `title`
+- `description`
+- `recommendedAction`
+- `resolvedAt`
+- `createdAt`
+
+Alert-typer: `near_top_3`, `low_ctr`, `position_drop`, `new_query`, `wrong_url`, `competitor_gap`, `serp_feature_opportunity`.
+
+### keyword_clusters
+
+- `id`
+- `siteId`
+- `name`
+- `intent`
+- `commercialValue`
+- `coverageScore`
+- `keywordIdsJson`
+- `winningPageType`
+- `gap`
+- `recommendedNextStep`
+- `createdAt`
+- `updatedAt`
+
+### competitor_observations
+
+- `id`
+- `siteId`
+- `competitor`
+- `domain`
+- `sharedKeywords`
+- `strongerOnJson`
+- `weakerOnJson`
+- `contentPatternsJson`
+- `recommendedResponse`
+- `createdAt`
+- `updatedAt`
+
+## Autoritet og eksterne signaler
+
+### external_authority_recommendations
+
+- `id`
+- `siteId`
+- `title`
+- `type`
+- `priority`
+- `relatedUrl`
+- `issue`
+- `recommendation`
+- `whyItMatters`
+- `suggestedTargetsJson`
+- `measurement`
+- `riskNote`
+- `createdAt`
+- `updatedAt`
+
+Typer: `external_mentions`, `outbound_citations`, `reputation_signal`, `expert_source`.
+
+Brukes til råd om eksterne omtaler, troverdige kildehenvisninger, ekspertprofiler og omdømmesignaler. Skal ikke brukes til kjøpte lenker eller irrelevante kataloger.
+
 ## Crawl og sideinnhold
 
 ### page_snapshots
@@ -133,6 +236,8 @@ Anbefalte indekser:
 - `title`
 - `metaDescription`
 - `h1`
+- `pageType`
+- `descriptionScore`
 - `headingsJson`
 - `bodyExcerpt`
 - `wordCount`
@@ -144,6 +249,31 @@ Anbefalte indekser:
 - `externalLinksJson`
 - `crawledAt`
 - `createdAt`
+
+### description_audits
+
+- `id`
+- `siteId`
+- `url`
+- `pageType`
+- `title`
+- `currentDescription`
+- `descriptionScore`
+- `wordCount`
+- `issue`
+- `missingElementsJson`
+- `recommendedDescriptionBrief`
+- `suggestedSectionsJson`
+- `priority`
+- `expectedImpact`
+- `estimatedTimeMinutes`
+- `source`
+- `createdAt`
+- `updatedAt`
+
+Kilder: `crawl`, `shopify`, `wordpress`, `woocommerce`, `manual`.
+
+Brukes til å finne produkter, kategorier, samlinger og tjenestesider med svake eller generiske beskrivelser.
 
 ## Muligheter, anbefalinger og tiltak
 
@@ -232,6 +362,7 @@ Status: `new`, `approved`, `sent_to_cms`, `in_progress`, `completed`, `measuring
 - `weekStart`
 - `weekEnd`
 - `summary`
+- `authorityAdviceJson`
 - `html`
 - `status`
 - `sentAt`

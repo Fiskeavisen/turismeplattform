@@ -19,7 +19,7 @@ function cloneState(): VisibilityDemoState {
       sourceData: { ...action.sourceData },
       measurement: action.measurement ? { ...action.measurement } : undefined,
     })),
-    report: { ...weeklyReport },
+    report: { ...weeklyReport, focusActions: [...weeklyReport.focusActions], authorityAdvice: [...weeklyReport.authorityAdvice] },
   };
 }
 

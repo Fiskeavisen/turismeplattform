@@ -31,6 +31,9 @@ export type OpportunityType =
   | "low_ctr"
   | "answer_readiness"
   | "internal_linking"
+  | "external_authority"
+  | "outbound_citation"
+  | "weak_description"
   | "content_gap"
   | "trust"
   | "local_visibility"
@@ -54,6 +57,29 @@ export type SearchIntentCategory =
   | "problem_friction_intent"
   | "trust_safety_doubt"
   | "ai_answer_intent";
+
+export type KeywordAlertType =
+  | "near_top_3"
+  | "low_ctr"
+  | "position_drop"
+  | "new_query"
+  | "wrong_url"
+  | "competitor_gap"
+  | "serp_feature_opportunity";
+
+export type KeywordAlertSeverity = "low" | "medium" | "high";
+
+export type SerpFeature =
+  | "local_pack"
+  | "people_also_ask"
+  | "featured_snippet"
+  | "ai_overview"
+  | "reviews"
+  | "video"
+  | "shopping"
+  | "site_links";
+
+export type PageType = "home" | "service" | "article" | "product" | "collection" | "category" | "contact" | "other";
 
 export type VisibilityOrganization = {
   id: string;
@@ -136,6 +162,8 @@ export type PageSnapshot = {
   title: string;
   metaDescription: string;
   h1: string;
+  pageType: PageType;
+  descriptionScore: number;
   wordCount: number;
   statusCode: number;
   seoScore: number;
@@ -144,6 +172,25 @@ export type PageSnapshot = {
   issues: string[];
   opportunities: string[];
   crawledAt: string;
+};
+
+export type DescriptionAudit = {
+  id: string;
+  siteId: string;
+  url: string;
+  pageType: PageType;
+  title: string;
+  currentDescription: string;
+  descriptionScore: number;
+  wordCount: number;
+  issue: string;
+  missingElements: string[];
+  recommendedDescriptionBrief: string;
+  suggestedSections: string[];
+  priority: number;
+  expectedImpact: "lav" | "medium" | "medium/høy" | "høy";
+  estimatedTimeMinutes: number;
+  source: "crawl" | "shopify" | "wordpress" | "woocommerce" | "manual";
 };
 
 export type QueryRow = {
@@ -156,6 +203,67 @@ export type QueryRow = {
   position: number;
   intent: SearchIntentCategory;
   trend: "up" | "down" | "flat";
+};
+
+export type MonitoredKeyword = {
+  id: string;
+  siteId: string;
+  keyword: string;
+  targetUrl: string;
+  currentUrl: string;
+  intent: SearchIntentCategory;
+  priority: number;
+  position: number;
+  previousPosition: number;
+  bestPosition: number;
+  clicks: number;
+  impressions: number;
+  ctr: number;
+  conversionValue: "lav" | "medium" | "høy";
+  serpFeatures: SerpFeature[];
+  competitors: string[];
+  status: "watching" | "action_needed" | "measuring" | "ignored";
+  nextAction: string;
+  updatedAt: string;
+};
+
+export type KeywordAlert = {
+  id: string;
+  siteId: string;
+  keywordId: string;
+  type: KeywordAlertType;
+  severity: KeywordAlertSeverity;
+  title: string;
+  description: string;
+  recommendedAction: string;
+  createdAt: string;
+  resolvedAt?: string;
+};
+
+export type KeywordCluster = {
+  id: string;
+  siteId: string;
+  name: string;
+  intent: SearchIntentCategory;
+  commercialValue: number;
+  coverageScore: number;
+  keywordIds: string[];
+  winningPageType: string;
+  gap: string;
+  recommendedNextStep: string;
+};
+
+export type CompetitorObservation = {
+  id: string;
+  siteId: string;
+  competitor: string;
+  domain: string;
+  sharedKeywords: number;
+  strongerOn: string[];
+  weakerOn: string[];
+  contentPatterns: string[];
+  recommendedResponse: string;
+  updatedAt: string;
 };
 
 export type AiVisibilityTest = {
@@ -179,11 +287,27 @@ export type WeeklyReport = {
   weekEnd: string;
   summary: string;
   focusActions: string[];
+  authorityAdvice: string[];
   quickWin: string;
   biggestRisk: string;
   status: WeeklyReportStatus;
   html: string;
   sentAt?: string;
+};
+
+export type ExternalAuthorityRecommendation = {
+  id: string;
+  siteId: string;
+  title: string;
+  type: "external_mentions" | "outbound_citations" | "reputation_signal" | "expert_source";
+  priority: number;
+  relatedUrl: string;
+  issue: string;
+  recommendation: string;
+  whyItMatters: string;
+  suggestedTargets: string[];
+  measurement: string;
+  riskNote: string;
 };
 
 export type Integration = {
