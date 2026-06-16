@@ -27,6 +27,7 @@ Produktet skal hjelpe bedrifter å forstå hva de bør gjøre denne uken, på hv
 - Tiltaksliste og tiltaksdetaljer
 - URL-/sideanalyse
 - Søkeord og Search Console-data
+- Betalte annonser
 - AEO / AI-synlighet
 - Lokal synlighet
 - Rapporter
@@ -87,6 +88,26 @@ Guiden skal forklare:
 - at systemet kun ber om lesetilgang
 
 Search Console brukes til synlighet før klikket. GA4 brukes til verdi etter klikket. Tiltak skal prioriteres bedre når begge kilder er koblet.
+
+## Betalte annonser
+
+Produktet skal også kunne overvåke betalte annonser, spesielt Google Ads og etter hvert Meta Ads.
+
+Målet er ikke å bli et komplett annonseverktøy, men å gi tydelige varsler og tiltak:
+
+- spend øker uten tilsvarende konverteringer
+- CPA øker
+- ROAS faller
+- kampanjen sender trafikk til svak landingsside
+- betalte og organiske søk overlapper unødvendig
+- quality score eller annonserelevans er svak
+- konverteringer faller etter endringer
+
+Annonseovervåkningen skal kobles mot organisk arbeid. Hvis en betalt kampanje bruker mye penger på en landingsside med svak beskrivelse, dårlig prissvar eller lav konvertering, skal systemet foreslå både annonsetiltak og nettsidetiltak.
+
+Eksempel:
+
+> Reduser budsjettet midlertidig på Google Ads-kampanjen for `regnskapsfører oslo`, legg til negative søkeord og oppdater `/regnskapsforer-oslo` med prissvar før kampanjen skaleres igjen.
 
 ## Søkeordovervåkning
 

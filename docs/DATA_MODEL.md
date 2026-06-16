@@ -123,6 +123,68 @@ Anbefalte indekser:
 - `revenue`
 - `createdAt`
 
+## Betalte annonser
+
+### paid_ads_campaigns
+
+- `id`
+- `siteId`
+- `channel`
+- `externalCampaignId`
+- `name`
+- `status`
+- `objective`
+- `spend`
+- `previousSpend`
+- `impressions`
+- `clicks`
+- `ctr`
+- `cpc`
+- `conversions`
+- `conversionRate`
+- `costPerConversion`
+- `revenue`
+- `roas`
+- `landingPage`
+- `qualityScore`
+- `nextAction`
+- `syncedAt`
+- `createdAt`
+- `updatedAt`
+
+Kanaler: `google_ads`, `meta_ads`, `linkedin_ads`, `microsoft_ads`.
+
+### paid_ads_alerts
+
+- `id`
+- `siteId`
+- `campaignId`
+- `type`
+- `severity`
+- `title`
+- `description`
+- `recommendedAction`
+- `createdAt`
+- `resolvedAt`
+
+Alert-typer: `spend_spike`, `cpa_increase`, `roas_drop`, `low_quality_score`, `landing_page_mismatch`, `organic_paid_overlap`, `budget_limited`, `conversion_drop`.
+
+### paid_landing_page_observations
+
+- `id`
+- `siteId`
+- `url`
+- `paidSpend`
+- `paidConversions`
+- `organicClicks`
+- `pageScore`
+- `issue`
+- `recommendedAction`
+- `createdAt`
+- `updatedAt`
+
+Brukes til å koble annonsekostnad mot landingssider, organisk synlighet og innholdskvalitet.
+
 ## Søkeordovervåkning
 
 ### monitored_keywords

@@ -15,8 +15,8 @@ export default function SynlighetPricingPage() {
       <SynlighetTopNav />
       <MarketingSection
         eyebrow="Priser"
-        title="Velg hvor mye handling kunden trenger."
-        description="Pakkene er laget for å selge tiltak, ikke rapporter. Prisene er arbeidsområder og kan justeres før endelig lansering."
+        title="Velg hvor mye hjelp du trenger."
+        description="Alle pakkene gir deg konkrete oppgaver hver uke, ikke bare en rapport. Du betaler for å vite hva du bør gjøre – og for å se om det virket. Prisene justeres før endelig lansering."
       >
         <div className="mt-10 grid gap-5 lg:grid-cols-4">
           {pricingPlans.map((plan) => (

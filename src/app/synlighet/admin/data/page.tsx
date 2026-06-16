@@ -7,6 +7,7 @@ const jobs = [
   ["Crawler", "mocked", "Tre toppsider er crawlet med sideutdrag."],
   ["Beskrivelsesaudit", "mocked", "Produkter, kategorier og tjenestesider er sjekket for svake beskrivelser."],
   ["Søkeordmonitor", "mocked", "Monitorerte søkeord, alerts, clusters og konkurrentnotater er lastet."],
+  ["Annonsemonitor", "mocked", "Google Ads og Meta-kampanjer er sjekket for CPA, spend og landingssidematch."],
   ["Analyse", "connected", "Regelmotor og quality gate er kjørt."],
   ["Rapportgenerator", "needs_review", "Ukesrapport venter på admin-godkjenning."],
 ] as const;

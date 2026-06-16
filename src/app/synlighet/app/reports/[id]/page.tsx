@@ -16,7 +16,7 @@ export default async function ReportDetailPage({ params }: { params: Promise<{ i
 
   return (
     <VisibilityAppShell
-      title="Ukens organiske synlighetstiltak"
+      title="Ukens oppgaver for å bli lettere å finne"
       description={`${report.weekStart} til ${report.weekEnd}`}
     >
       <Card>

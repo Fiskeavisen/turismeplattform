@@ -5,12 +5,21 @@ import { aiVisibilityTests, pageSnapshots } from "@/lib/synlighet/demo-data";
 export default function AeoPage() {
   return (
     <VisibilityAppShell
-      title="AEO / AI-synlighet"
-      description="Eksperimentell monitor for svarvennlighet, testspørsmål og innholdshull. Ingen garantier om AI-synlighet."
+      title="AEO / Synlighet i AI-svar"
+      description="Her ser du hvor godt sidene dine er forberedt på å bli brukt i AI-svar. Vi gir ingen garantier, men peker på hva som kan gjøre innholdet tydeligere."
     >
       <div className="grid gap-6">
+        <Card className="bg-sky-50">
+          <h2 className="text-lg font-semibold">Hva betyr dette?</h2>
+          <p className="mt-3 leading-7 text-slate-700">
+            Flere og flere spør AI-tjenester som ChatGPT og Google AI i stedet for å klikke seg
+            rundt på Google. AEO handler om å skrive innholdet ditt klart nok til at slike svar
+            faktisk nevner og anbefaler deg. Tallet under viser hvor klar hver side er – jo høyere,
+            jo bedre.
+          </p>
+        </Card>
         <Card>
-          <h2 className="text-xl font-semibold">Answer readiness per side</h2>
+          <h2 className="text-xl font-semibold">Hvor klar er hver side for AI-svar?</h2>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
             {pageSnapshots.map((page) => (
               <article key={page.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
@@ -25,7 +34,11 @@ export default function AeoPage() {
         </Card>
 
         <Card>
-          <h2 className="text-xl font-semibold">AI-synlighetstester</h2>
+          <h2 className="text-xl font-semibold">Vi spør AI om bransjen din</h2>
+          <p className="mt-3 leading-7 text-slate-600">
+            Vi stiller AI-tjenester typiske spørsmål kundene dine kan stille, og sjekker om
+            bedriften din blir nevnt. «Må vurderes» betyr at du ikke ble nevnt ennå.
+          </p>
           <div className="mt-5 grid gap-4">
             {aiVisibilityTests.map((test) => (
               <article key={test.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">

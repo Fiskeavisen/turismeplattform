@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { ActionControls } from "@/components/synlighet/action-controls";
 import { VisibilityAppShell } from "@/components/synlighet/app-shell";
+import { DonutScore, TrendChart } from "@/components/synlighet/graphics";
 import {
   AppNotice,
   Card,
@@ -11,13 +12,18 @@ import {
   StatusBadge,
   formatPercent,
 } from "@/components/synlighet/ui";
-import { dashboardMetrics } from "@/lib/synlighet/demo-data";
+import { dashboardMetrics, visibilityTrend } from "@/lib/synlighet/demo-data";
 import { getVisibilityDemoState } from "@/lib/synlighet/store";
 
 export const dynamic = "force-dynamic";
 
 export default function VisibilityDashboardPage() {
-  const priorityActions = getVisibilityDemoState().actions.slice(0, 4);
+  const { actions } = getVisibilityDemoState();
+  const priorityActions = actions.slice(0, 4);
+
+  const newActions = actions.filter((action) => action.status === "new").length;
+  const highPriority = actions.filter((action) => action.priorityScore >= 85).length;
+  const quickWins = actions.filter((action) => action.estimatedTimeMinutes <= 20).length;
 
   return (
     <VisibilityAppShell
@@ -27,12 +33,36 @@ export default function VisibilityDashboardPage() {
       <div className="grid gap-6">
         <AppNotice />
 
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-6">
-          <MetricCard label="Synlighetsscore" value={`${dashboardMetrics.visibilityScore} / 100`} />
-          <MetricCard label="Endring" value={`+${dashboardMetrics.weeklyChange}`} tone="positive" />
-          <MetricCard label="Nye tiltak" value={String(dashboardMetrics.newActions)} />
-          <MetricCard label="Høy prioritet" value={String(dashboardMetrics.highPriority)} tone="warning" />
-          <MetricCard label="Raske gevinster" value={String(dashboardMetrics.quickWins)} tone="positive" />
+        <div className="grid gap-6 lg:grid-cols-[1fr_1.6fr]">
+          <Card className="flex items-center justify-between gap-4">
+            <div>
+              <h2 className="text-lg font-semibold">Synlighetsscore</h2>
+              <p className="mt-1 text-sm text-slate-500">
+                +{dashboardMetrics.weeklyChange} siden forrige uke
+              </p>
+            </div>
+            <DonutScore score={dashboardMetrics.visibilityScore} label="av 100" />
+          </Card>
+          <Card>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h2 className="text-lg font-semibold">Utvikling de siste ukene</h2>
+              <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
+                Stigende trend
+              </span>
+            </div>
+            <TrendChart values={visibilityTrend.map((point) => point.score)} className="mt-4 text-slate-900" />
+            <div className="mt-2 flex justify-between text-xs font-medium text-slate-400">
+              {visibilityTrend.map((point) => (
+                <span key={point.week}>{point.week}</span>
+              ))}
+            </div>
+          </Card>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <MetricCard label="Nye tiltak" value={String(newActions)} />
+          <MetricCard label="Høy prioritet" value={String(highPriority)} tone="warning" />
+          <MetricCard label="Raske gevinster" value={String(quickWins)} tone="positive" />
           <MetricCard label="Tekniske feil" value={String(dashboardMetrics.technicalIssues)} tone="warning" />
         </div>
 

@@ -7,6 +7,7 @@ const googleSetupGuide = [
     title: "Før du starter",
     steps: [
       "Bruk en Google-konto som har tilgang til både GA4 og Search Console.",
+      "Sjekk at samme konto også har Google Ads-tilgang hvis betalte annonser skal overvåkes.",
       "Sjekk at domenet er verifisert i Search Console.",
       "Sjekk at GA4-property måler riktig nettsted og har datastream for web.",
     ],
@@ -30,11 +31,21 @@ const googleSetupGuide = [
     ],
   },
   {
+    title: "Koble Google Ads",
+    steps: [
+      "Velg riktig Google Ads-konto eller MCC-konto.",
+      "Gi lesetilgang til kampanje- og rapportdata.",
+      "Kontroller at kampanjer, spend, klikk, konverteringer, CPA og landingssider hentes inn.",
+      "Sjekk at konverteringene matcher GA4 eller annonsekontoens primære mål.",
+    ],
+  },
+  {
     title: "Hvis noe ikke virker",
     steps: [
       "Finner du ikke property, mangler Google-kontoen tilgang.",
       "Har Search Console null data, er domenet ofte feil property eller nylig verifisert.",
       "Har GA4 null konverteringer, må key events settes opp i GA4 først.",
+      "Finner du ikke Google Ads-konto, mangler brukeren ofte tilgang via annonsekonto eller MCC.",
       "Koble fra og koble til på nytt etter at tilgangene er rettet.",
     ],
   },
@@ -74,10 +85,11 @@ export default function IntegrationsPage() {
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <p className="text-sm font-semibold uppercase tracking-wide text-slate-500">Bruksguide</p>
-              <h2 className="mt-2 text-2xl font-semibold">Slik kobler du Google Analytics og Search Console</h2>
+              <h2 className="mt-2 text-2xl font-semibold">Slik kobler du Google-kildene</h2>
               <p className="mt-3 max-w-3xl leading-7 text-slate-600">
                 Search Console forteller hvilke søk og sider som gir synlighet. GA4 forteller hva trafikken gjør etter
-                klikket. Begge må kobles til for at systemet skal kunne prioritere tiltak basert på verdi.
+                klikket. Google Ads forteller hva kunden betaler for. Kildene kobles sammen for å prioritere tiltak
+                basert på både synlighet, kostnad og verdi.
               </p>
             </div>
             <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-semibold text-amber-800">
@@ -105,7 +117,7 @@ export default function IntegrationsPage() {
             <h3 className="font-semibold">Tilganger vi ber om</h3>
             <p className="mt-2 text-sm leading-6 text-slate-600">
               MVP-en skal kun be om lesetilgang til rapportdata. Den skal ikke endre Google-kontoen, Analytics-oppsett,
-              Search Console-verifisering eller publisere noe på vegne av kunden.
+              Search Console-verifisering eller annonsekampanjer uten eksplisitt godkjenning.
             </p>
           </div>
         </Card>

@@ -3,6 +3,8 @@ import {
   externalAuthorityRecommendations,
   keywordAlerts,
   monitoredKeywords,
+  paidAdsAlerts,
+  paidAdsCampaigns,
   pageSnapshots,
   queryRows,
   visibilityActions,
@@ -286,6 +288,34 @@ export function findWeakDescriptionOpportunities(): Opportunity[] {
     }));
 }
 
+export function findPaidAdsOpportunities(): Opportunity[] {
+  return paidAdsAlerts.map((alert) => {
+    const campaign = paidAdsCampaigns.find((item) => item.id === alert.campaignId);
+    const score = alert.severity === "high" ? 88 : alert.severity === "medium" ? 74 : 58;
+
+    return {
+      id: `opp-paid-${alert.id}`,
+      category: "paid_ads",
+      opportunityType:
+        alert.type === "budget_limited" || alert.type === "organic_paid_overlap"
+          ? "paid_ads_opportunity"
+          : "paid_ads_waste",
+      url: campaign?.landingPage ?? "/",
+      score,
+      reason: alert.description,
+      evidence: {
+        alertType: alert.type,
+        channel: campaign?.channel,
+        campaign: campaign?.name,
+        spend: campaign?.spend,
+        cpa: campaign?.costPerConversion,
+        conversions: campaign?.conversions,
+        landingPage: campaign?.landingPage,
+      },
+    } satisfies Opportunity;
+  });
+}
+
 export function runMockAnalysis() {
   const opportunities = [
     ...findLowCtrOpportunities(),
@@ -298,6 +328,7 @@ export function runMockAnalysis() {
     ...findKeywordMonitoringOpportunities(),
     ...findExternalAuthorityOpportunities(),
     ...findWeakDescriptionOpportunities(),
+    ...findPaidAdsOpportunities(),
   ].sort((a, b) => b.score - a.score);
 
   return {

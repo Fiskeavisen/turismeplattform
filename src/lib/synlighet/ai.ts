@@ -67,6 +67,7 @@ function actionText(opportunity: Opportunity) {
     entity_authority: `Legg til trust-signaler og konkret bevis på ${opportunity.url}.`,
     local_visibility: `Gjør lokale signaler tydeligere på ${opportunity.url}.`,
     conversion_opportunity: `Gjør neste steg tydeligere på ${opportunity.url}.`,
+    paid_ads: `Reduser annonsetap og forbedre landingssiden for ${opportunity.url}.`,
     structured_data: `Legg til relevant schema på ${opportunity.url}.`,
     reputation_signal: `Bygg relevante eksterne omtaler og omdømmesignaler for ${opportunity.url}.`,
   };

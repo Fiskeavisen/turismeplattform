@@ -16,6 +16,10 @@ const steps = [
     "Koble Google Analytics 4",
     "Velg riktig GA4-konto, property og web stream. Kontroller sessions, engagement og konverteringer.",
   ],
+  [
+    "Koble Google Ads",
+    "Hvis kunden bruker betalte annonser, velg annonsekonto og hent spend, klikk, konverteringer, CPA og landingssider.",
+  ],
   ["Velg property", "Demo-property er valgt automatisk i mock mode."],
   ["Kjør første datainnhenting", "GSC- og GA4-rader er seedet."],
   ["Crawl toppsider", "Tre viktige URL-er er crawlet i demo."],
@@ -33,8 +37,8 @@ export default function OnboardingPage() {
         <div className="mb-6 rounded-2xl border border-amber-200 bg-amber-50 p-5">
           <h2 className="font-semibold text-amber-950">Viktig før Google kobles til</h2>
           <p className="mt-2 text-sm leading-6 text-amber-900">
-            Search Console og GA4 må ofte ha ulike tilganger. Hvis kunden ikke ser riktig property i oppsettet, må de
-            først få tilgang fra eier/admin i Google.
+            Search Console, GA4 og Google Ads kan ha ulike tilganger. Hvis kunden ikke ser riktig property eller
+            annonsekonto i oppsettet, må de først få tilgang fra eier/admin i Google.
           </p>
         </div>
         <div className="grid gap-4">

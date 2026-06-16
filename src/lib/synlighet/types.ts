@@ -22,6 +22,7 @@ export type ActionCategory =
   | "local_visibility"
   | "structured_data"
   | "conversion_opportunity"
+  | "paid_ads"
   | "ai_visibility_gap"
   | "agent_readiness"
   | "reputation_signal"
@@ -39,6 +40,8 @@ export type OpportunityType =
   | "local_visibility"
   | "schema"
   | "conversion"
+  | "paid_ads_waste"
+  | "paid_ads_opportunity"
   | "content_decay";
 
 export type Difficulty = "low" | "medium" | "high";
@@ -68,6 +71,20 @@ export type KeywordAlertType =
   | "serp_feature_opportunity";
 
 export type KeywordAlertSeverity = "low" | "medium" | "high";
+
+export type PaidAdsChannel = "google_ads" | "meta_ads" | "linkedin_ads" | "microsoft_ads";
+
+export type PaidAdsAlertType =
+  | "spend_spike"
+  | "cpa_increase"
+  | "roas_drop"
+  | "low_quality_score"
+  | "landing_page_mismatch"
+  | "organic_paid_overlap"
+  | "budget_limited"
+  | "conversion_drop";
+
+export type PaidAdsAlertSeverity = "low" | "medium" | "high";
 
 export type SerpFeature =
   | "local_pack"
@@ -266,6 +283,55 @@ export type CompetitorObservation = {
   updatedAt: string;
 };
 
+export type PaidAdsCampaign = {
+  id: string;
+  siteId: string;
+  channel: PaidAdsChannel;
+  name: string;
+  status: "enabled" | "paused" | "limited" | "learning";
+  objective: "leads" | "sales" | "traffic" | "awareness";
+  spend: number;
+  previousSpend: number;
+  impressions: number;
+  clicks: number;
+  ctr: number;
+  cpc: number;
+  conversions: number;
+  conversionRate: number;
+  costPerConversion: number;
+  revenue?: number;
+  roas?: number;
+  landingPage: string;
+  qualityScore?: number;
+  updatedAt: string;
+  nextAction: string;
+};
+
+export type PaidAdsAlert = {
+  id: string;
+  siteId: string;
+  campaignId: string;
+  type: PaidAdsAlertType;
+  severity: PaidAdsAlertSeverity;
+  title: string;
+  description: string;
+  recommendedAction: string;
+  createdAt: string;
+  resolvedAt?: string;
+};
+
+export type PaidLandingPageObservation = {
+  id: string;
+  siteId: string;
+  url: string;
+  paidSpend: number;
+  paidConversions: number;
+  organicClicks: number;
+  pageScore: number;
+  issue: string;
+  recommendedAction: string;
+};
+
 export type AiVisibilityTest = {
   id: string;
   prompt: string;
@@ -316,6 +382,8 @@ export type Integration = {
   type:
     | "google_search_console"
     | "google_analytics"
+    | "google_ads"
+    | "meta_ads"
     | "wordpress"
     | "shopify"
     | "google_business_profile"

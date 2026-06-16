@@ -6,6 +6,9 @@ import {
   keywordAlerts,
   keywordClusters,
   monitoredKeywords,
+  paidAdsAlerts,
+  paidAdsCampaigns,
+  paidLandingPageObservations,
   pageSnapshots,
   queryRows,
   weeklyReport,
@@ -95,6 +98,15 @@ export async function fetchDescriptionAudits() {
   return {
     mode: isMockMode() ? "mock" : "live",
     audits: descriptionAudits,
+  };
+}
+
+export async function fetchPaidAdsMonitoring() {
+  return {
+    mode: isMockMode() ? "mock" : "live",
+    campaigns: paidAdsCampaigns,
+    alerts: paidAdsAlerts,
+    landingPages: paidLandingPageObservations,
   };
 }
 

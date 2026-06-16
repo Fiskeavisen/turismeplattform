@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import {
   BarChart3,
   Bot,
+  CircleDollarSign,
   FileText,
   Gauge,
   Globe2,
@@ -20,6 +21,7 @@ const appNav = [
   { href: "/synlighet/app/actions", label: "Tiltak", icon: Gauge },
   { href: "/synlighet/app/pages", label: "Sider", icon: Globe2 },
   { href: "/synlighet/app/queries", label: "Søkeord", icon: Search },
+  { href: "/synlighet/app/paid-ads", label: "Annonser", icon: CircleDollarSign },
   { href: "/synlighet/app/aeo", label: "AEO / AI-synlighet", icon: Bot },
   { href: "/synlighet/app/local", label: "Lokal synlighet", icon: MapPin },
   { href: "/synlighet/app/reports", label: "Rapporter", icon: FileText },
