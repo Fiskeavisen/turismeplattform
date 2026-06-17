@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { demoCredentials } from "@/lib/auth/demo-auth";
 import { createClient } from "@/lib/supabase/browser";
 
 export function LoginForm() {
@@ -22,6 +23,20 @@ export function LoginForm() {
     setLoading(true);
     setError(null);
 
+    if (email === demoCredentials.email && password === demoCredentials.password) {
+      const response = await fetch("/api/demo-login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password, redirect }),
+      });
+
+      if (response.ok) {
+        router.push(redirect);
+        router.refresh();
+        return;
+      }
+    }
+
     const supabase = createClient();
     const { error: signInError } = await supabase.auth.signInWithPassword({
       email,
@@ -40,6 +55,30 @@ export function LoginForm() {
 
   return (
     <form onSubmit={handleSubmit} className="grid gap-5">
+      <div className="rounded-2xl border border-sky-100 bg-sky-50 p-4 text-sm text-sky-950">
+        <p className="font-semibold">Demo-bruker</p>
+        <dl className="mt-2 grid gap-1 text-sky-900">
+          <div className="flex justify-between gap-3">
+            <dt className="text-sky-700">E-post</dt>
+            <dd className="font-mono font-semibold">{demoCredentials.email}</dd>
+          </div>
+          <div className="flex justify-between gap-3">
+            <dt className="text-sky-700">Passord</dt>
+            <dd className="font-mono font-semibold">{demoCredentials.password}</dd>
+          </div>
+        </dl>
+        <button
+          type="button"
+          onClick={() => {
+            setEmail(demoCredentials.email);
+            setPassword(demoCredentials.password);
+          }}
+          className="mt-3 text-xs font-semibold uppercase tracking-wide text-sky-950 underline underline-offset-4"
+        >
+          Fyll inn demo-bruker
+        </button>
+      </div>
+
       <div>
         <label htmlFor="email" className="text-xs font-semibold uppercase tracking-wide text-slate-600">
           E-post

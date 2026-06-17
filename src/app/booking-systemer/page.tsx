@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { norskeBilder } from "@/lib/images";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { themes } from "@/lib/themes";
 
 export const metadata = buildMetadata({
   title: {
@@ -102,6 +103,12 @@ const steps = [
     text: "Direktesalg aktiveres først. Deretter kobles eksterne kanaler inn der tekniske avtaler og API-tilgang finnes.",
   },
 ];
+
+const demoSlugByTheme = {
+  coastal: "storhavet",
+  fjord: "skogsro",
+  premium: "fyrvokteren",
+} as const;
 
 export default function BookingSystemsPage() {
   return (
@@ -220,6 +227,55 @@ export default function BookingSystemsPage() {
                 Kajakktur, 4 gjester, betalt og klar for leveranse.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="maler" className="scroll-mt-24 border-y border-slate-200 bg-white py-20">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-3xl">
+              <p className="text-xs font-semibold uppercase tracking-[0.35em] text-slate-500">
+                Designmaler
+              </p>
+              <h2
+                className="mt-4 text-4xl font-semibold tracking-[-0.03em] md:text-5xl"
+                style={{ fontFamily: "var(--font-fraunces), Georgia, serif" }}
+              >
+                Tre klikkbare demoer med helt ulike uttrykk.
+              </h2>
+              <p className="mt-5 leading-7 text-slate-600">
+                Åpne hver underside for å se hvordan samme bookingplattform kan
+                tilpasses kyst, fjell, skog eller et mer eksklusivt reiselivsprodukt.
+              </p>
+            </div>
+            <Link
+              href="/login"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-slate-300 px-5 text-sm font-semibold hover:bg-slate-50"
+            >
+              Test admin <ArrowRight size={16} />
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {themes.map((theme) => (
+              <Link
+                key={theme.id}
+                href={`/demo/${demoSlugByTheme[theme.id]}`}
+                className="group rounded-[2rem] border border-slate-200 bg-slate-50 p-6 transition hover:-translate-y-1 hover:bg-white hover:shadow-xl hover:shadow-slate-950/5"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-500">
+                  {theme.name}
+                </p>
+                <h3 className="mt-3 text-2xl font-semibold tracking-[-0.02em]">
+                  {theme.tagline}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600">{theme.description}</p>
+                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-slate-950">
+                  Åpne demo <ArrowUpRight size={16} />
+                </span>
+              </Link>
+            ))}
           </div>
         </div>
       </section>
