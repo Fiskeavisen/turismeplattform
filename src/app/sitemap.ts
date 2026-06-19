@@ -36,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       priority: 0.8,
     })),
-    ...["storhavet", "skogsro", "fyrvokteren", "basecamp"].map((slug) => ({
+    ...["storhavet", "skogsro", "fyrvokteren", "basecamp", "rib-safari"].map((slug) => ({
       url: `${siteUrl}/demo/${slug}`,
       lastModified: now,
       priority: 0.9,

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { BasecampLayout } from "@/components/demo/basecamp-layout";
 import { FyrvokterenLayout } from "@/components/demo/fyrvokteren-layout";
+import { RibSafariLayout } from "@/components/demo/rib-safari-layout";
 import { SkogsroLayout } from "@/components/demo/skogsro-layout";
 import { StorhavetLayout } from "@/components/demo/storhavet-layout";
 import { touristCenter } from "@/lib/demo-data";
@@ -42,6 +43,12 @@ const demoConfigs: DemoConfig[] = [
     themeId: "basecamp",
     ogImage: norskeBilder.skogshytte.hero,
     Layout: BasecampLayout,
+  },
+  {
+    slug: "rib-safari",
+    themeId: "rib",
+    ogImage: norskeBilder.moerkBoelge.hero,
+    Layout: RibSafariLayout,
   },
 ];
 

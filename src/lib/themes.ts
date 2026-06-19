@@ -15,7 +15,7 @@ export type ThemeDefinition = {
   tagline: string;
   description: string;
   idealFor: string[];
-  heroStyle: "image-overlay" | "split-light" | "editorial-dark" | "basecamp-lodge";
+  heroStyle: "image-overlay" | "split-light" | "editorial-dark" | "basecamp-lodge" | "video-rib";
   tokens: {
     background: string;
     surface: string;
@@ -133,6 +133,31 @@ export const themes: ThemeDefinition[] = [
       bodyFontStack: "var(--font-geist-sans), system-ui, sans-serif",
       radiusCard: "1.25rem",
       radiusControl: "0.875rem",
+    },
+  },
+  {
+    id: "rib",
+    name: "Fjordpuls",
+    tagline: "RIB-safari med video, fart og sikker booking i front.",
+    description:
+      "En mørk, filmatisk og høyenergisk mal for RIB-safari, båtturer og actionbaserte opplevelser. Videohero, korte salgspunkter, tydelige turkort og sikkerhetsbevis gjør at gjesten både får lyst og føler trygghet.",
+    idealFor: ["RIB-safari", "Båtturer med skipper", "Actionopplevelser ved fjord og hav"],
+    heroStyle: "video-rib",
+    tokens: {
+      background: "#071018",
+      surface: "#0f1b26",
+      surfaceMuted: "#162736",
+      text: "#f4fbff",
+      mutedText: "#a7bac8",
+      primary: "#ff6b21",
+      primaryForeground: "#120905",
+      accent: "#75d8ff",
+      accentForeground: "#031018",
+      border: "#243746",
+      headingFontStack: "var(--font-geist-sans), system-ui, sans-serif",
+      bodyFontStack: "var(--font-geist-sans), system-ui, sans-serif",
+      radiusCard: "1.125rem",
+      radiusControl: "9999px",
     },
   },
 ];
