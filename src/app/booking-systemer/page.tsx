@@ -108,6 +108,7 @@ const demoSlugByTheme = {
   coastal: "storhavet",
   fjord: "skogsro",
   premium: "fyrvokteren",
+  basecamp: "basecamp",
 } as const;
 
 export default function BookingSystemsPage() {
@@ -242,7 +243,7 @@ export default function BookingSystemsPage() {
                 className="mt-4 text-4xl font-semibold tracking-[-0.03em] md:text-5xl"
                 style={{ fontFamily: "var(--font-fraunces), Georgia, serif" }}
               >
-                Tre klikkbare demoer med helt ulike uttrykk.
+                Fire klikkbare demoer med helt ulike uttrykk.
               </h2>
               <p className="mt-5 leading-7 text-slate-600">
                 Åpne hver underside for å se hvordan samme bookingplattform kan
@@ -257,7 +258,7 @@ export default function BookingSystemsPage() {
             </Link>
           </div>
 
-          <div className="mt-10 grid gap-5 md:grid-cols-3">
+          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {themes.map((theme) => (
               <Link
                 key={theme.id}

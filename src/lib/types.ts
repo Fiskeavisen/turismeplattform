@@ -1,6 +1,6 @@
 export type Locale = "nb" | "en" | "de";
 
-export type SiteTemplate = "coastal" | "fjord" | "premium";
+export type SiteTemplate = "coastal" | "fjord" | "premium" | "basecamp";
 
 export type PaymentProvider = "stripe" | "vipps" | "manual";
 

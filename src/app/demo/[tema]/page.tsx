@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BasecampLayout } from "@/components/demo/basecamp-layout";
 import { FyrvokterenLayout } from "@/components/demo/fyrvokteren-layout";
 import { SkogsroLayout } from "@/components/demo/skogsro-layout";
 import { StorhavetLayout } from "@/components/demo/storhavet-layout";
@@ -35,6 +36,12 @@ const demoConfigs: DemoConfig[] = [
     themeId: "premium",
     ogImage: norskeBilder.moerkBoelge.hero,
     Layout: FyrvokterenLayout,
+  },
+  {
+    slug: "basecamp",
+    themeId: "basecamp",
+    ogImage: norskeBilder.skogshytte.hero,
+    Layout: BasecampLayout,
   },
 ];
 

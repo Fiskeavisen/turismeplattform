@@ -15,7 +15,7 @@ export type ThemeDefinition = {
   tagline: string;
   description: string;
   idealFor: string[];
-  heroStyle: "image-overlay" | "split-light" | "editorial-dark";
+  heroStyle: "image-overlay" | "split-light" | "editorial-dark" | "basecamp-lodge";
   tokens: {
     background: string;
     surface: string;
@@ -108,6 +108,31 @@ export const themes: ThemeDefinition[] = [
       bodyFontStack: "var(--font-geist-sans), system-ui, sans-serif",
       radiusCard: "0.5rem",
       radiusControl: "0.25rem",
+    },
+  },
+  {
+    id: "basecamp",
+    name: "Basecamp",
+    tagline: "Stedet først. Hytter, camping og turforslag samlet rundt booking.",
+    description:
+      "En jordnær og salgsrettet mal for hyttefelt, campingplasser og feriesentre som vil presentere stedet før produktene. Hytter og camping får tydelig booking, egne aktiviteter selges separat, og nærområdet løftes med turforslag uten prispress.",
+    idealFor: ["Campingplasser", "Hyttefelt", "Feriesentre med lokale turforslag"],
+    heroStyle: "basecamp-lodge",
+    tokens: {
+      background: "#f4efe5",
+      surface: "#fffaf1",
+      surfaceMuted: "#e8ddca",
+      text: "#261d14",
+      mutedText: "#6b5a47",
+      primary: "#31523a",
+      primaryForeground: "#fffaf1",
+      accent: "#b86b2d",
+      accentForeground: "#fffaf1",
+      border: "#d6c6ad",
+      headingFontStack: "var(--font-fraunces), Georgia, 'Times New Roman', serif",
+      bodyFontStack: "var(--font-geist-sans), system-ui, sans-serif",
+      radiusCard: "1.25rem",
+      radiusControl: "0.875rem",
     },
   },
 ];
