@@ -65,12 +65,14 @@ export function MarketingSection({
 export function Card({
   children,
   className,
+  id,
 }: {
   children: ReactNode;
   className?: string;
+  id?: string;
 }) {
   return (
-    <section className={cn("rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm", className)}>
+    <section id={id} className={cn("rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm", className)}>
       {children}
     </section>
   );

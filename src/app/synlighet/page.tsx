@@ -52,12 +52,20 @@ export default function SynlighetLandingPage() {
     <SynlighetShell>
       <SynlighetTopNav />
 
-      <section className="overflow-hidden border-b border-slate-200 bg-white">
-        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
+      <section className="relative overflow-hidden border-b border-slate-200 bg-[radial-gradient(circle_at_20%_10%,#e0f2fe_0,#f8fafc_34%,#ffffff_70%)]">
+        <div className="absolute -right-28 top-10 size-72 rounded-full bg-sky-200/40 blur-3xl" />
+        <div className="absolute -left-24 bottom-8 size-64 rounded-full bg-emerald-100/60 blur-3xl" />
+        <div className="relative mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
           <div className="flex flex-col justify-center">
-            <SectionEyebrow>Bli lettere å finne på nett</SectionEyebrow>
+            <div className="inline-flex w-fit items-center gap-2 rounded-full border border-sky-200 bg-white/80 px-3 py-1 text-xs font-semibold text-sky-900 shadow-sm">
+              <Sparkles className="size-3.5" />
+              Første rapport gratis
+            </div>
+            <div className="mt-5">
+              <SectionEyebrow>Bli lettere å finne på nett</SectionEyebrow>
+            </div>
             <h1 className="mt-5 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-7xl">
-              Vi forteller deg hva du bør gjøre for at flere finner bedriften din på nett.
+              Fra Google-tall til konkrete oppgaver du faktisk rekker å gjøre.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
               Du trenger ikke kunne noe om søkemotorer. Vi kobler oss til dine egne
@@ -75,10 +83,30 @@ export default function SynlighetLandingPage() {
                 <CheckItem key={item}>{item}</CheckItem>
               ))}
             </ul>
+            <div className="mt-8 grid max-w-2xl gap-3 sm:grid-cols-3">
+              {[
+                ["3–5", "prioriterte oppgaver"],
+                ["25 min", "typisk første tiltak"],
+                ["7 dager", "til neste måling"],
+              ].map(([value, label]) => (
+                <div key={label} className="rounded-2xl border border-slate-200 bg-white/75 p-4 shadow-sm">
+                  <p className="text-2xl font-semibold tracking-[-0.04em] text-slate-950">{value}</p>
+                  <p className="mt-1 text-xs font-medium text-slate-500">{label}</p>
+                </div>
+              ))}
+            </div>
           </div>
 
-          <Card className="relative overflow-hidden bg-slate-950 p-0 text-white">
-            <div className="absolute right-8 top-8 size-40 rounded-full bg-sky-500/20 blur-3xl" />
+          <Card className="relative overflow-hidden border-slate-900 bg-slate-950 p-0 text-white shadow-2xl shadow-slate-900/20">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(56,189,248,0.25),transparent_34%),radial-gradient(circle_at_10%_90%,rgba(16,185,129,0.16),transparent_34%)]" />
+            <div className="relative border-b border-white/10 px-6 py-4">
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Ukens plan</span>
+                <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-100">
+                  Klar på 4 min
+                </span>
+              </div>
+            </div>
             <div className="relative p-6 md:p-8">
               <div className="flex items-center justify-between gap-4">
                 <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold">
@@ -97,50 +125,72 @@ export default function SynlighetLandingPage() {
                   Tar 25 minutter
                 </span>
               </div>
-              <div className="mt-8 grid gap-5">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Hva vi så</p>
-                  <p className="mt-2 leading-7 text-slate-200">
-                    Mange søker «hva koster regnskapsfører i Oslo» og finner siden din,
-                    men siden svarer ikke tydelig på pris.
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Hva du bør gjøre</p>
-                  <p className="mt-2 leading-7 text-slate-200">
-                    Legg til en kort del med overskriften «Hva koster en regnskapsfører i Oslo?»
-                    og svar enkelt på det.
-                  </p>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Hvorfor det hjelper</p>
-                  <p className="mt-2 leading-7 text-slate-200">
-                    Da svarer siden på det folk faktisk lurer på, og blir lettere å vise
-                    fram både i Google og i AI-svar.
-                  </p>
-                </div>
+              <div className="mt-8 grid gap-3">
+                {[
+                  [
+                    "1",
+                    "Hva vi så",
+                    "Mange søker «hva koster regnskapsfører i Oslo» og finner siden din, men siden svarer ikke tydelig på pris.",
+                  ],
+                  [
+                    "2",
+                    "Hva du bør gjøre",
+                    "Legg til en kort del med overskriften «Hva koster en regnskapsfører i Oslo?» og svar enkelt på det.",
+                  ],
+                  [
+                    "3",
+                    "Hvorfor det hjelper",
+                    "Da svarer siden på det folk faktisk lurer på, og blir lettere å vise fram både i Google og i AI-svar.",
+                  ],
+                ].map(([number, title, text]) => (
+                  <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
+                    <div className="flex gap-3">
+                      <span className="grid size-7 shrink-0 place-items-center rounded-full bg-sky-400/15 text-xs font-bold text-sky-100">
+                        {number}
+                      </span>
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{title}</p>
+                        <p className="mt-2 leading-7 text-slate-200">{text}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <ButtonLink href="/synlighet/app/actions/act-price-section" variant="secondary">
-                Se forslaget
-              </ButtonLink>
+              <div className="mt-6">
+                <ButtonLink href="/synlighet/app/actions/act-price-section" variant="secondary">
+                  Se forslaget
+                </ButtonLink>
+              </div>
             </div>
           </Card>
         </div>
       </section>
 
-      <section id="gratis-rapport" className="border-b border-slate-200 bg-slate-50">
-        <div className="mx-auto max-w-5xl px-5 py-16 lg:py-20">
-          <div className="text-center">
-            <SectionEyebrow>Gratis å prøve</SectionEyebrow>
-            <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] md:text-4xl">
-              Få din første synlighetsrapport gratis
+      <section id="gratis-rapport" className="border-b border-slate-200 bg-slate-950 text-white">
+        <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:py-20">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-sky-300">Gratis å prøve</p>
+            <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] md:text-5xl">
+              Se hva vi ville startet med på din nettside.
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-600">
-              Skriv inn nettadressen din, så skanner vi siden og viser deg hvor du kan bli lettere å finne.
-              Vil du ha hele rapporten? Legg igjen firmanavn, telefon og e-post, så sender vi den til deg.
+            <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">
+              Skriv inn nettadressen din, så skanner vi siden og viser de første mulighetene.
+              Hele rapporten sendes på e-post når du legger igjen firmanavn, telefon og e-post.
             </p>
+            <div className="mt-8 grid gap-3 text-sm text-slate-300">
+              {[
+                "Ingen teknisk oppkobling for første scan",
+                "Brønnøysund-oppslag hjelper oss å velge riktig firma",
+                "Vi forklarer funnene uten fagprat",
+              ].map((item) => (
+                <div key={item} className="flex items-center gap-3">
+                  <span className="grid size-6 place-items-center rounded-full bg-emerald-400/15 text-emerald-200">✓</span>
+                  {item}
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="mt-10">
+          <div>
             <LeadForm />
           </div>
         </div>

@@ -9,6 +9,7 @@ import {
   TextArea,
   TextInput,
 } from "@/components/admin/ui";
+import { ImageUploader } from "@/components/admin/image-uploader";
 import { accommodations, rentalUnits } from "@/lib/demo-data";
 import type { AccommodationType } from "@/lib/types";
 
@@ -57,9 +58,12 @@ export default function AdminAccommodationPage() {
           return (
             <Panel key={accommodation.id}>
               <div className="grid gap-6 xl:grid-cols-[240px_minmax(0,1fr)]">
-                <div
-                  className="h-52 rounded-2xl bg-cover bg-center xl:h-auto xl:min-h-[22rem]"
-                  style={{ backgroundImage: `url('${accommodation.imageUrl}')` }}
+                <ImageUploader
+                  label="Hovedbilde"
+                  currentImageUrl={accommodation.imageUrl}
+                  previewClassName="h-52 xl:h-80"
+                  variant="overlay"
+                  helpText="Last opp eget bilde for boenheten. Dette blir hovedbildet på kort og detaljside."
                 />
 
                 <div className="grid gap-5">

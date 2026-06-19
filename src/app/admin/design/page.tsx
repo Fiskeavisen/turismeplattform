@@ -16,6 +16,7 @@ import {
   TextArea,
   TextInput,
 } from "@/components/admin/ui";
+import { ImageUploader } from "@/components/admin/image-uploader";
 import {
   accommodations,
   activities,
@@ -439,9 +440,16 @@ export default function AdminDesignPage() {
 
           <Panel title="Bildebank">
             <p className="mb-4 text-sm leading-6 text-slate-600">
-              Velg bilder fra en kuratert norsk bildebank. Bruk kystbilder på salgsflater,
-              og mer rolige naturbilder på innholdssider.
+              Last opp egne bilder eller velg fra en kuratert norsk bildebank. Bruk kystbilder
+              på salgsflater, og mer rolige naturbilder på innholdssider.
             </p>
+            <div className="mb-5 rounded-2xl border border-dashed border-slate-300 bg-slate-50 p-4">
+              <ImageUploader
+                label="Last opp nytt bilde"
+                previewClassName="h-40"
+                helpText="Etter opplasting kan bilde-URL-en brukes i hero, seksjoner, artikler og aktivitetskort."
+              />
+            </div>
             <div className="grid gap-3 sm:grid-cols-2">
               {imageOptions.slice(0, 8).map(([key, image]) => (
                 <label

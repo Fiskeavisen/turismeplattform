@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Flame, ListChecks, Wrench, Zap } from "lucide-react";
+import { ArrowRight, Flame, ListChecks, Target, Users, Wrench, Zap } from "lucide-react";
 import { ActionControls } from "@/components/synlighet/action-controls";
 import { VisibilityAppShell } from "@/components/synlighet/app-shell";
 import { DonutScore, TrendChart } from "@/components/synlighet/graphics";
@@ -33,6 +33,63 @@ export default function VisibilityDashboardPage() {
     >
       <div className="grid gap-6">
         <AppNotice />
+
+        <section className="overflow-hidden rounded-[1.75rem] border border-slate-900 bg-slate-950 text-white shadow-sm">
+          <div className="grid gap-6 p-6 md:p-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-sky-100">
+                <Target size={14} />
+                Nytt: bedre råd med målprofil
+              </div>
+              <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-[-0.04em] md:text-4xl">
+                Fortell oss hva som faktisk er viktig, så prioriterer vi smartere.
+              </h2>
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+                Samme datagrunnlag kan gi ulike råd. En nettbutikk vil kanskje løfte høy-margin-produkter,
+                mens en lokal bedrift trenger flere riktige henvendelser. Med noen få svar kan vi vekte
+                tiltak etter mål, kundeverdi og geografisk fokus.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
+                <Link
+                  href="/synlighet/app/settings#malprofil"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-slate-950 hover:bg-slate-100"
+                >
+                  Fyll ut målprofil <ArrowRight size={15} />
+                </Link>
+                <Link
+                  href="/synlighet/app/ordliste"
+                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/20 px-5 text-sm font-semibold text-white hover:bg-white/10"
+                >
+                  Se hvordan score leses
+                </Link>
+              </div>
+            </div>
+
+            <div className="grid gap-3">
+              {[
+                ["Hovedmål", "Flere riktige leads, bookinger eller salg"],
+                ["Viktigst å selge", "Tjenester, produkter eller områder med høy verdi"],
+                ["Målgruppe", "Hvem dere helst vil nå – og hvem dere ikke vil ha mer av"],
+              ].map(([label, text], index) => (
+                <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
+                  <div className="flex items-start gap-3">
+                    <span className="grid size-8 shrink-0 place-items-center rounded-full bg-sky-400/15 text-sm font-bold text-sky-100">
+                      {index + 1}
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-white">{label}</p>
+                      <p className="mt-1 text-sm leading-6 text-slate-300">{text}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+              <div className="flex items-center gap-2 rounded-2xl bg-emerald-400/10 px-4 py-3 text-sm text-emerald-100">
+                <Users size={16} />
+                Vi venter med «snitt blant våre kunder» til vi har nok ekte data.
+              </div>
+            </div>
+          </div>
+        </section>
 
         <div className="grid gap-6 lg:grid-cols-[1fr_1.6fr]">
           <Card className="flex items-center justify-between gap-4">
