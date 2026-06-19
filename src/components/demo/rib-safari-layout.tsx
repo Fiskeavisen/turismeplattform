@@ -22,7 +22,7 @@ const ribTours = [
     kicker: "Signaturtur",
     duration: "2 timer",
     capacity: 12,
-    speed: "50 knop",
+    speed: "90 knop",
     priceFrom: 990,
     imageUrl: norskeBilder.moerkBoelge.url,
     description:
@@ -157,7 +157,7 @@ export function RibSafariLayout() {
               className="mt-6 text-6xl font-black leading-[0.9] tracking-[-0.06em] text-white md:text-8xl lg:text-9xl"
               style={{ fontFamily: tokens.headingFontStack }}
             >
-              Kjenn fjorden i 50 knop.
+              Kjenn fjorden i 90 knop.
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-medium leading-8 text-white/78 md:text-xl">
               RIB-safari med lokalkjent skipper, trygge rammer og rå natur tett
