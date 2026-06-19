@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/synlighet/layout,_N_T_/synlighet/login/layout,_N_T_/synlighet/login/page,_N_T_/synlighet/login"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/synlighet/login/__PAGE__",
+    "/synlighet/login",
+    "/synlighet",
+    "/_index",
+    "/_head"
+  ]
+}

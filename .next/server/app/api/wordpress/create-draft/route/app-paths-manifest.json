@@ -1,0 +1,3 @@
+{
+  "/api/wordpress/create-draft/route": "app/api/wordpress/create-draft/route.js"
+}

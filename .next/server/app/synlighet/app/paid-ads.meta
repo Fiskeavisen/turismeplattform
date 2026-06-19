@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/synlighet/layout,_N_T_/synlighet/app/layout,_N_T_/synlighet/app/paid-ads/layout,_N_T_/synlighet/app/paid-ads/page,_N_T_/synlighet/app/paid-ads"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/synlighet/app/paid-ads/__PAGE__",
+    "/synlighet/app/paid-ads",
+    "/synlighet/app",
+    "/synlighet",
+    "/_index",
+    "/_head"
+  ]
+}

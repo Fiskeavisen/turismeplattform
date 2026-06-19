@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: /admin
+Disallow: /portal
+Disallow: /login
+
+Sitemap: https://frimedia.no/sitemap.xml

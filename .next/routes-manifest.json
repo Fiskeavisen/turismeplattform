@@ -1,0 +1,598 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/api/actions/[id]/status",
+      "regex": "^/api/actions/([^/]+?)/status(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/actions/(?<nxtPid>[^/]+?)/status(?:/)?$"
+    },
+    {
+      "page": "/api/reports/[id]/status",
+      "regex": "^/api/reports/([^/]+?)/status(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/reports/(?<nxtPid>[^/]+?)/status(?:/)?$"
+    },
+    {
+      "page": "/demo/[tema]",
+      "regex": "^/demo/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPtema": "nxtPtema"
+      },
+      "namedRegex": "^/demo/(?<nxtPtema>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/actions/[id]",
+      "regex": "^/synlighet/app/actions/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/synlighet/app/actions/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/pages/[id]",
+      "regex": "^/synlighet/app/pages/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/synlighet/app/pages/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/reports/[id]",
+      "regex": "^/synlighet/app/reports/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/synlighet/app/reports/(?<nxtPid>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/admin",
+      "regex": "^/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin(?:/)?$"
+    },
+    {
+      "page": "/admin/aktiviteter",
+      "regex": "^/admin/aktiviteter(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/aktiviteter(?:/)?$"
+    },
+    {
+      "page": "/admin/bookinger",
+      "regex": "^/admin/bookinger(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/bookinger(?:/)?$"
+    },
+    {
+      "page": "/admin/design",
+      "regex": "^/admin/design(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/design(?:/)?$"
+    },
+    {
+      "page": "/admin/innhold",
+      "regex": "^/admin/innhold(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/innhold(?:/)?$"
+    },
+    {
+      "page": "/admin/innstillinger",
+      "regex": "^/admin/innstillinger(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/innstillinger(?:/)?$"
+    },
+    {
+      "page": "/admin/kalender",
+      "regex": "^/admin/kalender(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/kalender(?:/)?$"
+    },
+    {
+      "page": "/admin/omtaler",
+      "regex": "^/admin/omtaler(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/omtaler(?:/)?$"
+    },
+    {
+      "page": "/admin/overnatting",
+      "regex": "^/admin/overnatting(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/overnatting(?:/)?$"
+    },
+    {
+      "page": "/admin/rapporter",
+      "regex": "^/admin/rapporter(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/rapporter(?:/)?$"
+    },
+    {
+      "page": "/admin/tilvalg",
+      "regex": "^/admin/tilvalg(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/tilvalg(?:/)?$"
+    },
+    {
+      "page": "/annonser",
+      "regex": "^/annonser(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/annonser(?:/)?$"
+    },
+    {
+      "page": "/api/admin/images/upload",
+      "regex": "^/api/admin/images/upload(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/admin/images/upload(?:/)?$"
+    },
+    {
+      "page": "/api/analysis/run",
+      "regex": "^/api/analysis/run(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/analysis/run(?:/)?$"
+    },
+    {
+      "page": "/api/authority/recommendations",
+      "regex": "^/api/authority/recommendations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/authority/recommendations(?:/)?$"
+    },
+    {
+      "page": "/api/availability",
+      "regex": "^/api/availability(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/availability(?:/)?$"
+    },
+    {
+      "page": "/api/bookings",
+      "regex": "^/api/bookings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/bookings(?:/)?$"
+    },
+    {
+      "page": "/api/brreg/lookup",
+      "regex": "^/api/brreg/lookup(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/brreg/lookup(?:/)?$"
+    },
+    {
+      "page": "/api/content/description-audits",
+      "regex": "^/api/content/description\\-audits(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/content/description\\-audits(?:/)?$"
+    },
+    {
+      "page": "/api/crawl/run",
+      "regex": "^/api/crawl/run(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/crawl/run(?:/)?$"
+    },
+    {
+      "page": "/api/demo-login",
+      "regex": "^/api/demo\\-login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/demo\\-login(?:/)?$"
+    },
+    {
+      "page": "/api/google/analytics/sync",
+      "regex": "^/api/google/analytics/sync(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/google/analytics/sync(?:/)?$"
+    },
+    {
+      "page": "/api/google/oauth/callback",
+      "regex": "^/api/google/oauth/callback(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/google/oauth/callback(?:/)?$"
+    },
+    {
+      "page": "/api/google/oauth/start",
+      "regex": "^/api/google/oauth/start(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/google/oauth/start(?:/)?$"
+    },
+    {
+      "page": "/api/google/search-console/sync",
+      "regex": "^/api/google/search\\-console/sync(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/google/search\\-console/sync(?:/)?$"
+    },
+    {
+      "page": "/api/keywords/alerts",
+      "regex": "^/api/keywords/alerts(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/keywords/alerts(?:/)?$"
+    },
+    {
+      "page": "/api/keywords/monitor",
+      "regex": "^/api/keywords/monitor(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/keywords/monitor(?:/)?$"
+    },
+    {
+      "page": "/api/leads",
+      "regex": "^/api/leads(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/leads(?:/)?$"
+    },
+    {
+      "page": "/api/marketplace-search",
+      "regex": "^/api/marketplace\\-search(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/marketplace\\-search(?:/)?$"
+    },
+    {
+      "page": "/api/paid-ads/monitor",
+      "regex": "^/api/paid\\-ads/monitor(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/paid\\-ads/monitor(?:/)?$"
+    },
+    {
+      "page": "/api/reports/generate",
+      "regex": "^/api/reports/generate(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/reports/generate(?:/)?$"
+    },
+    {
+      "page": "/api/reports/send",
+      "regex": "^/api/reports/send(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/reports/send(?:/)?$"
+    },
+    {
+      "page": "/api/scan/preview",
+      "regex": "^/api/scan/preview(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/scan/preview(?:/)?$"
+    },
+    {
+      "page": "/api/shopify/test",
+      "regex": "^/api/shopify/test(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/shopify/test(?:/)?$"
+    },
+    {
+      "page": "/api/webhooks/cron",
+      "regex": "^/api/webhooks/cron(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/webhooks/cron(?:/)?$"
+    },
+    {
+      "page": "/api/wordpress/create-draft",
+      "regex": "^/api/wordpress/create\\-draft(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/wordpress/create\\-draft(?:/)?$"
+    },
+    {
+      "page": "/api/wordpress/test",
+      "regex": "^/api/wordpress/test(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/wordpress/test(?:/)?$"
+    },
+    {
+      "page": "/auth/callback",
+      "regex": "^/auth/callback(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/auth/callback(?:/)?$"
+    },
+    {
+      "page": "/auth/signout",
+      "regex": "^/auth/signout(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/auth/signout(?:/)?$"
+    },
+    {
+      "page": "/booking-systemer",
+      "regex": "^/booking\\-systemer(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/booking\\-systemer(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/ledig-sok",
+      "regex": "^/ledig\\-sok(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/ledig\\-sok(?:/)?$"
+    },
+    {
+      "page": "/login",
+      "regex": "^/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/login(?:/)?$"
+    },
+    {
+      "page": "/maler",
+      "regex": "^/maler(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/maler(?:/)?$"
+    },
+    {
+      "page": "/markedsplass",
+      "regex": "^/markedsplass(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/markedsplass(?:/)?$"
+    },
+    {
+      "page": "/om-oss",
+      "regex": "^/om\\-oss(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/om\\-oss(?:/)?$"
+    },
+    {
+      "page": "/pakker",
+      "regex": "^/pakker(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/pakker(?:/)?$"
+    },
+    {
+      "page": "/portal",
+      "regex": "^/portal(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/portal(?:/)?$"
+    },
+    {
+      "page": "/robots.txt",
+      "regex": "^/robots\\.txt(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/robots\\.txt(?:/)?$"
+    },
+    {
+      "page": "/sitemap.xml",
+      "regex": "^/sitemap\\.xml(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/sitemap\\.xml(?:/)?$"
+    },
+    {
+      "page": "/synlighet",
+      "regex": "^/synlighet(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet(?:/)?$"
+    },
+    {
+      "page": "/synlighet/admin",
+      "regex": "^/synlighet/admin(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/admin(?:/)?$"
+    },
+    {
+      "page": "/synlighet/admin/actions",
+      "regex": "^/synlighet/admin/actions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/admin/actions(?:/)?$"
+    },
+    {
+      "page": "/synlighet/admin/ai-usage",
+      "regex": "^/synlighet/admin/ai\\-usage(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/admin/ai\\-usage(?:/)?$"
+    },
+    {
+      "page": "/synlighet/admin/billing",
+      "regex": "^/synlighet/admin/billing(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/admin/billing(?:/)?$"
+    },
+    {
+      "page": "/synlighet/admin/customers",
+      "regex": "^/synlighet/admin/customers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/admin/customers(?:/)?$"
+    },
+    {
+      "page": "/synlighet/admin/data",
+      "regex": "^/synlighet/admin/data(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/admin/data(?:/)?$"
+    },
+    {
+      "page": "/synlighet/admin/integrations",
+      "regex": "^/synlighet/admin/integrations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/admin/integrations(?:/)?$"
+    },
+    {
+      "page": "/synlighet/admin/leads",
+      "regex": "^/synlighet/admin/leads(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/admin/leads(?:/)?$"
+    },
+    {
+      "page": "/synlighet/admin/logs",
+      "regex": "^/synlighet/admin/logs(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/admin/logs(?:/)?$"
+    },
+    {
+      "page": "/synlighet/admin/reports",
+      "regex": "^/synlighet/admin/reports(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/admin/reports(?:/)?$"
+    },
+    {
+      "page": "/synlighet/admin/sites",
+      "regex": "^/synlighet/admin/sites(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/admin/sites(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app",
+      "regex": "^/synlighet/app(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/actions",
+      "regex": "^/synlighet/app/actions(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/actions(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/aeo",
+      "regex": "^/synlighet/app/aeo(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/aeo(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/dashboard",
+      "regex": "^/synlighet/app/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/dashboard(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/integrations",
+      "regex": "^/synlighet/app/integrations(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/integrations(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/local",
+      "regex": "^/synlighet/app/local(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/local(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/onboarding",
+      "regex": "^/synlighet/app/onboarding(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/onboarding(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/ordliste",
+      "regex": "^/synlighet/app/ordliste(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/ordliste(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/pages",
+      "regex": "^/synlighet/app/pages(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/pages(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/paid-ads",
+      "regex": "^/synlighet/app/paid\\-ads(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/paid\\-ads(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/queries",
+      "regex": "^/synlighet/app/queries(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/queries(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/reports",
+      "regex": "^/synlighet/app/reports(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/reports(?:/)?$"
+    },
+    {
+      "page": "/synlighet/app/settings",
+      "regex": "^/synlighet/app/settings(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/app/settings(?:/)?$"
+    },
+    {
+      "page": "/synlighet/eksempelrapport",
+      "regex": "^/synlighet/eksempelrapport(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/eksempelrapport(?:/)?$"
+    },
+    {
+      "page": "/synlighet/login",
+      "regex": "^/synlighet/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/login(?:/)?$"
+    },
+    {
+      "page": "/synlighet/priser",
+      "regex": "^/synlighet/priser(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/priser(?:/)?$"
+    },
+    {
+      "page": "/synlighet/signup",
+      "regex": "^/synlighet/signup(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/synlighet/signup(?:/)?$"
+    },
+    {
+      "page": "/tester",
+      "regex": "^/tester(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tester(?:/)?$"
+    },
+    {
+      "page": "/tjenester",
+      "regex": "^/tjenester(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/tjenester(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

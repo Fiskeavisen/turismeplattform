@@ -1,0 +1,16 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/synlighet/layout,_N_T_/synlighet/priser/layout,_N_T_/synlighet/priser/page,_N_T_/synlighet/priser"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/synlighet/priser/__PAGE__",
+    "/synlighet/priser",
+    "/synlighet",
+    "/_index",
+    "/_head"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "headers": {
+    "x-nextjs-stale-time": "300",
+    "x-nextjs-prerender": "1",
+    "x-next-cache-tags": "_N_T_/layout,_N_T_/synlighet/layout,_N_T_/synlighet/admin/layout,_N_T_/synlighet/admin/integrations/layout,_N_T_/synlighet/admin/integrations/page,_N_T_/synlighet/admin/integrations"
+  },
+  "segmentPaths": [
+    "/_tree",
+    "/_full",
+    "/synlighet/admin/integrations/__PAGE__",
+    "/synlighet/admin/integrations",
+    "/synlighet/admin",
+    "/synlighet",
+    "/_index",
+    "/_head"
+  ]
+}
