@@ -66,30 +66,32 @@ export default function VisibilityDashboardPage() {
       <div className="grid gap-6">
         <AppNotice />
 
-        <section className="overflow-hidden rounded-[1.75rem] border border-slate-900 bg-slate-950 text-white shadow-sm">
+        <section className="relative overflow-hidden rounded-[2rem] border border-amber-200 bg-[#fff2cf] shadow-sm shadow-amber-900/10">
+          <div className="absolute -right-16 -top-16 size-40 rounded-full bg-[#f6c56b]/40 blur-2xl" />
+          <div className="absolute -bottom-20 left-12 size-44 rounded-full bg-[#8fd3b0]/35 blur-2xl" />
           <div className="grid gap-6 p-6 md:p-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-sky-100">
+              <div className="inline-flex rotate-[-1deg] items-center gap-2 rounded-full bg-[#275444] px-3 py-1 text-xs font-semibold text-amber-50 shadow-sm">
                 <ListChecks size={14} />
                 Operativ arbeidsliste
               </div>
-              <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-[-0.04em] md:text-4xl">
+              <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-[-0.04em] text-stone-950 md:text-4xl">
                 Du har {weeklyActions.length} anbefalte tiltak denne uken.
               </h2>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700 md:text-base">
                 Vi viser ikke alt vi vet. Vi viser det du bør gjøre først, forklart med vanlig språk,
                 estimert tidsbruk og datakilden bak anbefalingen.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
                 <Link
                   href={mainOpportunity ? `/synlighet/app/actions/${mainOpportunity.id}` : "/synlighet/app/actions"}
-                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-white px-5 text-sm font-semibold text-slate-950 hover:bg-slate-100"
+                  className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#275444] px-5 text-sm font-semibold text-amber-50 shadow-sm hover:bg-[#1f4638]"
                 >
                   Start med viktigste tiltak <ArrowRight size={15} />
                 </Link>
                 <Link
                   href="/synlighet/app/results"
-                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/20 px-5 text-sm font-semibold text-white hover:bg-white/10"
+                  className="inline-flex min-h-11 items-center justify-center rounded-full border border-amber-300 bg-[#fffaf2]/70 px-5 text-sm font-semibold text-stone-800 hover:bg-[#fffaf2]"
                 >
                   Se hva som har virket
                 </Link>
@@ -102,12 +104,12 @@ export default function VisibilityDashboardPage() {
                 ["Estimert tidsbruk", `${Math.round(estimatedTime / 60)} timer totalt`],
                 ["Viktigste mulighet", mainOpportunity?.title ?? "Ingen åpne tiltak"],
               ].map(([label, text]) => (
-                <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
-                  <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{label}</p>
-                  <p className="mt-2 text-sm font-semibold leading-6 text-white">{text}</p>
+                <div key={label} className="rounded-2xl border border-amber-200 bg-[#fffaf2]/80 p-4 shadow-sm">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-[#a85f1a]">{label}</p>
+                  <p className="mt-2 text-sm font-semibold leading-6 text-stone-900">{text}</p>
                 </div>
               ))}
-              <div className="flex items-center gap-2 rounded-2xl bg-emerald-400/10 px-4 py-3 text-sm text-emerald-100">
+              <div className="flex items-center gap-2 rounded-2xl bg-[#275444]/10 px-4 py-3 text-sm text-[#275444]">
                 <CheckCircle2 size={16} />
                 Basert på kundens egne Google-data, crawl og prioriteringsregler.
               </div>
@@ -135,7 +137,7 @@ export default function VisibilityDashboardPage() {
             {weeklyActions.map((action, index) => (
               <article key={action.id} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
                 <div className="grid gap-4 lg:grid-cols-[auto_1fr_auto] lg:items-start">
-                  <span className="grid size-9 place-items-center rounded-full bg-slate-950 text-sm font-semibold text-white">
+                  <span className="grid size-9 place-items-center rounded-full bg-[#275444] text-sm font-semibold text-amber-50">
                     {index + 1}
                   </span>
                   <div>
@@ -178,7 +180,7 @@ export default function VisibilityDashboardPage() {
                 <div className="mt-4 flex flex-wrap gap-2">
                   <Link
                     href={`/synlighet/app/actions/${action.id}`}
-                    className="inline-flex min-h-10 items-center justify-center rounded-full bg-slate-950 px-4 text-sm font-semibold text-white hover:bg-slate-800"
+                    className="inline-flex min-h-10 items-center justify-center rounded-full bg-[#275444] px-4 text-sm font-semibold text-amber-50 hover:bg-[#1f4638]"
                   >
                     Se tekstforslag
                   </Link>
@@ -244,7 +246,7 @@ export default function VisibilityDashboardPage() {
             </div>
             <Link
               href="/synlighet/app/settings#malprofil"
-              className="inline-flex min-h-10 items-center gap-2 rounded-full bg-slate-950 px-4 text-sm font-semibold text-white hover:bg-slate-800"
+            className="inline-flex min-h-10 items-center gap-2 rounded-full bg-[#275444] px-4 text-sm font-semibold text-amber-50 hover:bg-[#1f4638]"
             >
               Fyll ut målprofil <ArrowRight size={15} />
             </Link>

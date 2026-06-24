@@ -70,9 +70,9 @@ export default function ExampleReportPage() {
               </Card>
             </div>
 
-            <section className="rounded-2xl bg-slate-950 p-6 text-white">
+            <section className="rounded-2xl border border-amber-200 bg-[#fff2cf] p-6 text-stone-950">
               <h2 className="text-xl font-semibold">Vi måler om det virket</h2>
-              <p className="mt-3 max-w-3xl leading-7 text-slate-300">
+              <p className="mt-3 max-w-3xl leading-7 text-stone-700">
                 Når du har gjort en oppgave, følger vi med en periode etterpå. Så sammenligner vi
                 hvor mange som så og klikket på siden, hvor høyt den lå i søk, og hvor mange som
                 tok kontakt eller kjøpte – før og etter endringen.

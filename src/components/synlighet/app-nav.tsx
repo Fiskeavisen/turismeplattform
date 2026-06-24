@@ -114,7 +114,7 @@ export function SidebarNav({ admin = false }: { admin?: boolean }) {
     <nav className="flex-1 space-y-6 overflow-y-auto px-3 py-4">
       {groups.map((group) => (
         <div key={group.label}>
-          <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+          <p className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-stone-400">
             {group.label}
           </p>
           <div className="space-y-1">
@@ -128,11 +128,11 @@ export function SidebarNav({ admin = false }: { admin?: boolean }) {
                   className={cn(
                     "flex min-h-11 items-center gap-3 rounded-xl px-3.5 text-sm font-medium transition-colors",
                     active
-                      ? "bg-slate-900 text-white"
-                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-950",
+                      ? "bg-[#275444] text-amber-50 shadow-sm"
+                      : "text-stone-600 hover:bg-amber-100/70 hover:text-stone-950",
                   )}
                 >
-                  <item.icon size={17} className={active ? "text-white" : "text-slate-400"} />
+                  <item.icon size={17} className={active ? "text-amber-50" : "text-stone-400"} />
                   {item.label}
                 </Link>
               );
@@ -160,7 +160,7 @@ export function MobileNav({ admin = false }: { admin?: boolean }) {
             aria-current={active ? "page" : undefined}
             className={cn(
               "shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors",
-              active ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700 hover:bg-slate-200",
+              active ? "bg-[#275444] text-amber-50" : "bg-amber-100 text-stone-700 hover:bg-amber-200",
             )}
           >
             {item.label}

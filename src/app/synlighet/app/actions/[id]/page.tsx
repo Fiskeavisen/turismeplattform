@@ -120,7 +120,7 @@ export default async function ActionDetailPage({ params }: { params: Promise<{ i
             <ol className="mt-5 grid gap-3">
               {action.implementationSteps.map((step, index) => (
                 <li key={step} className="flex gap-3 rounded-xl bg-slate-50 p-4">
-                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-slate-950 text-sm font-semibold text-white">
+                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-[#275444] text-sm font-semibold text-amber-50">
                     {index + 1}
                   </span>
                   <span className="leading-7 text-slate-700">{step}</span>

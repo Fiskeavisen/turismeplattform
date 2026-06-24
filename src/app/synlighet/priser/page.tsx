@@ -28,7 +28,7 @@ export default function SynlighetPricingPage() {
               )}
             >
               {plan.highlighted ? (
-                <span className="mb-4 w-fit rounded-full bg-slate-950 px-3 py-1 text-xs font-semibold text-white">
+                <span className="mb-4 w-fit rounded-full bg-[#275444] px-3 py-1 text-xs font-semibold text-amber-50">
                   Anbefalt
                 </span>
               ) : null}

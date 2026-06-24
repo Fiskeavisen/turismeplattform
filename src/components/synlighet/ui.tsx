@@ -6,15 +6,15 @@ import { PublicNavLinks } from "@/components/synlighet/public-nav";
 import type { ActionStatus, Difficulty, IntegrationStatus, QaStatus } from "@/lib/synlighet/types";
 
 export function SynlighetShell({ children }: { children: ReactNode }) {
-  return <main className="min-h-screen bg-[#f6f7fb] text-slate-950">{children}</main>;
+  return <main className="min-h-screen bg-[#fbf4e8] text-stone-950">{children}</main>;
 }
 
 export function SynlighetTopNav() {
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-amber-200/80 bg-[#fff8ed]/90 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-4">
         <Link href="/synlighet" className="flex items-center gap-3 font-semibold">
-          <span className="grid size-9 place-items-center rounded-2xl bg-slate-950 text-sm text-white">
+          <span className="grid size-9 rotate-[-3deg] place-items-center rounded-2xl bg-[#275444] text-sm text-amber-50 shadow-sm">
             S
           </span>
           <span>Synlighetsassistenten</span>
@@ -22,7 +22,7 @@ export function SynlighetTopNav() {
         <PublicNavLinks />
         <Link
           href="/synlighet/app/onboarding"
-          className="inline-flex min-h-11 items-center justify-center rounded-full bg-slate-950 px-5 text-sm font-semibold text-white hover:bg-slate-800"
+          className="inline-flex min-h-11 items-center justify-center rounded-full bg-[#275444] px-5 text-sm font-semibold text-amber-50 shadow-sm hover:bg-[#1f4638]"
         >
           Koble til gratis
         </Link>
@@ -33,7 +33,7 @@ export function SynlighetTopNav() {
 
 export function SectionEyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="text-xs font-bold uppercase tracking-[0.24em] text-sky-800">{children}</p>
+    <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#a85f1a]">{children}</p>
   );
 }
 
@@ -55,7 +55,7 @@ export function MarketingSection({
       <div className="max-w-3xl">
         {eyebrow ? <SectionEyebrow>{eyebrow}</SectionEyebrow> : null}
         <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] md:text-5xl">{title}</h2>
-        {description ? <p className="mt-5 text-lg leading-8 text-slate-600">{description}</p> : null}
+        {description ? <p className="mt-5 text-lg leading-8 text-stone-600">{description}</p> : null}
       </div>
       {children}
     </section>
@@ -72,7 +72,10 @@ export function Card({
   id?: string;
 }) {
   return (
-    <section id={id} className={cn("rounded-[1.5rem] border border-slate-200 bg-white p-6 shadow-sm", className)}>
+    <section
+      id={id}
+      className={cn("rounded-[1.65rem] border border-amber-200/80 bg-[#fffaf2] p-6 shadow-sm shadow-amber-900/5", className)}
+    >
       {children}
     </section>
   );
@@ -93,8 +96,8 @@ export function ButtonLink({
       className={cn(
         "inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold",
         variant === "primary"
-          ? "bg-slate-950 text-white hover:bg-slate-800"
-          : "border border-slate-300 bg-white text-slate-800 hover:bg-slate-50",
+          ? "bg-[#275444] text-amber-50 shadow-sm hover:bg-[#1f4638]"
+          : "border border-amber-300 bg-[#fffaf2] text-stone-800 hover:bg-amber-50",
       )}
     >
       {children}
@@ -105,8 +108,8 @@ export function ButtonLink({
 
 export function CheckItem({ children }: { children: ReactNode }) {
   return (
-    <li className="flex gap-3 text-sm leading-6 text-slate-700">
-      <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-600" />
+    <li className="flex gap-3 text-sm leading-6 text-stone-700">
+      <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-[#2f7a5f]" />
       <span>{children}</span>
     </li>
   );
@@ -132,9 +135,9 @@ export function MetricCard({
   return (
     <Card className="p-5">
       <div className="flex items-center justify-between gap-2">
-        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{label}</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-stone-500">{label}</p>
         {Icon ? (
-          <span className="grid size-8 place-items-center rounded-lg bg-slate-100 text-slate-500">
+          <span className="grid size-8 place-items-center rounded-xl bg-amber-100 text-[#8a4f19]">
             <Icon size={16} />
           </span>
         ) : null}
@@ -142,9 +145,9 @@ export function MetricCard({
       <div className="mt-3 flex items-baseline gap-2">
         <p
           className={cn(
-            "text-3xl font-semibold tracking-[-0.03em] tabular-nums",
-            tone === "positive" && "text-emerald-700",
-            tone === "warning" && "text-amber-700",
+            "text-3xl font-semibold tracking-[-0.03em] tabular-nums text-stone-950",
+            tone === "positive" && "text-[#2f7a5f]",
+            tone === "warning" && "text-[#a85f1a]",
           )}
         >
           {value}
@@ -161,7 +164,7 @@ export function MetricCard({
           </span>
         ) : null}
       </div>
-      {hint ? <p className="mt-1 text-sm text-slate-500">{hint}</p> : null}
+      {hint ? <p className="mt-1 text-sm text-stone-500">{hint}</p> : null}
     </Card>
   );
 }
@@ -169,10 +172,10 @@ export function MetricCard({
 export function PriorityBadge({ score }: { score: number }) {
   const className =
     score >= 85
-      ? "bg-rose-100 text-rose-800"
+      ? "bg-[#fee2b8] text-[#7c3d12]"
       : score >= 70
-        ? "bg-amber-100 text-amber-800"
-        : "bg-slate-100 text-slate-700";
+        ? "bg-[#fdecc8] text-[#8a4f19]"
+        : "bg-stone-100 text-stone-700";
 
   return <span className={cn("rounded-full px-3 py-1 text-xs font-bold", className)}>{score} / 100</span>;
 }
@@ -204,7 +207,7 @@ export function StatusBadge({ status }: { status: ActionStatus | IntegrationStat
         ? "bg-amber-100 text-amber-800"
         : status === "failed" || status === "error" || status === "rejected"
           ? "bg-rose-100 text-rose-800"
-          : "bg-slate-100 text-slate-700";
+          : "bg-stone-100 text-stone-700";
 
   return <span className={cn("rounded-full px-3 py-1 text-xs font-semibold", tone)}>{labels[status]}</span>;
 }
@@ -225,8 +228,8 @@ export function formatPercent(value: number) {
 
 export function AppNotice() {
   return (
-    <div className="rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm leading-6 text-sky-900">
-      Demoen kjører i mock mode. Google, AI, crawler og CMS-integrasjoner har service-lag/stubber og kan kobles til ekte nøkler senere.
+    <div className="rounded-2xl border border-amber-200 bg-[#fff4d8] px-4 py-3 text-sm leading-6 text-stone-800">
+      Demoen bruker eksempeldata. Google, crawler og CMS-integrasjoner har service-lag/stubber og kan kobles til ekte nøkler senere.
     </div>
   );
 }

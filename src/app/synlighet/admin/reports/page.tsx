@@ -15,7 +15,7 @@ export default function AdminReportsPage() {
             <StatusBadge status="needs_review" />
           </div>
           <div className="mt-5 flex flex-wrap gap-2">
-            <button className="min-h-10 rounded-full bg-slate-950 px-4 text-sm font-semibold text-white hover:bg-slate-800">
+            <button className="min-h-10 rounded-full bg-[#275444] px-4 text-sm font-semibold text-amber-50 hover:bg-[#1f4638]">
               Godkjenn
             </button>
             <button className="min-h-10 rounded-full border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-700 hover:bg-slate-50">

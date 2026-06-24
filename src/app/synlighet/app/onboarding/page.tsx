@@ -44,7 +44,7 @@ export default function OnboardingPage() {
         <div className="grid gap-4">
           {steps.map(([title, description], index) => (
             <article key={title} className="flex gap-4 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-              <span className="grid size-9 shrink-0 place-items-center rounded-full bg-slate-950 text-sm font-semibold text-white">
+              <span className="grid size-9 shrink-0 place-items-center rounded-full bg-[#275444] text-sm font-semibold text-amber-50">
                 {index + 1}
               </span>
               <div className="flex-1">

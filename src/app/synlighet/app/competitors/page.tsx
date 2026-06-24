@@ -15,16 +15,18 @@ export default function CompetitorsPage() {
       description="Kort konkurrent- og mulighetsanalyse. Ikke en stor rapport, men konkrete hull kunden kan tette."
     >
       <div className="grid gap-6">
-        <section className="rounded-[1.75rem] border border-slate-900 bg-slate-950 p-6 text-white md:p-8">
+        <section className="relative overflow-hidden rounded-[2rem] border border-amber-200 bg-[#fff2cf] p-6 shadow-sm shadow-amber-900/10 md:p-8">
+          <div className="absolute -right-16 -top-16 size-40 rounded-full bg-[#f6c56b]/40 blur-2xl" />
+          <div className="absolute -bottom-16 left-12 size-40 rounded-full bg-[#8fd3b0]/35 blur-2xl" />
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-sky-100">
+            <div className="inline-flex rotate-[-1deg] items-center gap-2 rounded-full bg-[#275444] px-3 py-1 text-xs font-semibold text-amber-50 shadow-sm">
               <Swords size={14} />
               Hvor ligger mulighetene?
             </div>
-            <h2 className="mt-5 text-3xl font-semibold tracking-[-0.04em] md:text-4xl">
+            <h2 className="mt-5 text-3xl font-semibold tracking-[-0.04em] text-stone-950 md:text-4xl">
               Vi ser etter hull konkurrentene dekker bedre enn deg.
             </h2>
-            <p className="mt-4 leading-7 text-slate-300">
+            <p className="mt-4 leading-7 text-stone-700">
               Målet er ikke å kopiere konkurrenter. Målet er å finne de få temaene, sidene og
               kjøpsspørsmålene som kan gi vekst hvis de prioriteres riktig.
             </p>

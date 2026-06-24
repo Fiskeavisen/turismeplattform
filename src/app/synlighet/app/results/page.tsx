@@ -31,16 +31,17 @@ export default function ResultsPage() {
       description="Før/etter-måling for tiltak som er gjennomført. Målet er å vise fremdrift ærlig, ikke love mer enn dataene viser."
     >
       <div className="grid gap-6">
-        <section className="rounded-[1.75rem] border border-slate-900 bg-slate-950 p-6 text-white md:p-8">
+        <section className="relative overflow-hidden rounded-[2rem] border border-amber-200 bg-[#fff2cf] p-6 shadow-sm shadow-amber-900/10 md:p-8">
+          <div className="absolute -right-16 -top-16 size-40 rounded-full bg-[#f6c56b]/40 blur-2xl" />
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-emerald-100">
+            <div className="inline-flex rotate-[-1deg] items-center gap-2 rounded-full bg-[#275444] px-3 py-1 text-xs font-semibold text-amber-50 shadow-sm">
               <BarChart3 size={14} />
               Hva virket?
             </div>
-            <h2 className="mt-5 text-3xl font-semibold tracking-[-0.04em] md:text-4xl">
+            <h2 className="mt-5 text-3xl font-semibold tracking-[-0.04em] text-stone-950 md:text-4xl">
               Vi måler tiltakene etter at de er utført.
             </h2>
-            <p className="mt-4 leading-7 text-slate-300">
+            <p className="mt-4 leading-7 text-stone-700">
               Når en oppgave er fullført, følger vi klikk, visninger, CTR, posisjon og konverteringer.
               Noen tiltak virker raskt. Andre trenger mer tid. Begge deler skal være synlig.
             </p>
@@ -98,7 +99,7 @@ export default function ResultsPage() {
                     </div>
                     <Link
                       href={`/synlighet/app/actions/${action.id}`}
-                      className="inline-flex min-h-10 items-center gap-2 rounded-full bg-slate-950 px-4 text-sm font-semibold text-white hover:bg-slate-800"
+                      className="inline-flex min-h-10 items-center gap-2 rounded-full bg-[#275444] px-4 text-sm font-semibold text-amber-50 hover:bg-[#1f4638]"
                     >
                       Se tiltak <ArrowRight size={15} />
                     </Link>

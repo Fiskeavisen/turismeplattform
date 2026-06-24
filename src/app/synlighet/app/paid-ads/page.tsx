@@ -38,45 +38,47 @@ export default function PaidAdsPage() {
       description="Overvåk Google Ads, Meta og landingssider med fokus på sløsing, CPA, konverteringer og samspill med organisk synlighet."
     >
       <div className="grid gap-6">
-        <section className="overflow-hidden rounded-[1.75rem] bg-slate-950 text-white shadow-sm">
+        <section className="relative overflow-hidden rounded-[2rem] border border-amber-200 bg-[#fff2cf] shadow-sm shadow-amber-900/10">
+          <div className="absolute -right-16 -top-16 size-40 rounded-full bg-[#f6c56b]/40 blur-2xl" />
+          <div className="absolute -bottom-16 left-12 size-40 rounded-full bg-[#8fd3b0]/35 blur-2xl" />
           <div className="grid gap-6 p-6 md:p-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-amber-400/15 px-3 py-1 text-xs font-semibold text-amber-100">
+              <div className="inline-flex rotate-[-1deg] items-center gap-2 rounded-full bg-[#275444] px-3 py-1 text-xs font-semibold text-amber-50 shadow-sm">
                 <ShieldAlert size={14} />
                 Annonseovervåkning
               </div>
-              <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-[-0.04em] md:text-4xl">
+              <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-[-0.04em] text-stone-950 md:text-4xl">
                 Vi finner hvor annonsekronene lekker, og hva som bør fikses først.
               </h2>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700 md:text-base">
                 Betalte annonser bør ikke vurderes isolert. Vi kobler Google Ads, Meta, landingssider og
                 organisk synlighet, slik at rådene handler om faktisk lønnsomhet, ikke bare klikk.
               </p>
             </div>
             <div className="grid gap-3">
-              <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
-                <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Viktigste tips nå</p>
+              <div className="rounded-2xl border border-amber-200 bg-[#fffaf2]/80 p-5 shadow-sm">
+                <p className="text-xs font-semibold uppercase tracking-wide text-[#a85f1a]">Viktigste tips nå</p>
                 <h3 className="mt-2 text-xl font-semibold">{topRecommendation.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-300">{topRecommendation.recommendation}</p>
+                <p className="mt-3 text-sm leading-6 text-stone-700">{topRecommendation.recommendation}</p>
                 <div className="mt-4 flex flex-wrap gap-2 text-xs font-semibold">
-                  <span className="rounded-full bg-rose-400/15 px-3 py-1 text-rose-100">
+                  <span className="rounded-full bg-[#fee2b8] px-3 py-1 text-[#7c3d12]">
                     Prioritet {topRecommendation.priority}/100
                   </span>
-                  <span className="rounded-full bg-white/10 px-3 py-1 text-slate-200">
+                  <span className="rounded-full bg-amber-100 px-3 py-1 text-stone-700">
                     {topRecommendation.estimatedTimeMinutes} min å starte
                   </span>
                 </div>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
-                <div className="rounded-2xl bg-emerald-400/10 p-4">
-                  <WalletCards className="size-5 text-emerald-200" />
+                <div className="rounded-2xl bg-[#275444]/10 p-4">
+                  <WalletCards className="size-5 text-[#275444]" />
                   <p className="mt-3 text-2xl font-semibold">{currency.format(estimatedSavings)}</p>
-                  <p className="mt-1 text-xs leading-5 text-emerald-100">mulig månedlig budsjettforbedring</p>
+                  <p className="mt-1 text-xs leading-5 text-stone-700">mulig månedlig budsjettforbedring</p>
                 </div>
-                <div className="rounded-2xl bg-white/[0.06] p-4">
-                  <Lightbulb className="size-5 text-sky-200" />
+                <div className="rounded-2xl bg-[#fffaf2]/80 p-4">
+                  <Lightbulb className="size-5 text-[#a85f1a]" />
                   <p className="mt-3 text-2xl font-semibold">{paidAdsRecommendations.length}</p>
-                  <p className="mt-1 text-xs leading-5 text-slate-300">konkrete annonsetips</p>
+                  <p className="mt-1 text-xs leading-5 text-stone-700">konkrete annonsetips</p>
                 </div>
               </div>
             </div>
@@ -148,7 +150,7 @@ export default function PaidAdsPage() {
                   <ol className="mt-4 grid gap-2 text-sm leading-6 text-slate-600">
                     {recommendation.steps.map((step, index) => (
                       <li key={step} className="flex gap-2">
-                        <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-slate-900 text-[11px] font-bold text-white">
+                        <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-[#275444] text-[11px] font-bold text-amber-50">
                           {index + 1}
                         </span>
                         <span>{step}</span>

@@ -97,19 +97,20 @@ export default function SynlighetLandingPage() {
             </div>
           </div>
 
-          <Card className="relative overflow-hidden border-slate-900 bg-slate-950 p-0 text-white shadow-2xl shadow-slate-900/20">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(56,189,248,0.25),transparent_34%),radial-gradient(circle_at_10%_90%,rgba(16,185,129,0.16),transparent_34%)]" />
-            <div className="relative border-b border-white/10 px-6 py-4">
+          <Card className="relative rotate-[0.35deg] overflow-hidden border-amber-200 bg-[#fff2cf] p-0 shadow-2xl shadow-amber-900/10">
+            <div className="absolute -right-12 -top-12 size-36 rounded-full bg-[#f6c56b]/45 blur-2xl" />
+            <div className="absolute -bottom-16 left-8 size-40 rounded-full bg-[#8fd3b0]/35 blur-2xl" />
+            <div className="relative border-b border-amber-200 px-6 py-4">
               <div className="flex items-center justify-between gap-4">
-                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Ukens plan</span>
-                <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-100">
+                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#a85f1a]">Ukens plan</span>
+                <span className="rounded-full bg-[#275444]/10 px-3 py-1 text-xs font-semibold text-[#275444]">
                   Klar på 4 min
                 </span>
               </div>
             </div>
             <div className="relative p-6 md:p-8">
               <div className="flex items-center justify-between gap-4">
-                <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold">
+                <span className="rounded-full bg-[#fffaf2] px-3 py-1 text-xs font-semibold text-stone-700">
                   Eksempel på en oppgave
                 </span>
                 <PriorityBadge score={91} />
@@ -117,11 +118,11 @@ export default function SynlighetLandingPage() {
               <h2 className="mt-8 text-3xl font-semibold tracking-[-0.04em]">
                 Skriv hva det koster på prissiden din
               </h2>
-              <div className="mt-5 flex flex-wrap gap-2">
-                <span className="rounded-full bg-sky-400/15 px-3 py-1 text-xs font-semibold text-sky-100">
+              <div className="mt-5 flex flex-wrap gap-2 text-stone-700">
+                <span className="rounded-full bg-[#fffaf2] px-3 py-1 text-xs font-semibold">
                   Innhold
                 </span>
-                <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-100">
+                <span className="rounded-full bg-[#275444]/10 px-3 py-1 text-xs font-semibold text-[#275444]">
                   Tar 25 minutter
                 </span>
               </div>
@@ -143,14 +144,14 @@ export default function SynlighetLandingPage() {
                     "Da svarer siden på det folk faktisk lurer på, og blir lettere å vise fram både i Google og i AI-svar.",
                   ],
                 ].map(([number, title, text]) => (
-                  <div key={title} className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
+                  <div key={title} className="rounded-2xl border border-amber-200 bg-[#fffaf2]/80 p-4 shadow-sm">
                     <div className="flex gap-3">
-                      <span className="grid size-7 shrink-0 place-items-center rounded-full bg-sky-400/15 text-xs font-bold text-sky-100">
+                      <span className="grid size-7 shrink-0 place-items-center rounded-full bg-[#275444] text-xs font-bold text-amber-50">
                         {number}
                       </span>
                       <div>
-                        <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{title}</p>
-                        <p className="mt-2 leading-7 text-slate-200">{text}</p>
+                        <p className="text-xs font-semibold uppercase tracking-wide text-[#a85f1a]">{title}</p>
+                        <p className="mt-2 leading-7 text-stone-700">{text}</p>
                       </div>
                     </div>
                   </div>
@@ -166,25 +167,25 @@ export default function SynlighetLandingPage() {
         </div>
       </section>
 
-      <section id="gratis-rapport" className="border-b border-slate-200 bg-slate-950 text-white">
+      <section id="gratis-rapport" className="border-y border-amber-200 bg-[#275444] text-amber-50">
         <div className="mx-auto grid max-w-7xl gap-10 px-5 py-16 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:py-20">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-sky-300">Gratis å prøve</p>
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-amber-200">Gratis å prøve</p>
             <h2 className="mt-4 text-4xl font-semibold tracking-[-0.04em] md:text-5xl">
               Se hva vi ville startet med på din nettside.
             </h2>
-            <p className="mt-5 max-w-xl text-lg leading-8 text-slate-300">
+            <p className="mt-5 max-w-xl text-lg leading-8 text-amber-50/80">
               Skriv inn nettadressen din, så skanner vi siden og viser de første mulighetene.
               Hele rapporten sendes på e-post når du legger igjen firmanavn, telefon og e-post.
             </p>
-            <div className="mt-8 grid gap-3 text-sm text-slate-300">
+            <div className="mt-8 grid gap-3 text-sm text-amber-50/80">
               {[
                 "Ingen teknisk oppkobling for første scan",
                 "Brønnøysund-oppslag hjelper oss å velge riktig firma",
                 "Vi forklarer funnene uten fagprat",
               ].map((item) => (
                 <div key={item} className="flex items-center gap-3">
-                  <span className="grid size-6 place-items-center rounded-full bg-emerald-400/15 text-emerald-200">✓</span>
+                  <span className="grid size-6 place-items-center rounded-full bg-amber-200/15 text-amber-100">✓</span>
                   {item}
                 </div>
               ))}
@@ -205,7 +206,7 @@ export default function SynlighetLandingPage() {
         >
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {glossary.map(([title, text]) => (
-              <Card key={title} className="bg-slate-50">
+              <Card key={title} className="bg-[#fffaf2]">
                 <h3 className="text-lg font-semibold">{title}</h3>
                 <p className="mt-3 leading-7 text-slate-600">{text}</p>
               </Card>
@@ -308,17 +309,17 @@ export default function SynlighetLandingPage() {
         </div>
       </MarketingSection>
 
-      <section className="bg-slate-950 text-white">
+      <section className="bg-[#275444] text-amber-50">
         <div className="mx-auto grid max-w-7xl gap-8 px-5 py-16 md:grid-cols-3">
           {[
             [Gauge, "Få, ikke mange", "Du får 3-5 viktige oppgaver, ikke en liste med 100 problemer."],
-            [Sparkles, "AI som hjelper", "AI forklarer og foreslår, men finner aldri på tall."],
+            [Sparkles, "Forslag, ikke trylling", "Vi forklarer hva som bør gjøres og viser hvilke tall rådet bygger på."],
             [ShieldCheck, "Ærlig om resultater", "Vi lover ikke førsteplass. Vi viser hva som skjedde før og etter."],
           ].map(([Icon, title, text]) => (
-            <div key={String(title)} className="border-t border-white/15 pt-6">
-              {typeof Icon !== "string" ? <Icon className="size-6 text-sky-300" /> : null}
+            <div key={String(title)} className="border-t border-amber-100/20 pt-6">
+              {typeof Icon !== "string" ? <Icon className="size-6 text-amber-200" /> : null}
               <h3 className="mt-5 text-xl font-semibold">{title as string}</h3>
-              <p className="mt-3 leading-7 text-slate-300">{text as string}</p>
+              <p className="mt-3 leading-7 text-amber-50/80">{text as string}</p>
             </div>
           ))}
         </div>

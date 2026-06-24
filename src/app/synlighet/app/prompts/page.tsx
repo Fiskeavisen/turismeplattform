@@ -17,31 +17,33 @@ export default function PromptWorkshopPage() {
       description="Ferdige prompts kundene kan bruke i sin egen LLM, for artikler, landingssider, GEO og annonser."
     >
       <div className="grid gap-6">
-        <section className="overflow-hidden rounded-[1.75rem] border border-slate-900 bg-slate-950 text-white shadow-sm">
+        <section className="relative overflow-hidden rounded-[2rem] border border-amber-200 bg-[#fff2cf] shadow-sm shadow-amber-900/10">
+          <div className="absolute -right-16 -top-16 size-40 rounded-full bg-[#f6c56b]/40 blur-2xl" />
+          <div className="absolute -bottom-16 left-12 size-40 rounded-full bg-[#8fd3b0]/35 blur-2xl" />
           <div className="grid gap-6 p-6 md:p-8 lg:grid-cols-[1fr_0.9fr] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-sky-100">
+              <div className="inline-flex rotate-[-1deg] items-center gap-2 rounded-full bg-[#275444] px-3 py-1 text-xs font-semibold text-amber-50 shadow-sm">
                 <FilePenLine size={14} />
                 For kunder som allerede bruker egne modeller
               </div>
-              <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-[-0.04em] md:text-4xl">
+              <h2 className="mt-5 max-w-3xl text-3xl font-semibold tracking-[-0.04em] text-stone-950 md:text-4xl">
                 Gi kunden en god prompt, ikke bare et råd.
               </h2>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-300 md:text-base">
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-stone-700 md:text-base">
                 Mange bruker allerede ChatGPT, Claude eller Gemini. Da bør vi hjelpe dem med
                 tydelige arbeidsoppgaver de kan ta med seg: artikkelutkast, metatekster,
                 landingssider, FAQ og GEO-forbedringer.
               </p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-5">
-              <div className="flex items-center gap-2 text-sm font-semibold text-white">
+            <div className="rounded-2xl border border-amber-200 bg-[#fffaf2]/80 p-5 shadow-sm">
+              <div className="flex items-center gap-2 text-sm font-semibold text-stone-950">
                 <ClipboardCheck size={16} />
                 Bruk slik
               </div>
-              <ul className="mt-4 grid gap-3 text-sm leading-6 text-slate-300">
+              <ul className="mt-4 grid gap-3 text-sm leading-6 text-stone-700">
                 {starterChecklist.map((item) => (
                   <li key={item} className="flex gap-2">
-                    <span className="mt-1 text-emerald-300">•</span>
+                    <span className="mt-1 text-[#275444]">•</span>
                     <span>{item}</span>
                   </li>
                 ))}

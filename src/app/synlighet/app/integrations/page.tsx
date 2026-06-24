@@ -69,7 +69,7 @@ export default function IntegrationsPage() {
                 <p className="mt-3 leading-7 text-slate-600">{integration.description}</p>
                 <p className="mt-4 text-sm font-medium text-slate-800">Neste steg: {integration.nextStep}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
-                  <button className="min-h-10 rounded-full bg-slate-950 px-4 text-sm font-semibold text-white hover:bg-slate-800">
+                  <button className="min-h-10 rounded-full bg-[#275444] px-4 text-sm font-semibold text-amber-50 hover:bg-[#1f4638]">
                     Koble til / test
                   </button>
                   <button className="min-h-10 rounded-full border border-slate-300 bg-white px-4 text-sm font-semibold text-slate-700 hover:bg-slate-50">

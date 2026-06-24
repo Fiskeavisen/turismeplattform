@@ -24,7 +24,7 @@ export function CopyPromptButton({
     <button
       type="button"
       onClick={copyPrompt}
-      className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-slate-950 px-4 text-sm font-semibold text-white hover:bg-slate-800"
+      className="inline-flex min-h-10 items-center justify-center gap-2 rounded-full bg-[#275444] px-4 text-sm font-semibold text-amber-50 shadow-sm hover:bg-[#1f4638]"
     >
       {copied ? <Check size={15} /> : <Copy size={15} />}
       {copied ? copiedLabel : label}
