@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BarChart3, CheckCircle2, Clock3, Flame, ListChecks, Target, Zap } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock3, Flame, ListChecks, Target, Wrench, Zap } from "lucide-react";
 import { ActionControls } from "@/components/synlighet/action-controls";
 import { VisibilityAppShell } from "@/components/synlighet/app-shell";
 import { DonutScore, TrendChart } from "@/components/synlighet/graphics";
@@ -13,7 +13,7 @@ import {
   StatusBadge,
   formatPercent,
 } from "@/components/synlighet/ui";
-import { dashboardMetrics, visibilityTrend } from "@/lib/synlighet/demo-data";
+import { dashboardMetrics, technicalAuditItems, visibilityTrend } from "@/lib/synlighet/demo-data";
 import { getVisibilityDemoState } from "@/lib/synlighet/store";
 import type { ActionImpactArea, ActionSource, VisibilityAction } from "@/lib/synlighet/types";
 
@@ -50,13 +50,12 @@ export default function VisibilityDashboardPage() {
     .filter((action) => action.status !== "completed" && action.status !== "ignored")
     .sort((a, b) => b.priorityScore - a.priorityScore)
     .slice(0, 5);
-  const measuredActions = actions.filter((action) => action.measurement);
-
   const newActions = actions.filter((action) => action.status === "new").length;
   const highPriority = actions.filter((action) => action.priorityScore >= 85).length;
   const quickWins = actions.filter((action) => action.estimatedTimeMinutes <= 20).length;
   const estimatedTime = weeklyActions.reduce((sum, action) => sum + action.estimatedTimeMinutes, 0);
   const mainOpportunity = weeklyActions[0];
+  const technicalIssues = technicalAuditItems.filter((item) => item.status === "open").length;
 
   return (
     <VisibilityAppShell
@@ -196,11 +195,11 @@ export default function VisibilityDashboardPage() {
           <MetricCard label="Høy prioritet" value={String(highPriority)} tone="warning" icon={Flame} />
           <MetricCard label="Raske gevinster" value={String(quickWins)} tone="positive" icon={Zap} />
           <MetricCard
-            label="Målt effekt"
-            value={String(measuredActions.length)}
-            hint="Tiltak med før/etter-data"
-            tone="positive"
-            icon={BarChart3}
+            label="Teknisk helse"
+            value={String(technicalIssues)}
+            hint="Åpne tekniske oppgaver"
+            tone={technicalIssues > 0 ? "warning" : "positive"}
+            icon={Wrench}
           />
         </div>
 
@@ -249,6 +248,28 @@ export default function VisibilityDashboardPage() {
             className="inline-flex min-h-10 items-center gap-2 rounded-full bg-[#275444] px-4 text-sm font-semibold text-amber-50 hover:bg-[#1f4638]"
             >
               Fyll ut målprofil <ArrowRight size={15} />
+            </Link>
+          </div>
+        </Card>
+
+        <Card className="border-amber-200 bg-[#fff4d8]">
+          <div className="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#8a4f19]">
+                <Wrench size={14} />
+                Teknisk SEO uten sjargong
+              </div>
+              <h2 className="mt-4 text-xl font-semibold">Sjekk om teknikken tapper verdi</h2>
+              <p className="mt-2 max-w-3xl leading-7 text-stone-700">
+                Vi forklarer sitemap, canonical, brutte lenker og schema som konkrete oppgaver,
+                og viser hva kunden kan fikse selv og hva som bør sendes til utvikler.
+              </p>
+            </div>
+            <Link
+              href="/synlighet/app/technical"
+              className="inline-flex min-h-10 items-center gap-2 rounded-full bg-[#275444] px-4 text-sm font-semibold text-amber-50 hover:bg-[#1f4638]"
+            >
+              Se teknisk helse <ArrowRight size={15} />
             </Link>
           </div>
         </Card>

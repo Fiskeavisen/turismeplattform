@@ -14,6 +14,7 @@ import type {
   PaidAdsRecommendation,
   PaidLandingPageObservation,
   QueryRow,
+  TechnicalAuditItem,
   VisibilityAction,
   VisibilityOrganization,
   VisibilitySite,
@@ -1437,6 +1438,100 @@ export const visibilityTrend = [
   { week: "U23", score: 66 },
   { week: "U24", score: 66 },
   { week: "U25", score: 74 },
+];
+
+export const technicalAuditItems: TechnicalAuditItem[] = [
+  {
+    id: "tech-sitemap-old-pages",
+    siteId: visibilitySite.id,
+    category: "sitemap",
+    severity: "medium",
+    title: "Sitemap inneholder gamle sider som ikke bør prioriteres",
+    plainLanguageIssue:
+      "Google får fortsatt beskjed om å sjekke sider som ikke lenger er viktige. Det kan gjøre det vanskeligere å forstå hvilke sider som faktisk skal prioriteres.",
+    affectedPages: 7,
+    exampleUrl: "/kampanje/regnskap-2023",
+    whyItMatters:
+      "En ryddig sitemap hjelper Google å finne de riktige sidene raskere, særlig når nettstedet har mange gamle kampanje- eller produktsider.",
+    recommendedFix: "Fjern gamle kampanjesider fra sitemap og pek brukere videre til relevante aktive sider.",
+    steps: [
+      "Sjekk hvilke URL-er i sitemap som gir lite verdi eller peker til gamle kampanjer.",
+      "Fjern sidene fra sitemap i CMS eller sitemap-plugin.",
+      "Legg 301-redirect til nærmeste relevante side hvis siden ikke skal brukes mer.",
+      "Send sitemap på nytt i Google Search Console.",
+    ],
+    estimatedTimeMinutes: 35,
+    needsDeveloper: false,
+    status: "open",
+  },
+  {
+    id: "tech-canonical-service",
+    siteId: visibilitySite.id,
+    category: "canonical",
+    severity: "high",
+    title: "To tjenestesider konkurrerer med hverandre",
+    plainLanguageIssue:
+      "To sider forteller Google at de handler om nesten det samme. Da kan Google bli usikker på hvilken side som skal vises.",
+    affectedPages: 2,
+    exampleUrl: "/regnskapsforer-oslo",
+    whyItMatters:
+      "Når to sider konkurrerer internt, kan begge prestere svakere. Én tydelig hovedside er ofte bedre enn to nesten like sider.",
+    recommendedFix: "Velg hovedside og bruk canonical eller sammenslå innholdet der det gir mest mening.",
+    steps: [
+      "Sammenlign sidene /regnskapsforer-oslo og /regnskap-oslo.",
+      "Velg hvilken URL som skal være hovedsiden.",
+      "Flytt viktig innhold til hovedsiden.",
+      "Sett canonical fra sekundærsiden til hovedsiden, eller redirect hvis sekundærsiden ikke trengs.",
+    ],
+    estimatedTimeMinutes: 50,
+    needsDeveloper: true,
+    status: "open",
+  },
+  {
+    id: "tech-broken-internal-links",
+    siteId: visibilitySite.id,
+    category: "broken_links",
+    severity: "medium",
+    title: "Interne lenker peker til sider som ikke finnes",
+    plainLanguageIssue:
+      "Noen lenker på nettstedet sender brukeren til en feilside. Det skaper friksjon og kan svekke hvordan Google leser strukturen.",
+    affectedPages: 4,
+    exampleUrl: "/blogg/starte-as",
+    whyItMatters:
+      "Brutte interne lenker tapper verdi fra sider som ellers kunne sendt brukeren videre til tjenestesider eller kontakt.",
+    recommendedFix: "Oppdater brutte lenker til nærmeste relevante aktive side.",
+    steps: [
+      "Åpne listen med brutte lenker fra crawl.",
+      "Finn nærmeste relevante aktiv side for hver gammel URL.",
+      "Oppdater lenkene i CMS.",
+      "Kjør ny crawl og sjekk at feilene er borte.",
+    ],
+    estimatedTimeMinutes: 25,
+    needsDeveloper: false,
+    status: "open",
+  },
+  {
+    id: "tech-structured-data",
+    siteId: visibilitySite.id,
+    category: "structured_data",
+    severity: "low",
+    title: "FAQ kan merkes tydeligere for søk",
+    plainLanguageIssue:
+      "FAQ-innholdet er synlig for brukere, men ikke merket opp på en måte som gjør det ekstra lett for søkemotorer å forstå.",
+    affectedPages: 3,
+    exampleUrl: "/regnskapsforer-oslo",
+    whyItMatters:
+      "Strukturert data er ikke magi, men det gjør innholdet mer maskinlesbart og kan støtte tydeligere forståelse av spørsmål og svar.",
+    recommendedFix: "Legg til FAQPage-schema på sider der FAQ faktisk vises på siden.",
+    steps: [
+      "Sjekk at spørsmål og svar er synlige for brukeren.",
+      "Legg inn FAQPage-schema via CMS, plugin eller kode.",
+      "Test siden med Googles Rich Results Test.",
+    ],
+    estimatedTimeMinutes: 45,
+    needsDeveloper: true,
+    status: "open",
+  },
 ];
 
 export const pricingPlans = [

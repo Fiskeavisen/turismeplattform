@@ -150,6 +150,36 @@ export type ActionImpactArea = "trafikk" | "leads" | "synlighet" | "teknisk" | "
 
 export type ActionSource = "search_console" | "ga4" | "crawl" | "competitor" | "ads" | "manual";
 
+export type TechnicalAuditCategory =
+  | "indexing"
+  | "crawlability"
+  | "sitemap"
+  | "canonical"
+  | "page_speed"
+  | "broken_links"
+  | "structured_data"
+  | "hreflang"
+  | "redirects";
+
+export type TechnicalAuditSeverity = "low" | "medium" | "high";
+
+export type TechnicalAuditItem = {
+  id: string;
+  siteId: string;
+  category: TechnicalAuditCategory;
+  severity: TechnicalAuditSeverity;
+  title: string;
+  plainLanguageIssue: string;
+  affectedPages: number;
+  exampleUrl: string;
+  whyItMatters: string;
+  recommendedFix: string;
+  steps: string[];
+  estimatedTimeMinutes: number;
+  needsDeveloper: boolean;
+  status: "open" | "in_progress" | "fixed" | "ignored";
+};
+
 export type ContentSuggestion = {
   label: string;
   context: string;

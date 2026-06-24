@@ -25,6 +25,7 @@ import {
   TrendingUp,
   UserPlus,
   Users,
+  Wrench,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -46,6 +47,7 @@ const appGroups: NavGroup[] = [
     label: "Verktøy",
     items: [
       { href: "/synlighet/app/actions", label: "Alle tiltak", icon: Gauge },
+      { href: "/synlighet/app/technical", label: "Teknisk helse", icon: Wrench },
       { href: "/synlighet/app/paid-ads", label: "Annonser", icon: CircleDollarSign },
       { href: "/synlighet/app/aeo", label: "Svarmotorer", icon: Bot },
       { href: "/synlighet/app/local", label: "Lokal synlighet", icon: MapPin },

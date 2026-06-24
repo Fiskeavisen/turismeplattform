@@ -16,6 +16,7 @@ const trustBullets = [
   "Du trenger ingen teknisk kunnskap",
   "Få noen få, tydelige oppgaver hver uke",
   "Bygger på dine egne tall fra Google",
+  "Tekniske feil forklart på vanlig norsk",
   "Virker med WordPress og Shopify",
   "Vi måler om endringene faktisk hjalp",
 ];
@@ -65,12 +66,12 @@ export default function SynlighetLandingPage() {
               <SectionEyebrow>Bli lettere å finne på nett</SectionEyebrow>
             </div>
             <h1 className="mt-5 max-w-4xl text-5xl font-semibold leading-[0.98] tracking-[-0.055em] md:text-7xl">
-              Fra Google-tall til konkrete oppgaver du faktisk rekker å gjøre.
+              Fra SEO-kaos til konkrete oppgaver du faktisk rekker å gjøre.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-600">
-              Du trenger ikke kunne noe om søkemotorer. Vi kobler oss til dine egne
-              tall fra Google, finner ut hva som er verdt å fikse, og gir deg en kort
-              liste med konkrete oppgaver hver uke. Etterpå måler vi om det virket.
+              Du trenger ikke kunne noe om søkemotorer. Vi kobler sammen egne Google-tall,
+              sidene på nettstedet og en teknisk helsesjekk. Så får du en kort oppgaveliste
+              som sier hva som bør fikses først, hvorfor det betyr noe og om det virket.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <ButtonLink href="#gratis-rapport">Få gratis rapport</ButtonLink>
@@ -218,12 +219,13 @@ export default function SynlighetLandingPage() {
       <MarketingSection
         eyebrow="Problemet"
         title="De fleste bedrifter har tallene. De vet bare ikke hva de skal gjøre med dem."
-        description="Google viser hva folk søker på og hvordan de bruker nettsiden din. Likevel er det vanskelig å vite hvilke sider som bør forbedres, hvilke søk du nesten vinner på, og hva du bør endre først. Det er denne oversettingen vi gjør for deg."
+        description="Google viser hva folk søker på, crawleren finner tekniske feil, og nettsiden har innhold som kan forbedres. Problemet er ikke mangel på data, men at alt blir for mye. Vi gjør det om til en kort og forståelig arbeidsliste."
       >
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {[
             ["Hva haster?", "Vi peker på sidene som er verdt å starte med, ikke alt på én gang."],
             ["Hva skal jeg endre?", "Du får et konkret forslag, ikke et vagt «lag bedre innhold»."],
+            ["Hva er teknisk?", "Vi forklarer sitemap, brutte lenker og schema uten at du må være utvikler."],
             ["Hjalp det?", "Når du har gjort en oppgave, måler vi om det faktisk ga resultater."],
           ].map(([title, text]) => (
             <Card key={title}>
@@ -244,7 +246,7 @@ export default function SynlighetLandingPage() {
           <div className="mt-10 grid gap-4 md:grid-cols-3">
             {[
               [BarChart3, "1. Du kobler til", "Koble til Google-kontoen din og nettsiden. Det tar noen minutter."],
-              [Bot, "2. Vi analyserer", "Vi går gjennom hva folk søker på, hvilke sider som fungerer, og hva som kan bli bedre."],
+              [Bot, "2. Vi analyserer", "Vi går gjennom søk, sider, tekniske feil, konkurrenter og hva som kan bli bedre."],
               [ClipboardCheck, "3. Du får oppgaver", "Endre dette, på denne siden, fordi det kan gi flere besøkende."],
             ].map(([Icon, title, text]) => (
               <Card key={String(title)}>
