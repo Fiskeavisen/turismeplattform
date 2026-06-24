@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { ActionControls } from "@/components/synlighet/action-controls";
 import { VisibilityAppShell } from "@/components/synlighet/app-shell";
+import { CopyPromptButton } from "@/components/synlighet/copy-prompt-button";
 import {
   Card,
   DifficultyLabel,
@@ -10,8 +11,26 @@ import {
   formatPercent,
 } from "@/components/synlighet/ui";
 import { getActionById } from "@/lib/synlighet/store";
+import type { ActionImpactArea, ActionSource } from "@/lib/synlighet/types";
 
 export const dynamic = "force-dynamic";
+
+const sourceLabels: Record<ActionSource, string> = {
+  search_console: "Search Console",
+  ga4: "GA4",
+  crawl: "Crawl",
+  competitor: "Konkurrentanalyse",
+  ads: "Annonser",
+  manual: "Manuell vurdering",
+};
+
+const impactLabels: Record<ActionImpactArea, string> = {
+  trafikk: "Trafikk",
+  leads: "Leads",
+  synlighet: "Synlighet",
+  teknisk: "Teknisk",
+  kostnad: "Kostnad",
+};
 
 export default async function ActionDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -56,6 +75,46 @@ export default async function ActionDetailPage({ params }: { params: Promise<{ i
             <ActionControls actionId={action.id} />
           </Card>
 
+          {action.contentSuggestions?.length ? (
+            <Card>
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <h2 className="text-xl font-semibold">Ferdige tekstforslag</h2>
+                  <p className="mt-2 leading-7 text-slate-600">
+                    Dette er utkast kunden kan kopiere, redigere og publisere i CMS. Tekstene skal
+                    kvalitetssikres før publisering.
+                  </p>
+                </div>
+                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
+                  Kopierbart
+                </span>
+              </div>
+              <div className="mt-5 grid gap-4">
+                {action.contentSuggestions.map((suggestion) => (
+                  <article key={suggestion.label} className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                    <div className="flex flex-wrap items-start justify-between gap-4">
+                      <div>
+                        <h3 className="font-semibold">{suggestion.label}</h3>
+                        <p className="mt-1 text-sm leading-6 text-slate-500">{suggestion.context}</p>
+                      </div>
+                      <CopyPromptButton
+                        prompt={suggestion.text}
+                        label="Kopier tekst"
+                        copiedLabel="Tekst kopiert"
+                      />
+                    </div>
+                    <pre className="mt-4 whitespace-pre-wrap rounded-xl bg-white p-4 text-sm leading-7 text-slate-800">
+                      {suggestion.text}
+                    </pre>
+                    <p className="mt-3 text-sm leading-6 text-slate-600">
+                      Hvorfor dette forslaget: {suggestion.why}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </Card>
+          ) : null}
+
           <Card>
             <h2 className="text-xl font-semibold">Slik gjør du det</h2>
             <ol className="mt-5 grid gap-3">
@@ -72,9 +131,19 @@ export default async function ActionDetailPage({ params }: { params: Promise<{ i
 
           {action.measurement ? (
             <Card>
-              <h2 className="text-xl font-semibold">Før/etter-måling</h2>
+              <div className="flex flex-wrap items-start justify-between gap-4">
+                <div>
+                  <h2 className="text-xl font-semibold">Før/etter-måling</h2>
+                  <p className="mt-2 leading-7 text-slate-600">
+                    Tiltak utført: {action.completedAt}. Målt etter 28 dager.
+                  </p>
+                </div>
+                <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-semibold text-emerald-800">
+                  Ser ut til å virke
+                </span>
+              </div>
               <p className="mt-2 leading-7 text-slate-600">
-                Tiltak utført: {action.completedAt}. Målt etter 28 dager.
+                Dette er en indikasjon, ikke et løfte. Andre faktorer kan også påvirke resultatet.
               </p>
               <div className="mt-5 grid gap-4 md:grid-cols-5">
                 <MetricCard
@@ -110,7 +179,16 @@ export default async function ActionDetailPage({ params }: { params: Promise<{ i
         <div className="grid gap-6 self-start">
           <Card>
             <h2 className="text-lg font-semibold">Datagrunnlag</h2>
+            {action.sourceSummary ? (
+              <p className="mt-2 text-sm leading-6 text-slate-600">{action.sourceSummary}</p>
+            ) : null}
             <dl className="mt-5 grid gap-4 text-sm">
+              <div className="flex justify-between gap-4">
+                <dt className="text-slate-500">Kilder</dt>
+                <dd className="text-right font-medium">
+                  {action.sources?.map((source) => sourceLabels[source]).join(", ") ?? "Search Console, GA4, crawl"}
+                </dd>
+              </div>
               <div className="flex justify-between gap-4">
                 <dt className="text-slate-500">Søk</dt>
                 <dd className="font-medium">{action.sourceData.query ?? "Sidebasert funn"}</dd>
@@ -140,6 +218,10 @@ export default async function ActionDetailPage({ params }: { params: Promise<{ i
               <div className="flex justify-between gap-4">
                 <dt className="text-slate-500">Effekt</dt>
                 <dd className="font-medium">{action.expectedImpact}</dd>
+              </div>
+              <div className="flex justify-between gap-4">
+                <dt className="text-slate-500">Effekttype</dt>
+                <dd className="font-medium">{impactLabels[action.impactArea ?? "synlighet"]}</dd>
               </div>
               <div className="flex justify-between gap-4">
                 <dt className="text-slate-500">Vanskelighet</dt>

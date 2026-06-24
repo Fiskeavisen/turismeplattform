@@ -86,6 +86,14 @@ export type PaidAdsAlertType =
 
 export type PaidAdsAlertSeverity = "low" | "medium" | "high";
 
+export type PaidAdsRecommendationCategory =
+  | "waste_reduction"
+  | "landing_page_fix"
+  | "budget_reallocation"
+  | "creative_test"
+  | "keyword_cleanup"
+  | "organic_paid_balance";
+
 export type SerpFeature =
   | "local_pack"
   | "people_also_ask"
@@ -138,6 +146,17 @@ export type Measurement = {
   measuredAt: string;
 };
 
+export type ActionImpactArea = "trafikk" | "leads" | "synlighet" | "teknisk" | "kostnad";
+
+export type ActionSource = "search_console" | "ga4" | "crawl" | "competitor" | "ads" | "manual";
+
+export type ContentSuggestion = {
+  label: string;
+  context: string;
+  text: string;
+  why: string;
+};
+
 export type VisibilityAction = {
   id: string;
   organizationId: string;
@@ -151,7 +170,11 @@ export type VisibilityAction = {
   recommendation: string;
   whyItMatters: string;
   suggestedChange: string;
+  contentSuggestions?: ContentSuggestion[];
   implementationSteps: string[];
+  impactArea?: ActionImpactArea;
+  sources?: ActionSource[];
+  sourceSummary?: string;
   expectedImpact: "lav" | "medium" | "medium/høy" | "høy";
   difficulty: Difficulty;
   estimatedTimeMinutes: number;
@@ -330,6 +353,22 @@ export type PaidLandingPageObservation = {
   pageScore: number;
   issue: string;
   recommendedAction: string;
+};
+
+export type PaidAdsRecommendation = {
+  id: string;
+  siteId: string;
+  campaignId?: string;
+  category: PaidAdsRecommendationCategory;
+  priority: number;
+  title: string;
+  insight: string;
+  recommendation: string;
+  whyItMatters: string;
+  expectedImpact: "lav" | "medium" | "medium/høy" | "høy";
+  estimatedTimeMinutes: number;
+  estimatedMonthlySavings?: number;
+  steps: string[];
 };
 
 export type AiVisibilityTest = {

@@ -15,7 +15,9 @@ function cloneState(): VisibilityDemoState {
     actions: visibilityActions.map((action) => ({
       ...action,
       implementationSteps: [...action.implementationSteps],
+      contentSuggestions: action.contentSuggestions?.map((suggestion) => ({ ...suggestion })),
       qaIssues: [...action.qaIssues],
+      sources: action.sources ? [...action.sources] : undefined,
       sourceData: { ...action.sourceData },
       measurement: action.measurement ? { ...action.measurement } : undefined,
     })),

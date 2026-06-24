@@ -16,8 +16,8 @@ export default function ActionsPage() {
 
   return (
     <VisibilityAppShell
-      title="Tiltak"
-      description="Alle anbefalinger er knyttet til en URL, et konkret funn og et målbart neste steg."
+      title="Alle tiltak"
+      description="Full liste over anbefalinger. Startsiden viser bare det som bør gjøres først denne uken."
     >
       <Card>
         <div className="grid gap-4">

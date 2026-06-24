@@ -30,8 +30,8 @@ export default function QueriesPage() {
 
   return (
     <VisibilityAppShell
-      title="Søkeordovervåkning"
-      description="Inspirert av rank tracking og keyword gap, men bygget for å vise hvilke søkeord som krever et konkret tiltak."
+      title="Muligheter"
+      description="Søk, sider og temaer der kunden har et konkret vekstpotensial. Søkeord brukes som signal, ikke som sluttprodukt."
     >
       <div className="grid gap-6">
         <div className="grid gap-4 md:grid-cols-4">

@@ -25,6 +25,14 @@ export const glossaryTerms: GlossaryTerm[] = [
     long: "Stadig flere får svar direkte fra AI i stedet for å klikke seg rundt. AEO handler om å formulere innholdet ditt slik at slike svar plukker det opp og anbefaler bedriften din.",
   },
   {
+    term: "GEO",
+    name: "Synlighet i generative svarmotorer",
+    short: "Å gjøre bedriften lettere å forstå, stole på og nevne i svar fra ChatGPT, Gemini, Perplexity og Google AI.",
+    long: "GEO (Generative Engine Optimization) handler om mer enn FAQ og schema. Det handler om at merkevaren fremstår som en tydelig og troverdig entitet: samme navn, tjenester og lokasjon på tvers av kilder, gode omtaler, ekspertise, kilder og eksterne signaler.",
+    benchmark:
+      "God GEO betyr at bedriften kan beskrives tydelig med hvem dere hjelper, hvor dere virker, hva dere tilbyr og hvorfor dere er troverdige.",
+  },
+  {
     term: "CTR",
     name: "Klikkrate",
     short: "Andelen som klikker etter å ha sett deg. Klikk delt på visninger.",

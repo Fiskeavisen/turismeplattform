@@ -11,6 +11,7 @@ import type {
   PageSnapshot,
   PaidAdsAlert,
   PaidAdsCampaign,
+  PaidAdsRecommendation,
   PaidLandingPageObservation,
   QueryRow,
   VisibilityAction,
@@ -54,12 +55,30 @@ export const visibilityActions: VisibilityAction[] = [
       "Prisrelaterte søk har høy kommersiell intensjon og er godt egnet for både Google-søk, AI-svar og konvertering.",
     suggestedChange:
       "Legg inn en seksjon med overskriften «Hva koster en regnskapsfører i Oslo?» rett etter introen.",
+    contentSuggestions: [
+      {
+        label: "Ny seksjon",
+        context: "Plasseres rett etter introen på tjenestesiden.",
+        text: "Hva koster en regnskapsfører i Oslo?\n\nPrisen avhenger vanligvis av selskapsform, bilagsmengde og om du trenger hjelp med lønn, mva og rapportering. For små AS starter vi med en enkel kartlegging, slik at du får et realistisk prisestimat før vi setter i gang.",
+        why: "Svarer direkte på et prisrelatert søk med høy kjøpsintensjon, uten å love en fast pris som ikke passer alle.",
+      },
+      {
+        label: "CTA under seksjonen",
+        context: "Legges rett etter prisforklaringen.",
+        text: "Vil du vite hva regnskapet vil koste for din bedrift? Be om et uforpliktende prisestimat.",
+        why: "Gir leseren et tydelig neste steg når de allerede vurderer pris.",
+      },
+    ],
     implementationSteps: [
       "Skriv et kort svar på 2-3 setninger øverst i seksjonen.",
       "Forklar tre prisdrivere: selskapsform, bilagsmengde og behov for lønn/rapportering.",
       "Legg til CTA-en «Få prisestimat» under seksjonen.",
     ],
     expectedImpact: "medium/høy",
+    impactArea: "leads",
+    sources: ["search_console", "ga4", "crawl"],
+    sourceSummary:
+      "Search Console viser mange prisrelaterte visninger, GA4 viser få henvendelser fra siden, og crawl viser at pris ikke forklares tydelig.",
     difficulty: "low",
     estimatedTimeMinutes: 25,
     confidence: 0.84,
@@ -98,12 +117,30 @@ export const visibilityActions: VisibilityAction[] = [
       "Når siden allerede har synlighet, er bedre klikkrate en raskere gevinst enn å lage nytt innhold.",
     suggestedChange:
       "Title: «Regnskapsfører i Oslo for små bedrifter | Regnskapspartner» Meta: «Få hjelp med regnskap, lønn og rapportering i Oslo. Fast kontaktperson og tydelige priser for små bedrifter.»",
+    contentSuggestions: [
+      {
+        label: "Meta title",
+        context: "Erstatt dagens title på /regnskapsforer-oslo.",
+        text: "Regnskapsfører i Oslo for små bedrifter | Fast kontaktperson",
+        why: "Kombinerer søkeord, lokal relevans og en konkret grunn til å klikke.",
+      },
+      {
+        label: "Meta description",
+        context: "Erstatt dagens meta description på samme side.",
+        text: "Få hjelp med regnskap, lønn og rapportering i Oslo. Tydelige priser, fast kontaktperson og enkel oppstart for små bedrifter.",
+        why: "Forklarer hvem siden passer for og hva kunden får, uten clickbait.",
+      },
+    ],
     implementationSteps: [
       "Oppdater title i CMS.",
       "Oppdater meta description.",
       "Mål CTR og klikk etter 28 dager.",
     ],
     expectedImpact: "medium/høy",
+    impactArea: "trafikk",
+    sources: ["search_console"],
+    sourceSummary:
+      "Search Console viser god posisjon, men lav CTR sammenlignet med forventet klikkrate for posisjon 4-7.",
     difficulty: "low",
     estimatedTimeMinutes: 15,
     confidence: 0.82,
@@ -141,12 +178,24 @@ export const visibilityActions: VisibilityAction[] = [
       "Internlenken hjelper både brukeren og søkemotorer å forstå at Oslo-siden er neste relevante steg.",
     suggestedChange:
       "Etter avsnittet om lokale prisforskjeller: «Trenger du hjelp lokalt? Les om regnskapsfører i Oslo.»",
+    contentSuggestions: [
+      {
+        label: "Internlenke",
+        context: "Legges inn etter avsnittet om lokale prisforskjeller.",
+        text: "Driver du bedrift i Oslo og vil ha en mer konkret vurdering? Les mer om regnskapsfører i Oslo og hva vi kan hjelpe små bedrifter med.",
+        why: "Sender trafikk fra informasjonsartikkel til relevant tjenesteside uten at lenken føles påtvunget.",
+      },
+    ],
     implementationSteps: [
       "Finn avsnittet om lokale prisforskjeller.",
       "Legg til internlenke med naturlig ankertekst.",
       "Kontroller at lenken ikke konkurrerer med hoved-CTA.",
     ],
     expectedImpact: "medium",
+    impactArea: "leads",
+    sources: ["search_console", "ga4"],
+    sourceSummary:
+      "Search Console viser trafikk til guiden, mens GA4 viser svak overgang fra artikkel til tjenesteside.",
     difficulty: "low",
     estimatedTimeMinutes: 10,
     confidence: 0.78,
@@ -268,6 +317,20 @@ export const visibilityActions: VisibilityAction[] = [
       "Svake produktbeskrivelser gjør det vanskeligere å rangere, bli brukt i AI-svar og konvertere organisk trafikk.",
     suggestedChange:
       "Legg til seksjonene «Passer for», «Dette er inkludert», «Før du bestiller» og en kort FAQ.",
+    contentSuggestions: [
+      {
+        label: "Ny produktintro",
+        context: "Plasseres øverst på produktsiden.",
+        text: "Regnskapspakke Start passer for små bedrifter som vil ha ryddig regnskap, enkel rapportering og en fast kontaktperson. Pakken dekker det viktigste du trenger for å komme i gang, og kan utvides hvis du får flere bilag, ansatte eller behov for rådgivning.",
+        why: "Gjør produktet mer konkret for målgruppen og forklarer hvem pakken faktisk passer for.",
+      },
+      {
+        label: "FAQ",
+        context: "Legges nederst på produktsiden.",
+        text: "Hva er inkludert i Regnskapspakke Start?\nPakken dekker grunnleggende regnskapsoppfølging for små bedrifter. Endelig omfang avhenger av bilagsmengde, selskapsform og behov for lønn eller ekstra rapportering.",
+        why: "Svar på vanlige kjøpsspørsmål øker både innholdskvalitet og trygghet før kontakt.",
+      },
+    ],
     implementationSteps: [
       "Skriv 120-180 ord unik produkttekst som forklarer hvem pakken passer for.",
       "Legg til punktliste med inkluderte leveranser og hva som ikke er inkludert.",
@@ -275,6 +338,10 @@ export const visibilityActions: VisibilityAction[] = [
       "Avslutt med CTA-en «Be om vurdering av regnskapsbehov».",
     ],
     expectedImpact: "medium/høy",
+    impactArea: "leads",
+    sources: ["crawl", "search_console"],
+    sourceSummary:
+      "Crawl viser svak produktbeskrivelse, og Search Console viser visninger på relevante produkt-/pakketjenestesøk.",
     difficulty: "medium",
     estimatedTimeMinutes: 40,
     confidence: 0.79,
@@ -311,6 +378,14 @@ export const visibilityActions: VisibilityAction[] = [
       "Betalt trafikk kan bli dyr når annonsens løfte og landingssiden ikke svarer på samme behov. Dette påvirker både CPA og organisk konvertering.",
     suggestedChange:
       "Pause dyreste annonsegruppe midlertidig, legg inn negative søk og legg prisseksjon øverst på /regnskapsforer-oslo.",
+    contentSuggestions: [
+      {
+        label: "Hero på landingsside",
+        context: "Plasseres i første skjermbilde for betalt trafikk.",
+        text: "Regnskapsfører i Oslo med tydelig pris og fast kontaktperson\n\nFå hjelp med regnskap, lønn og rapportering uten å måtte bytte system alene. Vi starter med en kort vurdering, så du vet hva du trenger og hva det vil koste.",
+        why: "Matcher annonseintensjonen bedre og svarer raskere på pris og trygghet.",
+      },
+    ],
     implementationSteps: [
       "Gå gjennom søketerms og legg til irrelevante søk som negative keywords.",
       "Senk budsjettet på annonsegruppen til landingssiden er oppdatert.",
@@ -318,6 +393,10 @@ export const visibilityActions: VisibilityAction[] = [
       "Mål CPA, konverteringsrate og organisk/paid samlet effekt etter 14 dager.",
     ],
     expectedImpact: "høy",
+    impactArea: "kostnad",
+    sources: ["ads", "ga4", "crawl"],
+    sourceSummary:
+      "Google Ads viser økende CPA, GA4 viser lav konverteringsrate, og landingssiden mangler prissvar i første skjermbilde.",
     difficulty: "medium",
     estimatedTimeMinutes: 60,
     confidence: 0.82,
@@ -392,8 +471,20 @@ export const visibilityActions: VisibilityAction[] = [
     recommendation: "CTA ble flyttet høyere opp og knyttet til AS-regnskap.",
     whyItMatters: "Informasjonsintensjon kan gi verdi når neste steg er tydelig og relevant.",
     suggestedChange: "Legg kontaktmodul under første hoveddel med CTA-en «Få hjelp med regnskap for AS».",
+    contentSuggestions: [
+      {
+        label: "CTA som ble testet",
+        context: "Plassert under første hoveddel i guiden.",
+        text: "Skal du starte AS og vil slippe usikkerhet rundt regnskapet? Få en kort vurdering av hva du bør sette opp før første faktura.",
+        why: "Knytter informasjonsinnholdet direkte til et relevant neste steg for leseren.",
+      },
+    ],
     implementationSteps: ["Tiltaket er utført.", "Måleperioden er fullført."],
     expectedImpact: "medium",
+    impactArea: "leads",
+    sources: ["search_console", "ga4"],
+    sourceSummary:
+      "Search Console viste stabil trafikk til guiden, og GA4 viste få klikk videre før CTA-en ble flyttet.",
     difficulty: "low",
     estimatedTimeMinutes: 20,
     confidence: 0.76,
@@ -1034,6 +1125,95 @@ export const paidLandingPageObservations: PaidLandingPageObservation[] = [
     pageScore: 44,
     issue: "Betalt Meta-trafikk lander på en produktside med svak beskrivelse.",
     recommendedAction: "Forbedre produktbeskrivelsen før ny kreativ test kjøres.",
+  },
+];
+
+export const paidAdsRecommendations: PaidAdsRecommendation[] = [
+  {
+    id: "paid-tip-budget-oslo",
+    siteId: visibilitySite.id,
+    campaignId: "paid-google-oslo",
+    category: "waste_reduction",
+    priority: 94,
+    title: "Stopp budsjettlekkasje i Oslo-kampanjen først",
+    insight:
+      "Kampanjen bruker 14 800 kr i perioden og har CPA på 1 057 kr, samtidig som kvalitetsscore er 5/10.",
+    recommendation:
+      "Reduser budsjettet midlertidig med 25–35 % til prissvar, negative søkeord og landingsside er forbedret.",
+    whyItMatters:
+      "Når kostnaden per lead stiger før landingssiden er klar, kjøper du dyr trafikk som ikke får godt nok svar.",
+    expectedImpact: "høy",
+    estimatedTimeMinutes: 30,
+    estimatedMonthlySavings: 4200,
+    steps: [
+      "Sett kampanjen i begrenset budsjett til landingssiden er oppdatert.",
+      "Legg til negative søk som «gratis», «kurs», «mal» og irrelevante jobb-/utdanningssøk.",
+      "Sjekk søkeordrapporten ukentlig og stopp søk uten leads etter nok klikk.",
+    ],
+  },
+  {
+    id: "paid-tip-price-landing",
+    siteId: visibilitySite.id,
+    campaignId: "paid-google-oslo",
+    category: "landing_page_fix",
+    priority: 91,
+    title: "Match annonsen med prissvar i første skjermbilde",
+    insight:
+      "Annonsen lover prisavklaring, men /regnskapsforer-oslo forklarer ikke pris tydelig nok før brukeren må scrolle.",
+    recommendation:
+      "Legg inn en kort prisseksjon og CTA over folden: «Få prisestimat for regnskap i Oslo».",
+    whyItMatters:
+      "Bedre samsvar mellom annonse, søkeord og landingsside kan senke CPC/CPA og øke konverteringsraten.",
+    expectedImpact: "medium/høy",
+    estimatedTimeMinutes: 45,
+    steps: [
+      "Svar på pris med et realistisk spenn og hva som påvirker pris.",
+      "Legg CTA rett under prissvaret.",
+      "Bruk samme formulering i annonsetekst og landingsside.",
+    ],
+  },
+  {
+    id: "paid-tip-budget-price-guide",
+    siteId: visibilitySite.id,
+    campaignId: "paid-google-price",
+    category: "budget_reallocation",
+    priority: 82,
+    title: "Flytt mer budsjett til søk som allerede konverterer billigere",
+    insight:
+      "Pris/kostnad-kampanjen har CPA på 564 kr, mens Oslo-kampanjen ligger på 1 057 kr.",
+    recommendation:
+      "Flytt 15–20 % av budsjettet fra Oslo-kampanjen til pris/kostnad-kampanjen mens landingssiden forbedres.",
+    whyItMatters:
+      "Du kjøper flere leads for samme annonsekroner når budsjettet følger faktisk CPA, ikke bare synlighet.",
+    expectedImpact: "medium",
+    estimatedTimeMinutes: 20,
+    estimatedMonthlySavings: 2500,
+    steps: [
+      "Øk budsjettet på pris/kostnad-kampanjen gradvis.",
+      "Hold totalbudsjettet uendret i testperioden.",
+      "Evaluer etter 7–14 dager basert på samlet CPA og leadkvalitet.",
+    ],
+  },
+  {
+    id: "paid-tip-meta-creative",
+    siteId: visibilitySite.id,
+    campaignId: "paid-meta-lead",
+    category: "creative_test",
+    priority: 74,
+    title: "Test ny Meta-kreativ med tydeligere problem og løfte",
+    insight:
+      "Meta-kampanjen har lav CTR på 0,9 %, som tyder på at budskapet ikke stopper nok relevante brukere.",
+    recommendation:
+      "Test to nye varianter: én som fokuserer på tidsbesparelse, og én som fokuserer på trygghet/fast kontaktperson.",
+    whyItMatters:
+      "Lav CTR i sosiale medier betyr ofte at kreativ eller første linje ikke treffer riktig målgruppe.",
+    expectedImpact: "medium",
+    estimatedTimeMinutes: 40,
+    steps: [
+      "Lag én annonse med overskriften «Bruk mindre tid på bilag».",
+      "Lag én annonse med overskriften «Fast regnskapsfører for små AS».",
+      "Send begge til en landingsside med bedre produktbeskrivelse og én tydelig CTA.",
+    ],
   },
 ];
 
